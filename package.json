@@ -1,0 +1,1 @@
+{"name":"ai-risk-observatory","version":"0.1.0","private":true,"scripts":{"start":"node server.cjs"},"dependencies":{"cesium":"1.146.0"}}
