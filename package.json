@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.cjs",
     "build": "node scripts/build.cjs",
-    "preview:dist": "node server.cjs --dist"
+    "preview:dist": "node server.cjs --dist",
+    "build:seo": "node scripts/build-seo.cjs"
   },
   "dependencies": {
     "cesium": "1.146.0"

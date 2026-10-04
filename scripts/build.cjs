@@ -1,10 +1,11 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
+require('./build-seo.cjs');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 if(path.dirname(out)!==root||path.basename(out)!=='dist')throw Error('Unsafe build path');
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 for(const file of fs.readdirSync(root)){
- if(!/\.(html|css|js)$/.test(file)&&!['i18n-en.json','seo.json','CNAME'].includes(file))continue;
+ if(!/\.(html|css|js)$/.test(file)&&!['i18n-en.json','seo.json','CNAME','robots.txt','sitemap.xml'].includes(file))continue;
  const source=path.join(root,file);if(!fs.statSync(source).isFile())continue;
  let text=fs.readFileSync(source,'utf8');if(file.endsWith('.js'))new vm.Script(text,{filename:file});
  text=text.replaceAll('node_modules/cesium/Build/Cesium/','vendor/cesium/');

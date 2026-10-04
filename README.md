@@ -81,3 +81,7 @@ policy.js는 OECD 공개 웹사이트의 api.oecdai.org/countries에서 국가 �
 `main`에 푸시하면 `.github/workflows/pages.yml`이 `npm ci`와 `npm run build`를 실행해 `dist/`만 배포합니다. Cesium 런타임·Workers·Assets·Widgets·ThirdParty와 라이선스를 `vendor/cesium/`에 포함합니다. 로컬 서버·CMD·node_modules 경로에 대한 방문자 의존성은 없습니다. CNAME의 기존 도메인을 유지합니다.
 
 개발 확인: `npm start`. 배포 결과 확인: `npm run build` 후 `npm run preview:dist`. `node_modules/`, `dist/`, `output/`, 원본 조사 응답과 실행 도구는 게시하지 않습니다. API 요청은 브라우저에서 OECD 공개 서비스로 전송됩니다. 서비스 또는 CORS 변경 시 별도 대응이 필요합니다.
+
+### 검색 메타데이터 생성
+
+`seo.json`이 한영 검색 설명의 기준입니다. `npm run build:seo`는 기본 영문 HTML 메타데이터, canonical, URL을 포함한 WebSite 구조화 데이터, robots.txt, sitemap.xml을 생성합니다. `npm run build`에도 자동 포함됩니다. 단일 대표 URL만 사이트맵에 넣으며 디자인 시스템 예시는 기존 noindex를 유지합니다. 검색엔진 등록·색인 여부는 별도 확인이 필요합니다.
