@@ -12,7 +12,7 @@
  function confirm(text,action){$('confirm-text').textContent=text;$('accept').onclick=()=>{$('weekly-confirm').close();run(action);};$('weekly-confirm').showModal();$('cancel').focus();}
  $('cancel').onclick=()=>$('weekly-confirm').close();$('weekly-confirm').addEventListener('cancel',e=>e.preventDefault());
  async function load(){install(await rpc('state',{p_week:$('week').value||null}));$('weekly-editor').hidden=false;message('초안을 불러왔습니다. 저장과 발행은 별도입니다.');}
- function source(url){const a=make('a','출처 확인 ▶');try{const u=new URL(url);if(u.protocol!=='https:')return make('span','출처 확인 필요');a.href=u.href;a.target='_blank';a.rel='noopener';return a;}catch{return make('span','출처 확인 필요');}}
+ function source(url){const a=make('a','출처 확인 ▶');a.className='ds-link';try{const u=new URL(url);if(u.protocol!=='https:')return make('span','출처 확인 필요');a.href=u.href;a.target='_blank';a.rel='noopener';return a;}catch{return make('span','출처 확인 필요');}}
  function add(candidate){if(draft.items.filter(x=>x.kind===kind).length>=10){message('해당 탭은 최대 10개를 선정합니다. 기존 항목을 제외한 뒤 추가하세요.');return;}
   const item={id:candidate?.id||'manual-'+crypto.randomUUID(),kind,title:candidate?.title||'',source:candidate?.source||'',change:'',risk:'',policy:'',signal:'',reason:'',reviewed:false};
   if(draft.items.some(x=>x.id===item.id)){message('이미 선정한 후보입니다.');return;}draft.items.push(item);selected=item.id;mark();render();}
@@ -26,7 +26,7 @@
  }
  function edit(){const box=$('item-editor');box.replaceChildren();const item=draft.items.find(x=>x.id===selected&&x.kind===kind);if(!item){box.append(make('p','선정 항목을 선택해 내용을 편집하세요.'));return;}
   for(const [key,label]of [['title','제목'],['change','핵심 변화 · 원문을 확인해 작성'],['risk','위험 연결'],['policy','정책·통제 연결'],['reason','선정 이유'],['signal','다음 주 관찰 신호'],['source','근거 원문 HTTPS URL']]){const l=make('label',label),input=make(key==='title'||key==='source'?'input':'textarea');input.value=item[key];input.maxLength=key==='title'?500:4000;input.id='weekly-field-'+key;input.oninput=()=>{item[key]=input.value;item.reviewed=false;const checked=$('reviewed');if(checked)checked.checked=false;mark();};l.append(input);box.append(l);}
-  const l=make('label',' 원문과 분석 내용을 검토했습니다'),check=make('input');check.id='reviewed';check.type='checkbox';check.checked=item.reviewed===true;check.onchange=()=>{item.reviewed=check.checked;mark();};l.prepend(check);box.append(l);
+  const l=make('label',' 원문과 분석 내용을 검토했습니다'),check=make('input');l.className='weekly-review';check.id='reviewed';check.type='checkbox';check.checked=item.reviewed===true;check.onchange=()=>{item.reviewed=check.checked;mark();};l.prepend(check);box.append(l);
  }
  $('question').oninput=()=>{draft.question=$('question').value;mark();};
  for(const k of ['risk','policy'])$(k+'-tab').onclick=()=>{kind=k;selected=null;render();};
