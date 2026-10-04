@@ -3,7 +3,7 @@
   const L = (ko, en) => document.documentElement.lang === 'ko' ? ko : en;
   const make = (tag, cls, text) => { const el = document.createElement(tag); if (cls) el.className = cls; if (text !== undefined) el.textContent = text; return el; };
   const button = (text, action) => { const b = make('button', 'ds-secondary', text); b.type = 'button'; b.onclick = action; return b; };
-  let risk = null, selectedCode = null, filter = 'all', page = 0, analysis = null;
+  let risk = null, selectedCode = null, filter = 'all', page = 0, pageSize = 15, analysis = null;
   const section = make('section', 'gap-analyzer'); section.id = 'gap-analyzer'; section.dataset.noTranslate = 'true'; section.setAttribute('aria-labelledby', 'gap-title');
   document.getElementById('observatory').after(section);
   const entry = make('a', 'journey-link', 'RISK ◀ Gap Analyzer ▶ POLICY'); entry.href = '#gap-analyzer'; entry.dataset.noTranslate = 'true';
@@ -50,12 +50,38 @@
       const url = URL.createObjectURL(blob), link = make('a'); link.href = url; link.download = 'risk-policy-gap-' + analysis.country.code + '.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     })); section.append(controls);
     const rows = a.rows.filter(r => filter === 'all' || r.status === filter);
-    page = Math.min(page, Math.max(0, Math.ceil(rows.length / 6) - 1));
+    const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
+    page = Math.min(page, pageCount - 1);
+    const pagination = position => {
+      const nav = make('nav', 'gap-pagination'); nav.setAttribute('aria-label', L('위험 기록 페이지 ', 'Risk record pages ') + position);
+      const move = target => { page = target; render(); if (position === 'bottom') section.querySelector('.gap-pagination').scrollIntoView({ block: 'start' }); };
+      const previous = button(L('이전', 'Previous'), () => move(page - 1)), next = button(L('다음', 'Next'), () => move(page + 1));
+      previous.disabled = page === 0; next.disabled = page === pageCount - 1;
+      previous.dataset.focus = position + '-previous'; next.dataset.focus = position + '-next';
+      const pages = make('select'); pages.setAttribute('aria-label', L('페이지 이동', 'Go to page')); pages.dataset.focus = position + '-page';
+      for (let i = 0; i < pageCount; i++) { const option = make('option', '', (i + 1) + ' / ' + pageCount); option.value = i; pages.append(option); }
+      pages.value = page; pages.onchange = () => move(Number(pages.value));
+      const range = make('span', 'ds-muted', (rows.length ? page * pageSize + 1 : 0) + '–' + Math.min((page + 1) * pageSize, rows.length) + ' / ' + rows.length + L('건', ' records')); range.setAttribute('aria-live', 'polite');
+      nav.append(range, previous, pages, next);
+      if (position === 'top') {
+        const label = make('label', 'gap-page-size', L('한 번에 ', 'Show ')), size = make('select'); size.dataset.focus = 'page-size';
+        for (const count of [15, 30, 100]) { const option = make('option', '', count + L('건', ' records')); option.value = count; size.append(option); }
+        size.value = pageSize; size.onchange = () => { pageSize = Number(size.value); page = 0; render(); }; label.append(size); nav.append(label);
+      }
+      return nav;
+    };
+    section.append(pagination('top'));
     const list = make('div', 'gap-list');
     if (!rows.length) list.append(make('p', 'ds-muted', L('이 조건의 위험 기록이 없습니다.', 'No risk records match this filter.')));
-    for (const row of rows.slice(page * 6, page * 6 + 6)) {
-      const card = make('article', 'gap-card'); card.dataset.status = row.status;
-      card.append(make('p', 'gap-label', names()[row.status]), make('h3', '', row.record.title), make('p', 'ds-muted', row.record.date), make('p', '', L('위험 AI 원칙: ', 'Risk AI principles: ') + (row.principles.join(' · ') || L('미입력', 'Not supplied'))));
+    for (const row of rows.slice(page * pageSize, page * pageSize + pageSize)) {
+      const entry = make('details', 'gap-card'); entry.dataset.status = row.status;
+      const summary = make('summary', 'gap-row');
+      const heading = make('span', 'gap-row-heading'); heading.append(make('span', 'gap-label', names()[row.status]), make('span', 'ds-muted', row.record.date));
+      const title = make('span', 'gap-row-title', row.record.title);
+      summary.append(heading, title, make('span', 'gap-row-count', L('정책 후보 ', 'Policies: ') + row.candidates.length), make('span', 'gap-expand', '⌄'));
+      entry.append(summary);
+      const card = make('div', 'gap-card-body');
+      card.append(make('p', '', L('위험 AI 원칙: ', 'Risk AI principles: ') + (row.principles.join(' · ') || L('미입력', 'Not supplied'))));
       const source = make('a', 'journey-link', L('위험 원문', 'Risk source')); source.href = 'https://oecd.ai/en/incidents/' + encodeURIComponent(row.record.id); source.target = '_blank'; source.rel = 'noopener'; card.append(source);
       if (row.candidates.length) {
         const details = make('details'); details.append(make('summary', '', L('정책 후보 ', 'Policy candidates: ') + row.candidates.length));
@@ -69,12 +95,10 @@
           details.append(item);
         } card.append(details);
       } else card.append(make('p', 'ds-muted', row.status === 'insufficient' ? L('원문에서 분류와 적용 범위를 먼저 확인하세요.', 'Check source classifications and scope first.') : L('등록 정책에서 원문·다른 분류로 추가 탐색이 필요합니다.', 'Further discovery using source text and other classifications is needed.')));
-      card.append(button(L('정책 검토·조사 질문으로 이어가기', 'Review policies and investigate gaps'), () => document.dispatchEvent(new CustomEvent('risk:policy-review', { detail: { ...row.record, country: { ...a.country, name: a.country.name || a.country.code } } })))); list.append(card);
+      card.append(button(L('정책 검토·조사 질문으로 이어가기', 'Review policies and investigate gaps'), () => document.dispatchEvent(new CustomEvent('risk:policy-review', { detail: { ...row.record, country: { ...a.country, name: a.country.name || a.country.code } } })))); entry.append(card); list.append(entry);
     }
     section.append(list);
-    const nav = make('div', 'gap-controls'); const previous = button(L('이전', 'Previous'), () => { page--; render(); }), next = button(L('다음', 'Next'), () => { page++; render(); });
-    previous.disabled = page === 0; next.disabled = (page + 1) * 6 >= rows.length; previous.dataset.focus = 'previous'; next.dataset.focus = 'next';
-    nav.append(previous, make('span', '', (page + 1) + ' / ' + Math.max(1, Math.ceil(rows.length / 6))), next); section.append(nav);
+    section.append(pagination('bottom'));
     if (focused) section.querySelector('[data-focus="' + focused + '"]')?.focus({ preventScroll: true });
   }
   document.addEventListener('gis:country-selected', e => { const code = e.detail?.aimCode || e.detail?.code; if (code !== selectedCode) { risk = null; filter = 'all'; page = 0; } selectedCode = code; render(); });
