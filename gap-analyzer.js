@@ -29,7 +29,7 @@
       state.dataset.state = error ? 'error' : 'info'; return;
     }
     const a = analysis;
-    section.append(make('p', 'ds-muted', L('온톨로지 발행본: ', 'Ontology version: ') + (a.ontologyVersion || '—')), button(L('최신 온톨로지 반영', 'Reload published ontology'), () => ontologyState.reload()));
+    section.append(make('p', 'ds-muted', a.ontologyVersion === 'seed-1' ? L('온톨로지 미등록', 'No ontology registered') : L('온톨로지 발행본: ', 'Ontology version: ') + (a.ontologyVersion || '—')), button(L('최신 온톨로지 반영', 'Reload published ontology'), () => ontologyState.reload()));
     state.textContent = a.country.code + ' · ' + L('위험 표본 ', 'Risk sample ') + a.sampleCount + ' / ' + a.riskTotal + ' · ' + L('등록 정책 ', 'Registered policies ') + a.policyCount;
     section.append(make('p', 'ds-muted', (a.from || '—') + ' — ' + (a.to || '—') + ' · ' + L('최신 수신 표본 기준 · 조회 시각: ', 'Latest received sample · Retrieved: ') + L('위험 ', 'Risk ') + new Date(a.riskFetchedAt).toLocaleString() + ' / ' + L('정책 ', 'Policy ') + new Date(a.policyFetchedAt).toLocaleString()));
     const metrics = make('div', 'gap-metrics');
