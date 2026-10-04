@@ -141,3 +141,12 @@ RISK·POLICY 각각 0~10건을 허용합니다. 관련 건이 1건이면 1건만
 0건 제안·오류·응답 중단 시 기존 초안을 유지합니다. 생성 중 초안/후보가 바뀌면 결과 반영을 거부합니다. 제안 반영은 명시적 확인 후 현재 선정 목록을 교체하며 서버 저장·발행은 별도입니다. 생성당 출력은 최대 8,192 토큰, 대기는 120초이고 자동 재시도하지 않습니다. 실제 모델별 지원·권한에 따라 생성이 실패할 수 있습니다.
 
 생성 규격: [OpenAI text generation](https://developers.openai.com/api/docs/guides/text), [Gemini generateContent](https://ai.google.dev/api/generate-content), [Claude Messages](https://platform.claude.com/docs/en/api/messages/create).
+
+
+## 모바일 기준 · 412×914 (2026-10-05)
+
+Samsung Galaxy A51/A71의 **CSS 뷰포트 412×914**를 기준으로 합니다. 기기 이름에 한정하지 않고 좁은 화면에 미디어 쿼리를 적용합니다. 안전 영역은 `env(safe-area-inset-bottom)`을 반영합니다.
+
+지도는 34dvh(최소 260px, 최대 340px), 위험·정책 패널은 기존 세로 흐름을 사용합니다. 출처 펼치기 영역은 최소 44px이며 입력 글자는 16px입니다. 팝업 높이는 동적 뷰포트와 하단 안전 영역을 기준으로 제한합니다. 구현: `design-system.css`. `npm run test:design`과 `node scripts/weekly-ui.cjs`에 412×914를 포함하며 공개 페이지, Gap Analyzer, 로그인, 주간 TOP 10 관리자·공개 팝업을 검사합니다.
+
+검증은 데스크톱 Edge의 모바일·터치 에뮬레이션으로 진행했습니다. 실제 Android 기기의 키보드와 브라우저 주소창 동작은 별도 실기기 확인 대상입니다.

@@ -36,6 +36,10 @@ GitHub Actions 변수 `SUPABASE_URL`은 프로젝트 변경 때만 필요합니�
 
 ## 검증
 
+관리자 3개 페이지의 CSP는 `font-src 'self'`로 번들 폰트만 허용합니다. `node scripts/admin-fonts.cjs`는 배포 빌드를 실제 CSP 그대로 열어 폰트 로딩과 차단 이벤트를 검사합니다.
+
+AI 설정 함수의 DB 오류는 키·원본 오류 내용 대신 제한된 오류 코드만 반환합니다. 설정 충돌은 409, 권한 오류는 403, 5초 내 재요청은 429, 그 밖의 서버 처리 실패는 500으로 구분합니다. 원인 조사에는 화면 문구와 오류 코드만 사용하며 API 키를 로그나 채팅에 남기지 않습니다.
+
 `npm test`는 PostgreSQL에서 익명·일반 계정·관리자 접근, 권한 취소, 초안 비공개, 발행, 잘못된 관계, 동시 수정 충돌을 검증합니다. 운영 Supabase 자체를 테스트한 것은 아닙니다. `npm run build`는 관리자 상대 URL과 배포 파일의 존재, SQL·초안 자료의 제외 여부를 검사합니다.
 
 참고: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [Database functions](https://supabase.com/docs/guides/database/functions), [Publishable keys](https://supabase.com/docs/guides/api/api-keys).

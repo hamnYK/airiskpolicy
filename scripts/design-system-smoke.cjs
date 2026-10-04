@@ -21,8 +21,8 @@ const root = path.resolve(__dirname, '..');
       }));
       assert.deepEqual(violations, [], 'Minimum 44px targets and 14px UI text');
     }
-    for (const width of [1280, 390, 320]) {
-      await page.setViewportSize({ width, height: 900 });
+    for (const width of [1280, 412, 390, 320]) {
+      await page.setViewportSize({ width, height: width === 412 ? 914 : 900 });
       await page.goto(base + 'design-system.html');
       await bounds('button,a,input,select,textarea,summary');
       await page.locator('#ds-open-dialog').click();
@@ -40,8 +40,8 @@ const root = path.resolve(__dirname, '..');
     }
     await page.route('**/Cesium.js*', route => route.abort());
     await page.route('https://**/*', route => route.abort());
-    for (const width of [1280, 390, 320]) {
-      await page.setViewportSize({width,height:900});
+    for (const width of [1280, 412, 390, 320]) {
+      await page.setViewportSize({width,height:width===412?914:900});
       await page.goto(base);
       await page.waitForFunction(() => document.body.dataset.countryInitialized === 'true');
       await bounds('#observatory button,#observatory a');
@@ -62,8 +62,8 @@ const root = path.resolve(__dirname, '..');
       document.dispatchEvent(new CustomEvent('gis:country-selected', { detail: { code: 'KOR' } }));
       document.dispatchEvent(new CustomEvent('aim:loaded', { detail: fixture.risk }));
     }, fixture);
-    for (const width of [1280, 390, 320]) for (const lang of ['ko', 'en']) {
-      await page.setViewportSize({ width, height: 900 });
+    for (const width of [1280, 412, 390, 320]) for (const lang of ['ko', 'en']) {
+      await page.setViewportSize({ width, height: width === 412 ? 914 : 900 });
       await page.evaluate(lang => document.documentElement.lang = lang, lang);
       await page.locator('.gap-list').waitFor();
       await bounds('.gap-analyzer button,.gap-analyzer a,.gap-analyzer select,.gap-analyzer summary');
@@ -77,6 +77,6 @@ const root = path.resolve(__dirname, '..');
     await page.evaluate(() => { window.aiRiskOntologyState.status = 'error'; document.dispatchEvent(new Event('ontology:changed')); });
     assert.equal(await page.locator('.gap-metrics').count(), 0);
     assert.deepEqual(errors, []);
-    console.log('PASS design system: reference/login/analyzer, KO/EN, 320/390/1280, targets/fonts/overflow, dialog focus, empty/error states.');
+    console.log('PASS design system: reference/login/analyzer, KO/EN, 320/390/412/1280, targets/fonts/overflow, dialog focus, empty/error states.');
   } finally { if (browser) await browser.close(); server.kill(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

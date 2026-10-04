@@ -1,4 +1,16 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{PGlite}=require('@electric-sql/pglite');
+test('AI settings errors distinguish server failures and throttling without exposing details',async()=>{
+ const {settingsFailure}=await import('../supabase/functions/weekly-ai-settings/errors.mjs');
+ assert.equal(settingsFailure({code:'P0001',message:'Wait before retrying'}).status,429);
+ assert.equal(settingsFailure({code:'P0001',message:'Key unavailable'}).status,500);
+ assert.equal(settingsFailure({code:'42501'}).status,403);
+ assert.equal(settingsFailure({code:'40001'}).status,409);
+ const result=settingsFailure({code:'PGRST202',message:'sensitive fixture secret',details:'private details'});
+ assert.equal(result.status,500);assert(result.error.includes('PGRST202'));assert(!JSON.stringify(result).includes('sensitive'));
+ assert.equal(settingsFailure({code:'secret value'}).code,'UNKNOWN');
+ assert(settingsFailure({code:'21000',message:'AI_SETTINGS_CARDINALITY:state'}).error.endsWith('state'));
+ assert(settingsFailure({code:'21000',message:'sensitive data'}).error.endsWith('api_result'));
+});
 test('AI provider calls use fixed origins, headers, metadata only, and redact errors',async()=>{
  const {inspectModels}=await import('../supabase/functions/weekly-ai-settings/provider.mjs');
  for(const provider of ['gemini','openai','anthropic']){
@@ -12,7 +24,7 @@ test('AI settings require administrator server; redact state; retain/rotate/dele
  const db=new PGlite();t.after(()=>db.close());const admin='11111111-1111-4111-8111-111111111111',member='22222222-2222-4222-8222-222222222222';
  // Vault is unavailable in PGlite: emulate its API to test permissions and transactions only.
  await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;create function auth.role() returns text language sql stable as $$ select current_setting('request.jwt.claim.role',true) $$;grant usage on schema public to anon,authenticated,service_role;insert into auth.users values('${admin}'),('${member}');create schema vault;create table vault.secrets(id uuid primary key default gen_random_uuid(),secret text);create view vault.decrypted_secrets as select id,secret as decrypted_secret from vault.secrets;create function vault.create_secret(value text) returns uuid language sql as $$ insert into vault.secrets(secret) values(value) returning id $$;create function vault.update_secret(secret_id uuid,value text) returns void language sql as $$ update vault.secrets set secret=value where id=secret_id $$;`);
- for(const file of ['202610040001_ontology_admin.sql','202610050005_weekly_ai_settings.sql'])await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations',file),'utf8'));
+ for(const file of ['202610040001_ontology_admin.sql','202610050005_weekly_ai_settings.sql','202610050006_ai_settings_diagnostics.sql'])await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations',file),'utf8'));
  await db.exec(`insert into airisk_private.ontology_admins(user_id) values('${admin}')`);
  const role=async(name,id='')=>{await db.exec('reset role');await db.query("select set_config('request.jwt.claim.sub',$1,false),set_config('request.jwt.claim.role',$2,false)",[id,name]);await db.exec('set role '+name);};
  const state=async()=> (await db.query('select public.airisk_weekly_ai_state() as result')).rows[0].result;

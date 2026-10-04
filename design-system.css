@@ -84,3 +84,14 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
  ::-webkit-scrollbar-corner{background:var(--ds-scrollbar-track)}
 }
 @media(forced-colors:active){:where(*){scrollbar-color:auto}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:Canvas}::-webkit-scrollbar-thumb{background:ButtonText;border-color:Canvas}::-webkit-scrollbar-thumb:hover,::-webkit-scrollbar-thumb:active{background:Highlight}}
+
+/* 412 × 914 phone reference: useful map height, readable disclosures and inputs. */
+@media(max-width:480px){
+ #observatory #globe{height:34dvh;min-height:260px;max-height:340px}
+ #observatory #selected-country{top:calc(34dvh - 60px);bottom:auto;max-width:calc(100% - 32px)}
+ #risk-panel,#policy-panel{overflow-wrap:anywhere}
+ #observatory .source-details > summary{min-height:44px;box-sizing:border-box;padding-block:10px;font-size:14px}
+ .journey-dialog,.ds-dialog{max-height:calc(100dvh - 24px - env(safe-area-inset-bottom,0px));overscroll-behavior:contain}
+ .journey-dialog-head{gap:12px}.journey-dialog-head .journey-close{flex-shrink:0}
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;max-width:100%}
+}
