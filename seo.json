@@ -1,0 +1,23 @@
+{
+  "siteName": "Global AI Risk",
+  "ko": {
+    "title": "Global AI Risk | AI 위험 대응을 위한 커뮤니티 글로벌 연대",
+    "description": "각국의 대표 커뮤니티를 연결해 AI 위험에 대응하는 기술·문화·정책을 함께 만들어갈 글로벌 연대를 준비합니다. 국가별 AI 사건과 잠재위험을 살펴보고, 경험과 근거를 모아 공동 대응을 논의합니다.",
+    "heading": "AI 위험에 대응하는 글로벌 연대, 각국의 커뮤니티에서 시작합니다.",
+    "intro": "기술적 대응과 문화적 이해, 정책적 준비를 함께 발전시키기 위해 각국의 대표 커뮤니티를 연결하고자 합니다. 서로의 경험과 근거를 나누며, 국경을 넘어 함께 대응할 길을 찾습니다.",
+    "locale": "ko_KR"
+  },
+  "en": {
+    "title": "Global AI Risk | A Global Alliance of National Communities",
+    "description": "Building a global alliance of national communities to shape technical, cultural and policy responses to AI risk. Explore incidents and share evidence and experience.",
+    "heading": "A global response to AI risk starts with communities in every country.",
+    "intro": "We aim to connect leading communities in each country to develop technical responses, cultural understanding and policy readiness for AI risk. By sharing evidence and lived experience, we seek paths to collective action across borders.",
+    "locale": "en_US"
+  },
+  "publication": {
+    "primaryLanguage": "en",
+    "englishStatus": "English by default. Korean toggle available only when the visitor country is detected as KR.",
+    "canonicalUrl": null,
+    "note": "Set canonical, og:url and language-alternate URLs after the public domain and actual language pages are confirmed."
+  }
+}

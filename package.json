@@ -1,1 +1,13 @@
-{"name":"ai-risk-observatory","version":"0.1.0","private":true,"scripts":{"start":"node server.cjs"},"dependencies":{"cesium":"1.146.0"}}
+{
+  "name": "ai-risk-observatory",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs",
+    "build": "node scripts/build.cjs",
+    "preview:dist": "node server.cjs --dist"
+  },
+  "dependencies": {
+    "cesium": "1.146.0"
+  }
+}
