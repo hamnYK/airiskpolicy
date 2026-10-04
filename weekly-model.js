@@ -20,7 +20,7 @@
   const errors=[];
   if(!doc||typeof doc!=='object'||!Array.isArray(doc.items)||doc.items.length>30)return ['Invalid briefing document'];
   if(typeof doc.question!=='string'||doc.question.length>1000)errors.push('Invalid weekly question');
-  if(publish&&(!doc.question.trim()||['risk','policy'].some(kind=>doc.items.filter(x=>x.kind===kind).length!==10)))errors.push('A question and exactly 10 reviewed issues per tab are required');
+  if(publish&&(typeof doc.question!=='string'||!doc.question.trim()||doc.items.length===0||['risk','policy'].some(kind=>doc.items.filter(x=>x?.kind===kind).length>10)))errors.push('핵심 질문과 검토 완료된 이슈가 최소 1개 필요합니다. 각 탭은 최대 10개입니다.');
   const ids=new Set();for(const item of doc.items){
    if(!item||typeof item.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(item.id)||ids.has(item.id)){errors.push('Invalid or duplicate item ID');continue;}ids.add(item.id);
    if(!['risk','policy'].includes(item.kind))errors.push('Choose RISK or POLICY');
