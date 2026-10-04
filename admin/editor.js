@@ -15,6 +15,7 @@
   }
   function confirm(title, text, action) { $('confirm-title').textContent = title; $('confirm-text').textContent = text; $('accept').onclick = () => { $('confirm').close(); action(); }; $('confirm').showModal(); $('cancel').focus(); }
   $('cancel').onclick = () => $('confirm').close();
+  $('confirm').addEventListener('cancel', e => e.preventDefault());
   async function api(route, payload) {
     const client = await window.aiRiskAdmin.client();
     if (route === 'logout') { const { error } = await client.auth.signOut({ scope: 'local' }); if (error) throw Error(window.aiRiskAdmin.describe(error)); return; }

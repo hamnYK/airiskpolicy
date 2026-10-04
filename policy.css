@@ -1,5 +1,5 @@
 /* Country policy overview and evidence explorer. */
-:root{--ds-policy-active:var(--ds-action);--ds-policy-proposed:var(--ds-hazard);--ds-policy-complete:var(--ds-text-muted);--ds-policy-not-started:var(--ds-warning);--entry-height:160px}
+:root{--entry-height:160px}
 #policy-panel{position:absolute;top:80px;right:28px;width:350px;box-sizing:border-box;padding:22px;background:var(--ds-surface);color:var(--ds-text);border:1px solid var(--ds-border);border-radius:var(--ds-radius-panel);overflow:auto}
 #policy-title{font:600 24px/1.25 var(--ds-font-number);margin:0 0 14px}#policy-panel .risk-kicker{margin:0 0 8px}#policy-state{font-size:var(--ds-type-meta);color:var(--ds-text-muted);line-height:1.6;margin:8px 0}#policy-state[data-state=error]{color:var(--ds-error)}
 .policy-total{position:relative;margin:16px 0}.policy-total>span{display:block;font-size:var(--ds-type-ui)}.policy-total>strong{display:block;font:500 48px/1.2 var(--ds-font-number);font-variant-numeric:tabular-nums}.policy-total>small{font-size:var(--ds-type-meta);color:var(--ds-text-muted)}

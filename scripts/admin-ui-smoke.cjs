@@ -55,6 +55,9 @@ const root = path.resolve(__dirname, '..');
     await page.getByRole('button', { name: '현재 초안으로 분석' }).click();
     assert.match(await page.locator('#preview-result').textContent(), /"type": "concept"/);
     await page.getByRole('button', { name: '발행 검토', exact: true }).click();
+    assert.equal(await page.locator('#cancel').evaluate(el => el === document.activeElement), true);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#confirm').evaluate(el => el.open), true);
     await page.locator('#accept').click(); await page.locator('#message').filter({ hasText: '발행했습니다' }).waitFor();
     assert.equal(state.published.concepts[0].label, 'Transparency');
     assert.equal(state.published.name, 'Common AI principles');
@@ -88,6 +91,12 @@ const root = path.resolve(__dirname, '..');
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.screenshot({ path: path.join(root, 'output/admin-mobile.png'), fullPage: true });
+    for (const width of [1280,390,320]) {
+      await page.setViewportSize({width,height:900});
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+      const small = await page.locator('#editor button,#editor a,#editor input,#editor select,#editor textarea').evaluateAll(els=>els.filter(el=>el.getClientRects().length&&!el.disabled).filter(el=>el.getBoundingClientRect().height<43.9||parseFloat(getComputedStyle(el).fontSize)<14).map(el=>({text:el.textContent.slice(0,30),height:el.getBoundingClientRect().height,font:getComputedStyle(el).fontSize})));
+      assert.deepEqual(small,[]);
+    }
     await page.getByRole('button', { name: '로그아웃', exact: true }).click(); await page.locator('#accept').click(); await page.waitForURL('**/admin/login.html');
     assert.deepEqual(errors, []);
     console.log('Browser smoke passed: login gate, non-admin denial, edit/save, ontology preview, publish, logout and mobile width. All Supabase calls mocked.');

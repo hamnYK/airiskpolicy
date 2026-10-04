@@ -8,7 +8,8 @@
     "preview:dist": "node server.cjs --dist",
     "build:seo": "node scripts/build-seo.cjs",
     "test": "node --test scripts/*.test.cjs",
-    "test:ui": "node scripts/admin-ui-smoke.cjs"
+    "test:ui": "node scripts/admin-ui-smoke.cjs",
+    "test:design": "node scripts/design-system-smoke.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2",

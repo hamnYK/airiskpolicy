@@ -1,4 +1,4 @@
-/* AI RISK design system v1.0. Shared by the application and reference page. */
+/* AI RISK design system v1.1. Shared by the application and reference page. */
 :root{
  --ds-background:#08131f;--ds-surface:#102737;--ds-surface-raised:#163241;--ds-input:#091d2b;
  --ds-text:#dfedf4;--ds-text-muted:#a9c0cf;--ds-text-subtle:#9fb7c7;
@@ -7,6 +7,7 @@
  --ds-secondary:#193d49;--ds-secondary-hover:#234c57;--ds-link:#b5e6da;
  --ds-focus:#a8ddd2;--ds-error:#efb0b0;--ds-warning:#dcc79e;--ds-success:#a8ddd2;
  --ds-incident:#e2a98e;--ds-hazard:#8baedb;--ds-country-selected:#f5cf69;
+ --ds-policy-active:var(--ds-action);--ds-policy-proposed:var(--ds-hazard);--ds-policy-complete:var(--ds-text-muted);--ds-policy-not-started:var(--ds-warning);
  --ds-space-1:4px;--ds-space-2:8px;--ds-space-3:12px;--ds-space-4:16px;--ds-space-6:24px;--ds-space-8:32px;--ds-space-12:48px;
  --ds-radius-control:6px;--ds-radius-panel:8px;--ds-radius-dialog:12px;--ds-radius-pill:999px;
  --ds-font-body:Pretendard,'Malgun Gothic',sans-serif;--ds-font-title:SUITE,Pretendard,sans-serif;--ds-font-number:'Space Grotesk',Pretendard,sans-serif;
@@ -33,8 +34,8 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
 .ds-secondary:hover:not(:disabled),#collective-work .work-secondary:hover:not(:disabled){background:var(--ds-secondary-hover);border-color:var(--ds-action);color:var(--ds-text);text-decoration:none}
 .ds-quiet,.journey-close,.map-controls>button,.map-zoom-controls button,#risk-refresh,.record-pagination button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-target);padding:var(--ds-space-2) var(--ds-space-3);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-control);background:var(--ds-surface);color:var(--ds-text);font-size:var(--ds-type-ui);line-height:var(--ds-line-control);cursor:pointer}
 .ds-quiet:hover:not(:disabled),.journey-close:hover,.map-controls>button:hover,.map-zoom-controls button:hover,#risk-refresh:hover:not(:disabled),.record-pagination button:hover:not(:disabled){background:var(--ds-surface-raised)}
-.ds-link,#collective-work .work-action:not(.work-secondary),#collective-work .work-source-link,.journey-link{display:inline-flex;align-items:center;box-sizing:border-box;min-height:var(--ds-target);max-width:100%;padding:var(--ds-space-2);border:0;border-radius:var(--ds-radius-control);background:transparent;color:var(--ds-link);font-size:var(--ds-type-ui);line-height:var(--ds-line-control);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
-.ds-link:hover,#collective-work .work-action:not(.work-secondary):hover,.journey-link:hover{background:var(--ds-surface-raised);color:var(--ds-text)}
+.ds-link,.risk-sources a,#collective-work .work-action:not(.work-secondary),#collective-work .work-source-link,.journey-link{display:inline-flex;align-items:center;box-sizing:border-box;min-height:var(--ds-target);max-width:100%;padding:var(--ds-space-2);border:0;border-radius:var(--ds-radius-control);background:transparent;color:var(--ds-link);font-size:var(--ds-type-ui);line-height:var(--ds-line-control);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.ds-link:hover,.risk-sources a:hover,#collective-work .work-action:not(.work-secondary):hover,.journey-link:hover{background:var(--ds-surface-raised);color:var(--ds-text)}
 /* Choice controls use aria-pressed as their single state source. */
 .ds-chip,.classification-chip,#explore-dialog .classification-chip{box-sizing:border-box;min-height:var(--ds-target);padding:var(--ds-space-2) var(--ds-space-3);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-pill);background:var(--ds-surface);color:var(--ds-text);font:inherit;font-size:var(--ds-type-ui);line-height:var(--ds-line-control);cursor:pointer;white-space:normal}
 .ds-chip[aria-pressed=true],.classification-chip[aria-pressed=true],#explore-dialog .classification-chip[aria-pressed=true],.explore-mobile-tabs button[aria-pressed=true]{background:var(--ds-action);color:var(--ds-on-action);border-color:var(--ds-action);font-weight:700}
