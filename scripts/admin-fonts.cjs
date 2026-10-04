@@ -8,9 +8,9 @@ const root=path.resolve(__dirname,'..');
   await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);});
   browser=await chromium.launch({channel:process.platform==='win32'?'msedge':undefined,headless:true});
   for(const file of ['login.html','index.html','weekly.html']){
-   const page=await browser.newPage();await page.route('https://**/*',route=>route.abort());
+   const page=await browser.newPage();await page.route('https://*.supabase.co/**',route=>route.abort());
    await page.addInitScript(()=>{window.fontViolations=[];document.addEventListener('securitypolicyviolation',e=>{if(e.effectiveDirective==='font-src')window.fontViolations.push(e.blockedURI);});});
-   await page.goto('http://127.0.0.1:'+port+'/admin/'+file);
+   await page.goto((process.env.ADMIN_TEST_BASE_URL||'http://127.0.0.1:'+port)+'/admin/'+file);
    const loaded=await page.evaluate(async()=>{const fonts=['16px Pretendard','16px SUITE','16px "Space Grotesk"'];await Promise.all(fonts.map(font=>document.fonts.load(font)));return fonts.every(font=>document.fonts.check(font));});
    assert(loaded,file+' fonts load');assert.deepEqual(await page.evaluate(()=>window.fontViolations),[],file+' CSP permits bundled fonts');await page.close();
   }
