@@ -17,8 +17,9 @@ Deno.serve(async(req:Request)=>{
   const body=JSON.parse(raw);if(!['save','delete','models','test','generate'].includes(body.action))return reply(400,{error:'지원하지 않는 작업입니다.'});
   let weekly:any,input:any;
   if(body.action==='generate'){
+   if(typeof body.country!=='string'||!/^[A-Z]{2}$/.test(body.country))return reply(400,{error:'발행 대상 국가를 선택하세요.'});
    if(typeof body.week!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(body.week))return reply(400,{error:'검토 주를 선택하세요.'});
-   const loaded=await actor.rpc('airisk_weekly_state',{p_week:body.week});
+   const loaded=await actor.rpc('airisk_weekly_state',{p_week:body.week,p_country:body.country});
    if(loaded.error||!loaded.data||loaded.data.revision!==body.week_revision)return reply(409,{error:'주간 초안이 변경되었습니다. 저장본을 다시 불러오세요.'});
    weekly=loaded.data;try{input=selectionInput(weekly);}catch(e){return reply(400,{error:(e as Error).message});}
    if(!input.candidates.length)return reply(200,{proposal:{question:weekly.draft.question,items:[],note:'수집된 후보가 없어 선정하지 않았습니다. 후보를 먼저 수집하세요.'},week_revision:weekly.revision});
@@ -34,7 +35,7 @@ Deno.serve(async(req:Request)=>{
   if(body.action==='generate'){
    try{
     const proposal=validateSelection(await generateSelection(result.data,input),input,weekly);
-    const latest=await actor.rpc('airisk_weekly_state',{p_week:body.week});
+    const latest=await actor.rpc('airisk_weekly_state',{p_week:body.week,p_country:body.country});
     if(latest.error||latest.data.revision!==weekly.revision||JSON.stringify(latest.data.candidates)!==JSON.stringify(weekly.candidates))return reply(409,{error:'생성 중 초안 또는 후보가 변경되었습니다. 최신 자료로 다시 요청하세요.'});
     return reply(200,{proposal,week_revision:weekly.revision,provider:result.data.provider,model:result.data.model});
    }catch(e){return reply(502,{error:(e as Error).message});}

@@ -5,8 +5,8 @@ const root=path.resolve(__dirname,'..');
  const server=spawn(process.execPath,['server.cjs','--dist'],{cwd:root,env:{...process.env,PORT:String(port)},stdio:['ignore','pipe','pipe'],windowsHide:true});let browser;
  try{
   await new Promise(r=>server.stdout.once('data',r));browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1668,height:870}});
-  const edition={week_start:'2026-09-28',week_end:'2026-10-04',published_at:'2026-10-05T00:00:00Z',document:{question:'대한민국 국가 안보에 영향을 줄 수 있는 AI 위험과 대응 정책',items:['risk','policy'].map(kind=>({id:kind,kind,title:kind==='risk'?'AI 기반 정보 조작 위험':'AI 보안 관리 정책',change:'원문에서 확인할 핵심 변화',risk:'위험 연결',policy:'정책 연결',reason:'선정 이유',signal:'다음 주 관찰 신호',source:'https://example.com',reviewed:true}))}};
-  await page.route('https://**/*',r=>r.request().url().endsWith('/airisk_weekly_public')?r.fulfill({json:edition}):r.abort());await page.route('**/Cesium.js*',r=>r.abort());
+  const edition={country_code:'KR',week_start:'2026-09-28',week_end:'2026-10-04',published_at:'2026-10-05T00:00:00Z',document:{question:'대한민국 국가 안보에 영향을 줄 수 있는 AI 위험과 대응 정책',items:['risk','policy'].map(kind=>({id:kind,kind,title:kind==='risk'?'AI 기반 정보 조작 위험':'AI 보안 관리 정책',change:'원문에서 확인할 핵심 변화',risk:'위험 연결',policy:'정책 연결',reason:'선정 이유',signal:'다음 주 관찰 신호',source:'https://example.com',reviewed:true}))}};
+  await page.route('https://**/*',r=>r.request().url().endsWith('/airisk_weekly_public')?r.fulfill({json:edition}):r.abort());await page.route('https://api.country.is/',r=>r.fulfill({json:{country:'KR'}}));await page.route('**/Cesium.js*',r=>r.abort());
   await page.goto('http://127.0.0.1:'+port);await page.locator('#weekly-dialog[open]').waitFor();await page.waitForFunction(()=>document.body.dataset.countryInitialized==='true');
   for(const width of [1668,1280]){
    await page.setViewportSize({width,height:870});await page.waitForFunction(()=>document.querySelector('#weekly-dialog').dataset.layout==='floating');

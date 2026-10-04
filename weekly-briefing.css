@@ -15,3 +15,5 @@
 #weekly-dialog .weekly-body>h3{font-size:16px;line-height:1.6}
 #weekly-dialog .weekly-tabs{gap:8px;margin:16px 0}
 #weekly-dialog .weekly-body details{padding:12px}
+
+#weekly-open[hidden]{display:none!important}

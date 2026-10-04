@@ -1,15 +1,16 @@
 'use strict';
 (()=>{
  const make=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;},L=(ko,en)=>document.documentElement.lang==='ko'?ko:en;
- let edition=null,tab='risk',opener=null,failed=false;
- const button=make('button');button.id='weekly-open';button.type='button';button.className='ds-secondary';document.querySelector('.map-controls').append(button);
+ let edition=null,tab='risk',opener=null,failed=false,visitorCountry=null;
+ const button=make('button');button.id='weekly-open';button.hidden=true;button.type='button';button.className='ds-secondary';document.querySelector('.map-controls').append(button);
  const dialog=make('dialog');dialog.id='weekly-dialog';dialog.className='journey-dialog weekly-dialog';dialog.dataset.noTranslate='true';dialog.setAttribute('aria-labelledby','weekly-title');dialog.setAttribute('aria-modal','false');button.setAttribute('aria-controls',dialog.id);button.setAttribute('aria-expanded','false');
  const header=make('header'),title=make('h2'),close=make('button'),body=make('div');title.id='weekly-title';header.className='journey-dialog-head';close.className='journey-close';body.className='weekly-body';header.append(title,close);dialog.append(header,body);document.body.append(dialog);
  function render(){
+  button.hidden=!edition||failed;
   button.textContent=L('주간 TOP 10','Weekly TOP 10');title.textContent=L('AI 주간 브리핑 · TOP 10','Weekly AI Briefing · TOP 10');close.textContent=L('닫기','Close');body.replaceChildren();
   if(failed){body.append(make('p',L('브리핑을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.','Could not load the briefing. Refresh to retry.')));return;}
   if(!edition){body.append(make('p',L('아직 발행된 주간 브리핑이 없습니다. 관리자가 후보를 검토한 뒤 공개합니다.','No weekly briefing has been published yet. Candidates become public after editorial review.')));return;}
-  body.append(make('p',edition.week_start+' — '+edition.week_end+' · '+L('검토 기간 · 한국시간','Review period · Korea time')));
+  body.append(make('p',new Intl.DisplayNames([document.documentElement.lang==='ko'?'ko':'en'],{type:'region'}).of(edition.country_code)+' · '+edition.week_start+' — '+edition.week_end+' · '+L('검토 기간 · 한국시간','Review period · Korea time')));
   body.append(make('p',L('관리자가 선정한 주요 이슈입니다. 통계적 위험 순위나 정책 효과 점수가 아닙니다.','Editorial selections, not statistical risk rankings or policy effectiveness scores.')));
   body.append(make('h3',edition.document.question));
   const tabs=make('div');tabs.className='weekly-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label',L('브리핑 분야','Briefing category'));
@@ -35,9 +36,9 @@
    for(const prop of ['left','top','width','max-height'])dialog.style.removeProperty(prop);
   }
  }
- function open(manual=true){if(dialog.open)return;opener=document.activeElement===document.body?button:document.activeElement;render();position();dialog.show();button.setAttribute('aria-expanded','true');if(manual){close.focus({preventScroll:true});if(dialog.dataset.layout==='inline')dialog.scrollIntoView({block:'start'});}else opener?.focus({preventScroll:true});}
- close.onclick=()=>dialog.close();dialog.addEventListener('cancel',e=>e.preventDefault());dialog.addEventListener('close',()=>{button.setAttribute('aria-expanded','false');if(edition)try{localStorage.setItem('airisk-weekly-seen',edition.published_at);}catch{}opener?.focus({preventScroll:true});});button.onclick=()=>open();
+ function open(manual=true){if(dialog.open||!edition||failed)return;opener=document.activeElement===document.body?button:document.activeElement;render();position();dialog.show();button.setAttribute('aria-expanded','true');if(manual){close.focus({preventScroll:true});if(dialog.dataset.layout==='inline')dialog.scrollIntoView({block:'start'});}else opener?.focus({preventScroll:true});}
+ close.onclick=()=>dialog.close();dialog.addEventListener('cancel',e=>e.preventDefault());dialog.addEventListener('close',()=>{button.setAttribute('aria-expanded','false');if(edition)try{localStorage.setItem('airisk-weekly-seen-'+visitorCountry,edition.published_at);}catch{}opener?.focus({preventScroll:true});});button.onclick=()=>open();
  addEventListener('resize',position);const layoutObserver=new ResizeObserver(position);for(const id of ['observatory','risk-panel','policy-panel']){const element=document.getElementById(id);if(element)layoutObserver.observe(element);}position();
  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});render();
- (async()=>{try{const c=await (await fetch('supabase-config.json',{cache:'no-store',signal:AbortSignal.timeout(15000)})).json();if(!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(c.url))throw Error();const r=await fetch(c.url+'/rest/v1/rpc/airisk_weekly_public',{method:'POST',headers:{apikey:c.publishableKey,'Content-Type':'application/json'},body:'{}',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();const data=await r.json();if(data&&(!data.document||window.aiRiskWeekly.validate(data.document,true).length))throw Error();edition=data;render();let seen=null;try{seen=localStorage.getItem('airisk-weekly-seen');}catch{}if(edition&&seen!==edition.published_at&&!document.querySelector('dialog[open]'))open(false);}catch{failed=true;button.title=L('브리핑을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.','Could not load the briefing. Refresh to retry.');body.replaceChildren(make('p',button.title));}})();
+ (async()=>{try{visitorCountry=await window.aiRiskVisitorCountry;if(!/^[A-Z]{2}$/.test(visitorCountry||''))return;const c=await (await fetch('supabase-config.json',{cache:'no-store',signal:AbortSignal.timeout(15000)})).json();if(!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(c.url))throw Error();const r=await fetch(c.url+'/rest/v1/rpc/airisk_weekly_public',{method:'POST',headers:{apikey:c.publishableKey,'Content-Type':'application/json'},body:JSON.stringify({p_country:visitorCountry}),signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();const data=await r.json();if(data&&(data.country_code!==visitorCountry||!data.document||window.aiRiskWeekly.validate(data.document,true).length))throw Error();edition=data;render();let seen=null;try{seen=localStorage.getItem('airisk-weekly-seen-'+visitorCountry);}catch{}if(edition&&seen!==edition.published_at&&!document.querySelector('dialog[open]'))open(false);}catch{failed=true;button.hidden=true;button.title=L('브리핑을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.','Could not load the briefing. Refresh to retry.');body.replaceChildren(make('p',button.title));}})();
 })();

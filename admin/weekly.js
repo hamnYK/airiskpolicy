@@ -4,8 +4,9 @@
  const $=id=>document.getElementById(id),make=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
  let state=null,draft=null,kind='risk',selected=null,dirty=false,busy=false,generating=false,proposal=null,proposalBase=null,candidatePage=0;
  const message=text=>{if(generating)$('ai-selection-status').textContent=text;else $('weekly-message').textContent=text;};
- const rpc=(name,args)=>window.aiRiskAdmin.rpc('airisk_weekly_'+name,args);
- function status(){for(const id of ['load','collect','download','save','publish','withdraw','add','ai-generate-weekly'])$(id).disabled=busy||!state||((id==='publish'||id==='ai-generate-weekly')&&dirty);$('weekly-status').textContent=state.week_start+' 주 · '+(dirty?'미저장 변경 있음':'초안 저장됨')+' · RISK '+draft.items.filter(x=>x.kind==='risk').length+'/10 · POLICY '+draft.items.filter(x=>x.kind==='policy').length+'/10 · '+(state.published?'공개본 있음':'미발행');}
+ const rpc=(name,args={})=>window.aiRiskAdmin.rpc('airisk_weekly_'+name,['state','save','publish'].includes(name)?{p_country:state?.country_code||$('country').value,...args}:args);
+ const countryLabel=code=>new Intl.DisplayNames(['ko'],{type:'region'}).of(code)+' ('+code+')';
+ function status(){$('country').disabled=busy;$('week').disabled=busy;for(const id of ['load','collect','download','save','publish','withdraw','add','ai-generate-weekly'])$(id).disabled=busy||!state||((id==='publish'||id==='ai-generate-weekly')&&dirty);$('weekly-status').textContent=countryLabel(state.country_code)+' · '+state.week_start+' 주 · '+(dirty?'미저장 변경 있음':'초안 저장됨')+' · RISK '+draft.items.filter(x=>x.kind==='risk').length+'/10 · POLICY '+draft.items.filter(x=>x.kind==='policy').length+'/10 · '+(state.published?'공개본 있음':'미발행');}
  function selectionStatus(){
   $('ai-save-draft').disabled=busy||!state;
   $('ai-generate-weekly').disabled=busy||!state||dirty||!draft.question.trim();
@@ -15,11 +16,11 @@
  }
  function mark(){clearProposal();$('ai-selection-status').textContent='';dirty=true;status();selectionStatus();selectionContext();}
  function clearProposal(){proposal=null;proposalBase=null;$('ai-proposal').hidden=true;$('ai-selection-status').textContent='';}
- function install(next){clearProposal();state=next;draft=structuredClone(next.draft);dirty=false;selected=null;$('week').value=state.week_start;$('question').value=draft.question;render();}
+ function install(next){clearProposal();state=next;$('country').value=state.country_code;draft=structuredClone(next.draft);dirty=false;selected=null;$('week').value=state.week_start;$('question').value=draft.question;render();}
  async function run(fn){if(busy)return;busy=true;if(state){status();selectionStatus();}try{await fn();}catch(e){message(e.message);}finally{busy=false;generating=false;if(state){status();selectionStatus();}}}
  function confirm(text,action){$('confirm-text').textContent=text;$('accept').onclick=()=>{$('weekly-confirm').close();run(action);};if(window.parent!==window)window.parent.aiRiskPositionConfirmation?.($('weekly-confirm'));$('weekly-confirm').showModal();$('cancel').focus();}
  $('cancel').onclick=()=>$('weekly-confirm').close();$('weekly-confirm').addEventListener('cancel',e=>e.preventDefault());
- async function load(){install(await rpc('state',{p_week:$('week').value||null}));$('weekly-editor').hidden=false;message('초안을 불러왔습니다. 저장과 발행은 별도입니다.');}
+ async function load(country=$('country').value){install(await rpc('state',{p_week:$('week').value||null,p_country:country}));$('weekly-editor').hidden=false;message('초안을 불러왔습니다. 저장과 발행은 별도입니다.');}
  function source(url){const a=make('a','출처 확인 ▶');a.className='ds-link';try{const u=new URL(url);if(u.protocol!=='https:')return make('span','출처 확인 필요');a.href=u.href;a.target='_blank';a.rel='noopener';return a;}catch{return make('span','출처 확인 필요');}}
  function add(candidate){if(draft.items.filter(x=>x.kind===kind).length>=10){message('해당 탭은 최대 10개를 선정합니다. 기존 항목을 제외한 뒤 추가하세요.');return;}
   const item={id:candidate?.id||'manual-'+crypto.randomUUID(),kind,title:candidate?.title||'',source:candidate?.source||'',change:'',risk:'',policy:'',signal:'',reason:'',reviewed:false};
@@ -56,7 +57,7 @@
   if(dirty||!draft.question.trim())throw Error('핵심 질문을 작성하고 초안 저장을 먼저 해 주세요.');
   const base=JSON.stringify(draft),revision=state.revision;clearProposal();message('핵심 질문에 관련된 후보를 선정하고 내용을 작성 중… 최대 2분 걸릴 수 있습니다.');
   const settings=await rpc('ai_state');if(!settings)throw Error('AI API 세팅에서 제공자·키·모델을 먼저 저장하세요.');
-  const client=await window.aiRiskAdmin.client();const {data,error}=await client.functions.invoke('weekly-ai-settings',{body:{action:'generate',revision:settings.revision,week:state.week_start,week_revision:revision}});
+  const client=await window.aiRiskAdmin.client();const {data,error}=await client.functions.invoke('weekly-ai-settings',{body:{action:'generate',revision:settings.revision,week:state.week_start,country:state.country_code,week_revision:revision}});
   if(error){let text='AI 요청에 실패했습니다. 기존 초안은 유지됩니다.';try{text=(await error.context.json()).error||text;}catch{}throw Error(text);}
   if(data?.error)throw Error(data.error);
   if(dirty||JSON.stringify(draft)!==base||state.revision!==revision||data.week_revision!==revision)throw Error('작성 중 초안이 변경되어 AI 제안을 반영하지 않았습니다.');
@@ -67,6 +68,7 @@
  });
  $('ai-discard-weekly').onclick=clearProposal;
  $('ai-apply-weekly').onclick=()=>{if(!proposal)return;confirm('현재 선정 목록을 AI 제안으로 교체할까요? 모든 제안은 검토 필요 상태이며 초안 저장과 발행은 별도입니다.',async()=>{if(!proposal||JSON.stringify(draft)!==proposalBase)throw Error('초안이 변경되어 제안을 적용할 수 없습니다.');draft.items=structuredClone(proposal.items).map(x=>({...x,reviewed:false}));selected=null;mark();render();message('AI 제안을 편집 초안에 반영했습니다. 원문 확인·내용 검토 후 저장하고 발행하세요.');});};
+ $('country').onchange=()=>{const target=$('country').value;$('country').value=state.country_code;const change=()=>load(target);if(dirty)confirm('미저장 편집을 버리고 '+countryLabel(target)+'의 초안을 불러올까요? 현재 국가의 저장본과 발행본은 유지됩니다.',change);else run(change);};
  $('question').oninput=()=>{draft.question=$('question').value;mark();};
  $('ai-save-draft').onclick=()=>$('save').click();
  for(const k of ['risk','policy'])$(k+'-tab').onclick=()=>{kind=k;selected=null;candidatePage=0;render();};
@@ -74,9 +76,9 @@
  $('add').onclick=()=>add();$('load').onclick=()=>{if(dirty)confirm('미저장 편집을 버리고 선택한 주의 저장본을 불러올까요?',load);else run(load);};
  $('collect').onclick=()=>run(async()=>{clearProposal();message('RISK·POLICY 후보 수집 중… 약 1~2분 걸릴 수 있습니다.');const client=await window.aiRiskAdmin.client();const {data,error}=await client.functions.invoke('weekly-collect',{body:{week:state.week_start}});if(error||data?.error)throw Error(data?.error||error?.message||'수집 실패');const next=await rpc('state',{p_week:state.week_start});state.candidates=next.candidates;state.collection=next.collection;render();message('후보를 갱신했습니다. 편집 중인 초안과 공개본은 유지됩니다.');});
  $('save').onclick=()=>run(async()=>{const errors=window.aiRiskWeekly.validate(draft);if(errors.length)throw Error(errors.join('\n'));const selection=selected;install(await rpc('save',{p_week:state.week_start,expected_revision:state.revision,document:draft}));selected=selection;edit();message('초안을 저장했습니다. 아직 공개본에는 적용되지 않았습니다.');});
- $('publish').onclick=()=>{const errors=window.aiRiskWeekly.validate(draft,true);if(errors.length){message('발행 조건을 확인하세요: '+errors.join('\n'));return;}confirm(state.week_start+' 주간 RISK '+draft.items.filter(x=>x.kind==='risk').length+'개·POLICY '+draft.items.filter(x=>x.kind==='policy').length+'개를 공개할까요? 목록 순서가 각 탭의 순위가 됩니다.',async()=>{install(await rpc('publish',{p_week:state.week_start,expected_revision:state.revision,withdraw:false}));message('공개 발행했습니다. 방문자는 새로고침하면 팝업에서 볼 수 있습니다.');});};
- $('withdraw').onclick=()=>confirm('이 주의 발행을 취소할까요? 저장된 초안은 남지만 미저장 편집은 사라집니다. 공개 화면에는 이전 주의 발행본이 표시될 수 있습니다.',async()=>{install(await rpc('publish',{p_week:state.week_start,expected_revision:state.revision,withdraw:true}));message('발행을 취소했습니다.');});
- $('download').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify({week:state.week_start,...draft},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='weekly-briefing-'+state.week_start+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ $('publish').onclick=()=>{const errors=window.aiRiskWeekly.validate(draft,true);if(errors.length){message('발행 조건을 확인하세요: '+errors.join('\n'));return;}confirm(countryLabel(state.country_code)+' 대상 · '+state.week_start+' 주간 RISK '+draft.items.filter(x=>x.kind==='risk').length+'개·POLICY '+draft.items.filter(x=>x.kind==='policy').length+'개를 공개할까요? 목록 순서가 각 탭의 순위가 됩니다.',async()=>{install(await rpc('publish',{p_week:state.week_start,expected_revision:state.revision,withdraw:false}));message('공개 발행했습니다. 방문자는 새로고침하면 팝업에서 볼 수 있습니다.');});};
+ $('withdraw').onclick=()=>confirm(countryLabel(state.country_code)+' 대상 · 이 주의 발행을 취소할까요? 저장된 초안은 남지만 미저장 편집은 사라집니다. 공개 화면에는 이전 주의 발행본이 표시될 수 있습니다.',async()=>{install(await rpc('publish',{p_week:state.week_start,expected_revision:state.revision,withdraw:true}));message('발행을 취소했습니다.');});
+ $('download').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify({country:state.country_code,week:state.week_start,...draft},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='weekly-briefing-'+state.country_code+'-'+state.week_start+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
  window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
  run(async()=>{const client=await window.aiRiskAdmin.client();const {data,error}=await client.auth.getUser();if(error||!data.user){message('관리자 로그인이 필요합니다. 위의 관리자 로그인 링크를 이용하세요.');return;}await load();});
 })();
