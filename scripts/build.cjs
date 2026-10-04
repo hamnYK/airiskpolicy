@@ -27,7 +27,7 @@ fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.writeFileSync(path.join(out,'ontology-config.json'),JSON.stringify(ontologyConfig,null,2));
 fs.writeFileSync(path.join(out,'supabase-config.json'),JSON.stringify(supabaseConfig,null,2));
 fs.mkdirSync(path.join(out,'admin'),{recursive:true});
-for(const name of ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js','workspace-tabs.js','weekly.html','weekly.js','weekly.css']){
+for(const name of ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js','workspace-tabs.js','weekly.html','weekly.js','weekly.css','ai-settings.js','ai-settings.css']){
  let source=fs.readFileSync(path.join(root,'admin',name),'utf8');
  if(name.endsWith('.js'))new vm.Script(source,{filename:'admin/'+name});
  source=source.replaceAll('../node_modules/@supabase/supabase-js/dist/umd/supabase.js','../vendor/supabase/supabase.js');
