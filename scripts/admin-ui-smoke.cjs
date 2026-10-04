@@ -28,6 +28,7 @@ const root = path.resolve(__dirname, '..');
       else if (url.pathname === '/auth/v1/user') data = user;
       else if (url.pathname === '/auth/v1/logout') data = {};
       else if (url.pathname.includes('/rest/v1/rpc/')) {
+        if (url.pathname.endsWith('airisk_weekly_public')) return route.fulfill({json:null});
         if (url.pathname.endsWith('airisk_ontology_published')) return route.fulfill({json:state.published});
         assert.ok(req.headers().authorization?.startsWith('Bearer '));
         if (rejectSave && url.pathname.endsWith('airisk_ontology_save')) return route.fulfill({status:409,json:{code:'40001',message:'Draft changed in another session'}});

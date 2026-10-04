@@ -27,7 +27,7 @@ fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
 fs.writeFileSync(path.join(out,'ontology-config.json'),JSON.stringify(ontologyConfig,null,2));
 fs.writeFileSync(path.join(out,'supabase-config.json'),JSON.stringify(supabaseConfig,null,2));
 fs.mkdirSync(path.join(out,'admin'),{recursive:true});
-for(const name of ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js']){
+for(const name of ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js','workspace-tabs.js','weekly.html','weekly.js','weekly.css']){
  let source=fs.readFileSync(path.join(root,'admin',name),'utf8');
  if(name.endsWith('.js'))new vm.Script(source,{filename:'admin/'+name});
  source=source.replaceAll('../node_modules/@supabase/supabase-js/dist/umd/supabase.js','../vendor/supabase/supabase.js');
@@ -41,7 +41,7 @@ const cesium=path.join(root,'node_modules/cesium');const vendor=path.join(out,'v
 for(const name of ['Cesium.js','Assets','ThirdParty','Widgets','Workers'])fs.cpSync(path.join(cesium,'Build/Cesium',name),path.join(vendor,name),{recursive:true});
 fs.copyFileSync(path.join(cesium,'LICENSE.md'),path.join(vendor,'LICENSE.md'));
 // Changed scripts/styles get new URLs, including for visitors with cached assets.
-for(const page of ['index.html','design-system.html','admin/index.html','admin/login.html']){
+for(const page of ['index.html','design-system.html','admin/index.html','admin/login.html','admin/weekly.html']){
  const target=path.join(out,page);
  const source=fs.readFileSync(target,'utf8').replace(/((?:src|href)=")([^"?#]+\.(?:js|css))"/g,(whole,prefix,url)=>{
   if(/^(?:https?:|data:)/.test(url))return whole;
@@ -54,7 +54,7 @@ for(const page of ['index.html','design-system.html','admin/index.html','admin/l
 fs.writeFileSync(path.join(out,'.nojekyll'),'');
 const html=fs.readFileSync(path.join(out,'index.html'),'utf8');for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(/^(https?:|data:)/.test(match[1]))continue;if(!fs.existsSync(path.join(out,match[1].split('?')[0])))throw Error('Missing deployment asset: '+match[1])}
 for(const json of ['ontology.json','ontology-config.json','seo.json','i18n-en.json'])JSON.parse(fs.readFileSync(path.join(out,json),'utf8'));
-for(const file of ['admin/index.html','admin/login.html']){
+for(const file of ['admin/index.html','admin/login.html','admin/weekly.html']){
  const html=fs.readFileSync(path.join(out,file),'utf8');
  for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
   if(/^(https?:|data:)/.test(match[1]))continue;

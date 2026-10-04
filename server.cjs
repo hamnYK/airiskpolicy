@@ -9,7 +9,7 @@ http.createServer((req, res) => {
     if (p === '/admin/') p = '/admin/index.html';
     const file = path.resolve(root, '.' + p);
     const topLevel = p.slice(1).indexOf('/') === -1;
-    const adminFiles = ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js'].map(name => '/admin/' + name);
+    const adminFiles = ['index.html','login.html','style.css','editor.js','login.js','supabase-client.js','workspace-tabs.js','weekly.html','weekly.js','weekly.css'].map(name => '/admin/' + name);
     const allowed = topLevel ? /\.(html|js|css)$/.test(p) || ['/ontology.json', '/ontology-config.json', '/supabase-config.json', '/i18n-en.json', '/seo.json', '/robots.txt', '/sitemap.xml'].includes(p) : adminFiles.includes(p) || p === '/node_modules/@supabase/supabase-js/dist/umd/supabase.js' || ['/assets/', '/node_modules/cesium/Build/Cesium/', '/vendor/cesium/', '/vendor/supabase/'].some(prefix => p.startsWith(prefix));
     if (!file.startsWith(root + path.sep) || p.includes('\\') || p.split('/').some(s => s.startsWith('.')) || !allowed) { res.writeHead(403).end(); return; }
     fs.stat(file, (error, stat) => {
