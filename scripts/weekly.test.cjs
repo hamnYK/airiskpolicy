@@ -1,4 +1,12 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{PGlite}=require('@electric-sql/pglite'),model=require('../weekly-model.js');
+test('publish guidance identifies each issue and exact missing fields without approving AI drafts',()=>{
+ const item={id:'one',kind:'risk',title:'검토 대상',change:'변화',risk:'위험',policy:'정책',signal:'신호',reason:'이유',source:'https://example.com',reviewed:false};
+ const doc={question:'질문',items:[item,{...item,id:'two',kind:'policy',reason:'',source:''}]};
+ const errors=model.validate(doc,true);assert.equal(errors.length,2);assert.match(errors[0],/RISK 1번.*검토 대상.*검토 완료 체크/);assert.match(errors[1],/POLICY 1번.*선정 이유 입력.*근거 원문 URL 입력.*검토 완료 체크/);
+ assert.deepEqual(model.validate(doc),[]);assert.equal(item.reviewed,false);
+ assert.doesNotThrow(()=>model.validate({...doc,items:[{...item,reason:42}]},true));
+ assert.deepEqual(model.validate({question:'질문',items:[{...item,reviewed:true}]},true),[]);
+});
 test('weekly dates use the previous completed KST week; candidate ordering is bounded and deduplicated',()=>{
  assert.deepEqual(model.previousWeek(new Date('2026-10-04T21:00:00Z')),{start:'2026-09-28',end:'2026-10-04'});
  assert.deepEqual(model.previousWeek(new Date('2026-10-04T14:59:59Z')),{start:'2026-09-21',end:'2026-09-27'});
