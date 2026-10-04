@@ -1,4 +1,5 @@
 .gap-analyzer{max-width:1120px;margin:32px auto;padding:32px;box-sizing:border-box;scroll-margin-top:24px}
+.gap-admin-link{display:flex;width:fit-content;margin:12px 0;min-height:44px;align-items:center}
 .gap-analyzer h2{font-size:32px;margin:0}.gap-analyzer h3{font-size:20px;margin:8px 0;overflow-wrap:anywhere}
 .gap-state{font-weight:600}.gap-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}
 .gap-metrics button{display:flex;flex-direction:column;align-items:flex-start;padding:24px;gap:8px}.gap-metrics strong{font-size:36px;font-family:var(--ds-font-number);line-height:1.2}

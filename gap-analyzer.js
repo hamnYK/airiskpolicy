@@ -3,6 +3,7 @@
   const L = (ko, en) => document.documentElement.lang === 'ko' ? ko : en;
   const make = (tag, cls, text) => { const el = document.createElement(tag); if (cls) el.className = cls; if (text !== undefined) el.textContent = text; return el; };
   const button = (text, action) => { const b = make('button', 'ds-secondary', text); b.type = 'button'; b.onclick = action; return b; };
+  const adminLink = () => { const link = make('a', 'journey-link gap-admin-link', L('관리자 로그인 · 온톨로지 편집', 'Admin login · Edit ontology')); link.href = 'admin/login.html'; return link; };
   let risk = null, selectedCode = null, filter = 'all', page = 0, pageSize = 15, analysis = null;
   const section = make('section', 'gap-analyzer'); section.id = 'gap-analyzer'; section.dataset.noTranslate = 'true'; section.setAttribute('aria-labelledby', 'gap-title');
   document.getElementById('observatory').after(section);
@@ -17,6 +18,7 @@
     section.replaceChildren();
     section.append(make('p', 'eyebrow', 'RISK ◀▶ POLICY'), Object.assign(make('h2', '', 'Gap Analyzer'), { id: 'gap-title' }),
       make('p', 'ds-muted', L('위험 기록과 정책을 연결하고, 더 확인할 빈틈을 찾습니다.', 'Connect risk records to policies and identify what needs further investigation.')));
+    section.append(adminLink());
     const state = make('p', 'gap-state'); state.setAttribute('role', 'status'); section.append(state);
     if (ontologyState?.status !== 'ready') {
       state.textContent = ontologyState?.status === 'error' ? L('온톨로지를 불러오거나 검증하지 못했습니다. 분석을 중단했습니다.', 'The ontology could not be loaded or validated. Analysis is unavailable.') : L('발행된 온톨로지를 불러오는 중…', 'Loading the published ontology…');
