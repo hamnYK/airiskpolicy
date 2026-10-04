@@ -40,14 +40,25 @@ fs.copyFileSync(path.join(root,'node_modules/@supabase/supabase-js/LICENSE'),pat
 const cesium=path.join(root,'node_modules/cesium');const vendor=path.join(out,'vendor/cesium');fs.mkdirSync(vendor,{recursive:true});
 for(const name of ['Cesium.js','Assets','ThirdParty','Widgets','Workers'])fs.cpSync(path.join(cesium,'Build/Cesium',name),path.join(vendor,name),{recursive:true});
 fs.copyFileSync(path.join(cesium,'LICENSE.md'),path.join(vendor,'LICENSE.md'));
+// Changed scripts/styles get new URLs, including for visitors with cached assets.
+for(const page of ['index.html','design-system.html','admin/index.html','admin/login.html']){
+ const target=path.join(out,page);
+ const source=fs.readFileSync(target,'utf8').replace(/((?:src|href)=")([^"?#]+\.(?:js|css))"/g,(whole,prefix,url)=>{
+  if(/^(?:https?:|data:)/.test(url))return whole;
+  const asset=path.resolve(path.dirname(target),url);
+  const hash=require('node:crypto').createHash('sha256').update(fs.readFileSync(asset)).digest('hex').slice(0,12);
+  return prefix+url+'?v='+hash+'"';
+ });
+ fs.writeFileSync(target,source);
+}
 fs.writeFileSync(path.join(out,'.nojekyll'),'');
-const html=fs.readFileSync(path.join(out,'index.html'),'utf8');for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(/^(https?:|data:)/.test(match[1]))continue;if(!fs.existsSync(path.join(out,match[1])))throw Error('Missing deployment asset: '+match[1])}
+const html=fs.readFileSync(path.join(out,'index.html'),'utf8');for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(/^(https?:|data:)/.test(match[1]))continue;if(!fs.existsSync(path.join(out,match[1].split('?')[0])))throw Error('Missing deployment asset: '+match[1])}
 for(const json of ['ontology.json','ontology-config.json','seo.json','i18n-en.json'])JSON.parse(fs.readFileSync(path.join(out,json),'utf8'));
 for(const file of ['admin/index.html','admin/login.html']){
  const html=fs.readFileSync(path.join(out,file),'utf8');
  for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
   if(/^(https?:|data:)/.test(match[1]))continue;
-  if(!fs.existsSync(path.resolve(out,path.dirname(file),match[1])))throw Error('Missing admin asset: '+match[1]);
+  if(!fs.existsSync(path.resolve(out,path.dirname(file),match[1].split('?')[0])))throw Error('Missing admin asset: '+match[1]);
  }
 }
 for(const file of ['supabase','admin/seed.json','admin/DEPLOYMENT.md'])if(fs.existsSync(path.join(out,file)))throw Error('Private setup asset leaked: '+file);

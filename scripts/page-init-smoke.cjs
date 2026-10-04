@@ -21,6 +21,14 @@ await page.waitForFunction(()=>document.documentElement.lang==='ko');
 await page.locator('[data-language="en"]').click();
 await page.waitForFunction(()=>document.documentElement.lang==='en');
 assert.deepEqual(errors,[]);
+const fallback=await browser.newPage();
+await fallback.route('**/Cesium.js',route=>route.abort());
+await fallback.route('https://**/*',route=>route.abort());
+await fallback.addInitScript(()=>{window.selectedCountries=[];document.addEventListener('gis:country-selected',e=>window.selectedCountries.push(e.detail?.code));});
+await fallback.goto('http://127.0.0.1:4193/',{waitUntil:'domcontentloaded'});
+await fallback.waitForFunction(()=>document.body.dataset.countryInitialized==='true');
+assert.ok(await fallback.evaluate(()=>window.selectedCountries.includes('KOR')));
+assert.equal(await fallback.evaluate(()=>document.body.dataset.gisError),'true');
 console.log('Full-page initialization passed: country selection, unchanged language, KO/EN toggles, responsive event loop. External APIs mocked/blocked.');
 }finally{if(browser)await browser.close();server.kill();}
 })().catch(e=>{console.error(e);process.exitCode=1});

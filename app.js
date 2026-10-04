@@ -1,6 +1,17 @@
 'use strict';
 (async()=>{
 const status=document.getElementById('status');
+let countrySelectionReceived=false;
+document.addEventListener('gis:country-selected',()=>{countrySelectionReceived=true});
+function fallbackCountry(){
+if(countrySelectionReceived)return;
+document.body.dataset.initialCountrySource='map-unavailable-fallback';
+document.body.dataset.countryInitialized='true';
+document.dispatchEvent(new CustomEvent('gis:country-selected',{detail:{code:'KOR',aimCode:'KOR',name:'대한민국'}}));
+}
+// Data panels must not wait forever for WebGL or country geometry.
+const startupTimer=setTimeout(fallbackCountry,12000);
+document.addEventListener('gis:country-selected',()=>clearTimeout(startupTimer),{once:true});
 if(location.protocol==='file:'){status.textContent='Open https://www.aipolicy.world/ to explore the globe.';const link=document.createElement('a');link.href='https://www.aipolicy.world/';link.textContent=' Open website';status.append(link);return;}
 const detectedCountry=window.aiRiskVisitorCountry=(async()=>{const c=new AbortController(),timer=setTimeout(()=>c.abort(),4500);try{const response=await fetch('https://api.country.is/',{signal:c.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)return null;const data=await response.json();return typeof data.country==='string'&&/^[A-Z]{2}$/.test(data.country)?data.country:null}catch{return null}finally{clearTimeout(timer)}})();
 let userInteracted=false;document.getElementById('globe').addEventListener('pointerdown',()=>{userInteracted=true});document.getElementById('globe').addEventListener('wheel',()=>{userInteracted=true},{passive:true});document.getElementById('reset').addEventListener('click',()=>{userInteracted=true});
@@ -51,8 +62,8 @@ document.getElementById('reset').addEventListener('click',()=>selectCountry(null
 viewer.scene.requestRender();status.hidden=true;document.body.dataset.gisReady='true';
 const detected=await detectedCountry;
 if(!userInteracted){const entities=countries.entities.values;let target=detected?entities.find(e=>e.polygon&&e.properties?.ISO_A2?.getValue()===detected):null;if(!target&&detected)target=entities.find(e=>e.polygon&&e.properties?.ISO_A2_EH?.getValue()===detected);const matched=Boolean(target);target=target||entities.find(e=>e.polygon&&e.properties?.ADM0_A3?.getValue()==='KOR');selectCountry(target);if(target){const x=Number(target.properties?.LABEL_X?.getValue()),y=Number(target.properties?.LABEL_Y?.getValue());if(Number.isFinite(x)&&Number.isFinite(y))viewer.camera.setView({destination:C.Cartesian3.fromDegrees(x,y,19000000),orientation:{heading:0,pitch:-C.Math.PI_OVER_TWO,roll:0}});}document.body.dataset.initialCountrySource=matched?'ip':'fallback';viewer.scene.requestRender();}
-else if(!selected.length){document.dispatchEvent(new CustomEvent('gis:country-selected',{detail:null}));}
+else if(!selected.length&&!countrySelectionReceived){document.dispatchEvent(new CustomEvent('gis:country-selected',{detail:null}));}
 document.body.dataset.countryInitialized='true';
 viewer.scene.renderError.addEventListener(()=>{status.hidden=false;status.textContent='3D 렌더링 오류가 발생했습니다. 브라우저의 하드웨어 가속 설정을 확인해 주세요.';});
-}catch(e){status.hidden=false;status.textContent='지구를 표시하지 못했습니다. '+e.message;document.body.dataset.gisError='true';}
+}catch(e){status.hidden=false;status.textContent='지구를 표시하지 못했습니다. '+e.message;document.body.dataset.gisError='true';setTimeout(fallbackCountry,0);}
 })();
