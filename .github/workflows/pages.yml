@@ -19,7 +19,12 @@ jobs:
           cache: npm
       - uses: actions/configure-pages@v5
       - run: npm ci --ignore-scripts
+      - run: npm test
       - run: npm run build
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY || secrets.SUPABASE_PUBLISHABLE_KEY }}
+          ONTOLOGY_PROVIDER: ${{ vars.ONTOLOGY_PROVIDER }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

@@ -12,3 +12,5 @@ output/
 Thumbs.db
 
 dist/
+
+supabase/.temp/

@@ -85,3 +85,19 @@ policy.js는 OECD 공개 웹사이트의 api.oecdai.org/countries에서 국가 �
 ### 검색 메타데이터 생성
 
 `seo.json`이 한영 검색 설명의 기준입니다. `npm run build:seo`는 기본 영문 HTML 메타데이터, canonical, URL을 포함한 WebSite 구조화 데이터, robots.txt, sitemap.xml을 생성합니다. `npm run build`에도 자동 포함됩니다. 단일 대표 URL만 사이트맵에 넣으며 디자인 시스템 예시는 기존 noindex를 유지합니다. 검색엔진 등록·색인 여부는 별도 확인이 필요합니다.
+
+## Risk?Policy Gap Analyzer
+
+`gap-engine.js` provides a pure, separately testable candidate-matching layer; `gap-analyzer.js` presents a country-level sample overview, status filters, shared-principle evidence, policy details, inquiry handoff and JSON export. It compares normalized AI principle labels only, not semantic or legal coverage. Missing labels are separated from no candidate found. All policy statuses are included. Refresh invalidates prior analysis and cross-country snapshots are rejected. The latest AIM sample is not a national coverage estimate. UI text is rendered directly in Korean and English under data-no-translate.
+
+The ontology layer now supports reviewed concept aliases and risk → required control ← policy paths with source evidence, country and date constraints. Matches remain unverified candidates rather than legal coverage judgments.
+
+Validation: `node --test scripts/gap-engine.test.cjs` and `npm run build`.
+
+## 관리자 전용 Ontology Studio · Supabase
+
+GitHub Pages의 /admin/ 정적 화면이 Supabase Auth와 데이터베이스 함수에 연결됩니다. 회원가입 화면 없이 지정된 Auth 사용자 UUID만 개념·별칭·통제수단·정책 조항 연결을 편집하고 저장·미리보기·발행·이력 복원을 할 수 있습니다. 별도 관리자 서버는 필요하지 않습니다. 편집기 파일은 공개 정적 파일이며, 초안 접근·수정 권한은 DB에서 강제합니다.
+
+supabase/migrations/202610040001_ontology_admin.sql에 스키마·권한·검증·발행 트랜잭션을 정의했습니다. 운영 DB에 마이그레이션을 적용하고 프로젝트의 실제 Publishable key로 연결을 수정했습니다. 공개 발행본 조회 성공, 비로그인 초안 접근 거부와 회원가입 차단을 확인했으며 provider는 supabase입니다. 관리자 계정 설정과 GitHub Pages 배포 완료 여부는 배포 안내를 참고하세요.
+
+[Supabase 적용 안내](admin/DEPLOYMENT.md)에 마이그레이션, 관리자 지정, 공개 키와 Pages 배포 설정을 정리했습니다. npm test로 로컬 PostgreSQL 권한과 엔진을 검증하고 npm run build로 정적 배포본을 생성합니다.
