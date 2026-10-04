@@ -29,3 +29,16 @@ test('dangling links, ambiguous aliases, unsafe sources and invalid dates are re
   for (const change of changes) { const o = fixture(); change(o); assert.ok(model.validate(o).length); }
 });
 module.exports = { fixture };
+test('common AI principle seed provides editable matching concepts without legal claims', () => {
+  const seed = require('../supabase/seeds/common-ai-principles.json');
+  assert.deepEqual(model.validate(seed), []);
+  assert.equal(seed.name, '공통 AI 원칙 매칭');
+  assert.equal(seed.concepts.length, 10);
+  for (const concept of seed.concepts) {
+    assert.deepEqual(concept.aliases, []);
+    const evidence = model.match({ properties: { principles: [concept.label] } }, { principles: [concept.label] }, 'KOR', seed);
+    assert.equal(evidence.length, 1);
+    assert.equal(evidence[0].conceptId, concept.id);
+  }
+  assert.deepEqual(seed.relations, []); assert.deepEqual(seed.bindings, []);
+});

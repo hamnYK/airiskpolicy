@@ -39,3 +39,8 @@ GitHub Actions 변수 `SUPABASE_URL`은 프로젝트 변경 때만 필요합니�
 `npm test`는 PostgreSQL에서 익명·일반 계정·관리자 접근, 권한 취소, 초안 비공개, 발행, 잘못된 관계, 동시 수정 충돌을 검증합니다. 운영 Supabase 자체를 테스트한 것은 아닙니다. `npm run build`는 관리자 상대 URL과 배포 파일의 존재, SQL·초안 자료의 제외 여부를 검사합니다.
 
 참고: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [Database functions](https://supabase.com/docs/guides/database/functions), [Publishable keys](https://supabase.com/docs/guides/api/api-keys).
+## 공통 AI 원칙 매칭 초안
+
+공통 AI 원칙 매칭이라는 이름으로 기존 원칙 분류 10개를 운영 초안에 등록했습니다. 원본은 supabase/seeds/common-ai-principles.json입니다. 원칙명 정규화 후 동일 명칭끼리 연결하는 기존 규칙을 개념으로 표현하며, 임의의 별칭·통제수단·정책 조항 관계는 추가하지 않았습니다. 근거 출처는 해당 분류를 사용하던 저장소 코드입니다. 검토 완료 표시는 분류명과 매칭 규칙의 확인을 뜻하며 법적 대응 검증을 뜻하지 않습니다.
+
+이름·별칭·검토 상태·근거 메모를 수정하고 초안 저장 후 발행할 수 있습니다. 이름 유지에는 두 번째 마이그레이션 202610040002_ontology_name.sql이 필요합니다. 초기 초안 등록은 공개 발행을 수행하지 않습니다. 등록된 개념은 발행 후 온톨로지 근거로 사용되며, 기존 공통 원칙 탐색 규칙도 별도로 유지됩니다.

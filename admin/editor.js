@@ -62,6 +62,7 @@
     selected = id; mark(); render();
   };
   $('search').oninput = renderList;
+  $('ontology-name').oninput = e => { if (!draft) return; draft.name = e.target.value; mark(); };
   function renderList() {
     $('items').replaceChildren(); if (!draft) return;
     const query = $('search').value.toLowerCase();
@@ -102,6 +103,7 @@
     }; const actions = make('div'); actions.className = 'actions'; actions.append(remove); box.append(actions);
   }
   function render() {
+    $('ontology-name').value = draft.name || '';
     renderVersion(); $('tabs').replaceChildren();
     for (const [key, title] of Object.entries(groups)) { const b = make('button', title + ' · ' + draft[key].length); b.setAttribute('aria-pressed', String(group === key)); b.onclick = () => { group = key; selected = null; $('search').value = ''; render(); }; $('tabs').append(b); }
     $('list-title').textContent = groups[group]; renderList(); renderDetail(); $('history').replaceChildren();

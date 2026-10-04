@@ -7,6 +7,7 @@
   function validate(data) {
     const errors = [];
     if (!data || data.schemaVersion !== 1 || !Array.isArray(data.concepts) || !Array.isArray(data.relations) || !Array.isArray(data.bindings)) return ['schemaVersion: 1 및 concepts / relations / bindings 배열이 필요합니다.'];
+    if (data.name !== undefined && (typeof data.name !== 'string' || !data.name.trim() || data.name.length > 120)) errors.push('온톨로지 이름은 1~120자여야 합니다.');
     if (data.concepts.length > 500 || data.relations.length > 2000 || data.bindings.length > 5000) return ['최대 개념 500 / 관계 2000 / 정책 연결 5000개입니다.'];
     const ids = new Set(), concepts = new Map(), aliases = new Map();
     const text = (v, max = 300) => typeof v === 'string' && v.trim().length > 0 && v.length <= max;

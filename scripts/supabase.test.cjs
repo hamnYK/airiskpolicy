@@ -11,6 +11,7 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
     grant usage on schema public to anon, authenticated;
     insert into auth.users values ('${admin}'), ('${member}');`);
   await db.exec(fs.readFileSync(path.join(__dirname, '../supabase/migrations/202610040001_ontology_admin.sql'), 'utf8'));
+  await db.exec(fs.readFileSync(path.join(__dirname, '../supabase/migrations/202610040002_ontology_name.sql'), 'utf8'));
   await db.exec(`insert into airisk_private.ontology_admins(user_id) values ('${admin}');`);
   const role = async (name, uid = '') => { await db.exec('reset role'); await db.query("select set_config('request.jwt.claim.sub', $1, false)", [uid]); await db.exec('set role ' + name); };
   const rpc = async (name, params = [], casts = []) => (await db.query(`select public.${name}(${params.map((_, i) => '$' + (i + 1) + '::' + casts[i]).join(',')}) as result`, params)).rows[0].result;
@@ -25,7 +26,7 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
   await role('authenticated', admin);
   let state = await rpc('airisk_ontology_state');
   const common = { review: 'reviewed', source: 'https://example.org/test', note: 'Synthetic SQL test fixture.' };
-  const document = { schemaVersion: 1, version: 'fixture', concepts: [
+  const document = { schemaVersion: 1, name: 'Common AI principles', version: 'fixture', concepts: [
     { id: 'risk', kind: 'harm', label: 'Physical', aliases: [], ...common },
     { id: 'control', kind: 'control', label: 'Safety tests', aliases: [], ...common },
     { id: 'draft', kind: 'principle', label: 'Private draft', aliases: [], review: 'draft', source: '', note: 'Private' }
@@ -49,6 +50,7 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
   state = await rpc('airisk_ontology_publish', [state.revision], ['uuid']);
   assert.equal(state.published.concepts.length, 2); assert.equal(state.history.length, 1); assert.deepEqual(model.validate(state.published), []);
   const published = state.published;
+  assert.equal(published.name, document.name);
   await role('anon'); assert.deepEqual(await rpc('airisk_ontology_published'), published);
   await assert.rejects(db.exec('select * from airisk_private.ontology_history'), /permission denied/);
   await db.exec('reset role'); await db.exec(`delete from airisk_private.ontology_admins where user_id = '${admin}'`);

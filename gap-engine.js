@@ -21,7 +21,7 @@
     rows.forEach(row => counts[row.status]++);
     return { country: risk.country, rows, counts, unclassifiedPolicies, policyCount: policies.length,
       sampleCount: rows.length, riskTotal: risk.total, from: risk.from, to: risk.to,
-      riskFetchedAt: risk.fetchedAt, policyFetchedAt: policy.fetchedAt, method: ontology ? 'ontology-and-principles-v1' : 'shared-principles-v1', ontologyVersion: ontology?.version || null, asOf: risk.to || null, assessment: 'unverified' };
+      riskFetchedAt: risk.fetchedAt, policyFetchedAt: policy.fetchedAt, method: ontology ? 'ontology-and-principles-v1' : 'shared-principles-v1', ontologyName: ontology?.name || null, ontologyVersion: ontology?.version || null, asOf: risk.to || null, assessment: 'unverified' };
   }
   const api = { analyze };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
