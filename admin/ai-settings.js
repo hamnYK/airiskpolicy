@@ -7,7 +7,7 @@
  function install(value){saved=value;provider.value=value?.provider||'gemini';model.value=value?.model||'';key.value='';list.replaceChildren();list.hidden=true;dirty=false;loaded=true;$('ai-saved').textContent=value?'키 등록됨 · '+value.provider+' · '+value.model+' · 변경 '+new Date(value.updated_at).toLocaleString():'등록된 AI 설정이 없습니다.';update();}
  async function invoke(body){const client=await window.aiRiskAdmin.client();const {data,error}=await client.functions.invoke('weekly-ai-settings',{body});if(error){let message='설정 요청에 실패했습니다. 로그인과 연결 상태를 확인하세요.';try{const result=await error.context.json();if(typeof result.error==='string')message=result.error;}catch{}throw Error(message);}if(data?.error)throw Error(data.error);return data;}
  async function run(fn){if(busy)return;busy=true;field.disabled=true;update();try{await fn();}catch(e){status.textContent=e.message;}finally{busy=false;field.disabled=false;update();}}
- function confirm(text,action){$('ai-confirm-text').textContent=text;$('ai-accept').onclick=()=>{$('ai-confirm').close();run(action);};$('ai-confirm').showModal();$('ai-cancel').focus();}
+ function confirm(text,action){$('ai-confirm-text').textContent=text;$('ai-accept').onclick=()=>{$('ai-confirm').close();run(action);};if(window.parent!==window)window.parent.aiRiskPositionConfirmation?.($('ai-confirm'));$('ai-confirm').showModal();$('ai-cancel').focus();}
  $('ai-cancel').onclick=()=>$('ai-confirm').close();$('ai-confirm').addEventListener('cancel',e=>e.preventDefault());
  async function load(){install(await window.aiRiskAdmin.rpc('airisk_weekly_ai_state'));status.textContent='서버 설정을 불러왔습니다. API 키 원문은 표시하지 않습니다.';}
  section.addEventListener('toggle',()=>{if(section.open&&!loaded)run(load);});
