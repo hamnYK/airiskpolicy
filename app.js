@@ -1,9 +1,11 @@
 'use strict';
 (async()=>{
 const status=document.getElementById('status');
-let countrySelectionReceived=false;
+let countrySelectionReceived=false,consumersReady=document.readyState==='complete';
+document.addEventListener('DOMContentLoaded',()=>{consumersReady=true},{once:true});
 document.addEventListener('gis:country-selected',()=>{countrySelectionReceived=true});
 function fallbackCountry(){
+if(!consumersReady){document.addEventListener('DOMContentLoaded',fallbackCountry,{once:true});return;}
 if(countrySelectionReceived)return;
 document.body.dataset.initialCountrySource='map-unavailable-fallback';
 document.body.dataset.countryInitialized='true';
@@ -14,6 +16,7 @@ const startupTimer=setTimeout(fallbackCountry,12000);
 document.addEventListener('gis:country-selected',()=>clearTimeout(startupTimer),{once:true});
 if(location.protocol==='file:'){status.textContent='Open https://www.aipolicy.world/ to explore the globe.';const link=document.createElement('a');link.href='https://www.aipolicy.world/';link.textContent=' Open website';status.append(link);return;}
 const detectedCountry=window.aiRiskVisitorCountry=(async()=>{const c=new AbortController(),timer=setTimeout(()=>c.abort(),4500);try{const response=await fetch('https://api.country.is/',{signal:c.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)return null;const data=await response.json();return typeof data.country==='string'&&/^[A-Z]{2}$/.test(data.country)?data.country:null}catch{return null}finally{clearTimeout(timer)}})();
+if(!consumersReady)await new Promise(resolve=>document.addEventListener('DOMContentLoaded',resolve,{once:true}));
 let userInteracted=false;document.getElementById('globe').addEventListener('pointerdown',()=>{userInteracted=true});document.getElementById('globe').addEventListener('wheel',()=>{userInteracted=true},{passive:true});document.getElementById('reset').addEventListener('click',()=>{userInteracted=true});
 try{
 const C=window.Cesium;if(!C)throw new Error('CesiumJS를 불러오지 못했습니다.');C.Ion.defaultAccessToken='';

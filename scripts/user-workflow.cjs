@@ -1,0 +1,101 @@
+'use strict';
+const { chromium } = require('playwright'), { spawn } = require('node:child_process');
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
+const root = path.resolve(__dirname, '..');
+(async () => {
+  const server = spawn(process.execPath, ['server.cjs', '--dist'], { cwd: root, env: { ...process.env, PORT: '4198' }, windowsHide: true, stdio: ['ignore','pipe','pipe'] });
+  let browser;
+  try {
+    await new Promise((resolve,reject) => { server.stdout.once('data',resolve);server.once('error',reject); });
+    browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless:true });
+    const fixture = require('./fixtures/kor-principles-20261005.json');
+    const ontology = require('../supabase/seeds/oecd-principle-crosswalk.json');
+    const base = 'http://127.0.0.1:4198/';
+    for (const width of [1280,390]) {
+      const context = await browser.newContext({viewport:{width,height:900},acceptDownloads:true});
+      const page = await context.newPage(), errors=[];page.on('pageerror',e=>errors.push(e.message));
+      let failPolicy=false;
+      await page.route('**/Cesium.js*',route=>route.abort());
+      await page.route('https://**/*',async route=>{
+        const u=new URL(route.request().url());let data;
+        if(u.hostname==='api.country.is') data={country:'KR'};
+        else if(u.pathname.endsWith('airisk_ontology_published')) data=ontology;
+        else if(u.hostname==='api.oecdai.org'&&u.pathname==='/countries')data={data:[{id:92,code:'KOR',name:'Korea'},{id:1,code:'USA',name:'United States'}],total:2,lastPage:1,currentPage:1};
+        else if(u.hostname==='api.oecdai.org'&&u.pathname==='/policy-initiatives/public'){
+          if(failPolicy)return route.fulfill({status:503,json:{message:'test failure'}});
+          const code=u.searchParams.get('countryIds')==='92'?'KOR':'USA';
+          const rows=code==='KOR'?fixture.policy.records.map(r=>({...r,englishName:'Test policy '+r.id,originalName:'검사 정책 '+r.id,gaiinCountry:{code},principles:r.principles.map(name=>({name})),category:'Regulations, guidelines and standards',status:'Active'})):[];
+          data={data:rows,total:rows.length,lastPage:1,currentPage:1};
+        }else if(u.pathname.endsWith('get-countries'))data=[{key:'KOR'},{key:'USA'}];
+        else if(u.pathname.endsWith('fetch-incidents')){
+          const input=route.request().postDataJSON(),code=input.countries[0],type=input.properties_config.harm_levels[0];
+          const rows=code==='KOR'?fixture.risk.records.map((r,i)=>({...r,title:'Test risk '+(i+1),date:'2026-10-05',location:{country_code:code},properties:{...r.properties,harm_levels:['AI incident']}})):[];
+          data={total_results:type==='AI hazard'?0:rows.length,incidents:type==='AI hazard'?[]:rows.slice(0,input.num_results)};
+        }else return route.abort();
+        return route.fulfill({json:data});
+      });
+      await page.goto(base);
+      await page.waitForFunction(()=>document.querySelector('.gap-metrics strong')?.textContent==='79').catch(async e=>{console.log(await page.locator('#risk-state,#policy-state,.gap-state').allTextContents(),errors);throw e;});
+      await page.locator('[data-language="ko"]').click();
+      await page.locator('#policy-explore').click();
+      await page.locator('#policy-dialog .journey-close').click();
+      await page.locator('[data-focus="filter-insufficient"]').click();
+      assert.equal(await page.locator('.gap-card').count(),15);
+      await page.locator('[data-focus="page-size"]').selectOption('100');
+      assert.equal(await page.locator('.gap-card').count(),21);
+      await page.locator('[data-focus="filter-candidate"]').click();
+      assert.equal(await page.locator('.gap-card').count(),79);
+      const downloadPromise=page.waitForEvent('download');
+      await page.getByRole('button',{name:'분석 JSON 내려받기',exact:true}).click();
+      const download=await downloadPromise;
+      const report=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
+      assert.equal(report.counts.candidate,79);
+      await page.locator('.gap-row').first().click();
+      await page.locator('.gap-card-body details summary').first().click();
+      await page.locator('.gap-candidate button').first().click();
+      await page.locator('#policy-detail-dialog .journey-close').click();
+      await page.getByRole('button',{name:'정책 검토·조사 질문으로 이어가기',exact:true}).first().click();
+      await page.getByRole('button',{name:'연결 근거가 있는 정책',exact:true}).click();
+      const expected=report.rows.find(r=>r.status==='candidate').candidates.length;
+      assert.equal(await page.locator('.response-policy-card').count(),expected);
+      await page.locator('.response-policy-card .journey-primary').first().click();
+      assert.equal(await page.locator('.response-gap input:checked').count(),3);
+      await page.locator('.response-footer .journey-primary').click();
+      assert.ok((await page.locator('#inquiry-question').inputValue()).length>0);
+      await page.locator('#inquiry-form button').click();
+      const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('ai-risk-local-inquiries-v1')));
+      assert.equal(saved.length,1);assert.equal(saved[0].policyReview.assessment,'unverified');
+      await page.getByRole('button',{name:'조사 메모 작성하기 ▶',exact:true}).click();
+      await page.locator('#case-research').fill('Workflow test research');
+      await page.locator('#case-evidence').fill('OECD source checked in isolated workflow test');
+      await page.locator('.case-stage form button').click();
+      await page.locator('#case-proposal').fill('Workflow test proposal');
+      await page.locator('.case-stage form button').click();
+      const sharePromise=page.waitForEvent('download');
+      await page.locator('#community-fields button').first().click();
+      await sharePromise;
+      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ai-risk-local-inquiries-v1'))[0].stage),3);
+      await page.reload();
+      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ai-risk-local-inquiries-v1')).length),1);
+      await page.waitForFunction(()=>document.querySelector('.gap-metrics strong')?.textContent==='79');
+      failPolicy=true;await page.locator('#policy-refresh').click();
+      await page.waitForFunction(()=>document.getElementById('policy-state').dataset.state==='error');
+      assert.equal(await page.locator('.gap-metrics').count(),0);
+      failPolicy=false;await page.locator('#policy-refresh').click();
+      await page.waitForFunction(()=>document.querySelector('.gap-metrics strong')?.textContent==='79');
+      await page.evaluate(()=>document.dispatchEvent(new CustomEvent('gis:country-selected',{detail:{code:'USA',aimCode:'USA',name:'United States'}})));
+      await page.waitForFunction(()=>document.querySelector('.gap-state')?.textContent.includes('USA')&&document.querySelector('.gap-metrics strong')?.textContent==='0');
+      assert.equal(await page.locator('.gap-card').count(),0);
+      await page.evaluate(()=>{
+        window.aiRiskOntologyState={status:'ready',data:{schemaVersion:1,concepts:[],relations:[],bindings:[]}};
+        window.aiRiskPolicy.snapshot=()=>({country:{code:'USA'},records:[{id:1,englishName:'No registered ontology',principles:['Safety'],status:'Active'}]});
+        document.dispatchEvent(new CustomEvent('risk:policy-review',{detail:{id:'test',title:'Unregistered exact label',country:{code:'USA'},properties:{principles:['Safety']}}}));
+      });
+      await page.getByRole('button',{name:/연결 근거가 있는 정책|Matching evidence/,exact:true}).click();
+      assert.equal(await page.locator('.response-policy-card').count(),0);
+      await page.locator('#response-dialog .journey-close').click();
+      assert.deepEqual(errors,[]);
+      await context.close();console.log('PASS user workflow at '+width+'px: lookup, policy explorer/details, filter, export, evidence, inquiry save/reload, failure/retry, country isolation. APIs mocked from captured real classifications.');
+    }
+  }finally{if(browser)await browser.close();server.kill();}
+})().catch(e=>{console.error(e);process.exitCode=1});

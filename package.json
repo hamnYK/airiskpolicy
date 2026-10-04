@@ -9,7 +9,8 @@
     "build:seo": "node scripts/build-seo.cjs",
     "test": "node --test scripts/*.test.cjs",
     "test:ui": "node scripts/admin-ui-smoke.cjs",
-    "test:design": "node scripts/design-system-smoke.cjs"
+    "test:design": "node scripts/design-system-smoke.cjs",
+    "test:workflow": "node scripts/user-workflow.cjs && node scripts/admin-ui-smoke.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2",
