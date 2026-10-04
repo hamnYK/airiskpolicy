@@ -1,1 +1,1 @@
-# airiskpolicy
+# AI Policy for All Risks
