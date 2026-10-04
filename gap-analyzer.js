@@ -25,6 +25,11 @@
       if (ontologyState?.status === 'error') section.append(button(L('온톨로지 다시 조회', 'Retry ontology lookup'), () => ontologyState.reload()));
       return;
     }
+    if (!ontologyState.data?.concepts.some(c => c.review === 'reviewed')) {
+      state.textContent = L('공개 적용된 온톨로지 개념이 없어 분석을 시작하지 않았습니다. 관리자가 초안을 저장하고 발행하면 분석할 수 있습니다.', 'Analysis has not started because no ontology concepts are published. An administrator must save and publish the draft.');
+      section.append(button(L('최신 온톨로지 반영', 'Reload published ontology'), () => ontologyState.reload()));
+      return;
+    }
     if (!analysis) {
       const error = ['risk-state', 'policy-state'].some(id => document.getElementById(id).dataset.state === 'error');
       state.textContent = error ? L('조회 실패로 분석할 수 없습니다. RISK 또는 POLICY의 다시 조회를 이용해 주세요.', 'Analysis is unavailable after a lookup failure. Retry the RISK or POLICY lookup.') : L('같은 국가의 RISK와 POLICY 조회가 모두 완료되면 분석합니다. 지도에서 국가를 선택해 주세요.', 'Analysis starts when RISK and POLICY data for the same country are available. Select a country on the map.');
@@ -41,7 +46,7 @@
     }
     section.append(metrics);
     const method = make('details', 'gap-method'); method.append(make('summary', '', L('매칭 방법과 해석', 'Matching method and interpretation')),
-      make('p', '', L('동일 국가에서 공통 AI 원칙, 검토 완료된 개념·별칭, 위험 ▶ 통제수단 ◀ 정책 연결을 비교합니다. 온톨로지 근거 수, 공통 원칙 수 순으로 정렬합니다. 정책 연결 기간은 위험 조회 종료일 기준이며 사건 발생 당시 적용 여부는 별도 확인이 필요합니다. 등록 상태와 관계없이 전체 정책을 비교하며 매칭은 적용·집행·효과의 확정이 아닙니다.', 'Candidates use shared AI principles, reviewed concepts and aliases, and risk ▶ control ◀ policy paths in the same country. They are ordered by ontology evidence count, then shared principles. Binding dates use the risk query end date, not the historical incident date. All policy statuses are included; matches do not establish coverage, enforcement or effectiveness.')),
+      make('p', '', L('동일 국가에서 발행된 개념·별칭에 따른 공통 AI 원칙과 위험 ▶ 통제수단 ◀ 정책 연결을 비교합니다. 온톨로지 근거 수, 공통 원칙 수 순으로 정렬합니다. 정책 연결 기간은 위험 조회 종료일 기준이며 사건 발생 당시 적용 여부는 별도 확인이 필요합니다. 등록 상태와 관계없이 전체 정책을 비교하며 매칭은 적용·집행·효과의 확정이 아닙니다.', 'Candidates use shared AI principles defined by published concepts and aliases, and risk ▶ control ◀ policy paths in the same country. They are ordered by ontology evidence count, then shared principles. Binding dates use the risk query end date, not the historical incident date. All policy statuses are included; matches do not establish coverage, enforcement or effectiveness.')),
       make('p', '', '★ ' + L('AI 원칙이 없는 정책: ', 'Policies without AI principle labels: ') + a.unclassifiedPolicies + L('건', a.unclassifiedPolicies === 1 ? ' policy' : ' policies')),
       make('p', '', L('온톨로지로도 후보를 찾지 못했고 위험 원칙 또는 모든 정책의 원칙이 없으면 분류 정보 부족입니다. 정보 누락으로 후보가 빠질 수 있습니다. 후보 미발견은 정책 부재를 뜻하지 않습니다.', 'When ontology paths find no candidate and risk principles or all policy principles are missing, labels are insufficient. Missing information can hide candidates. No candidate does not establish policy absence.')));
     section.append(method);

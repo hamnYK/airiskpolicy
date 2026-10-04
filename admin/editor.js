@@ -7,7 +7,12 @@
   let state, draft, group = 'concepts', selected = null, dirty = false, busy = false;
   function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
   function mark() { dirty = true; renderVersion(); }
-  function renderVersion() { $('version').textContent = (dirty ? '미저장 변경 있음' : '초안 저장됨') + ' · 발행본 ' + (state?.published.version || '—'); $('save').disabled = busy || !state; $('publish').disabled = busy || !state || dirty; }
+  const publishedLabel = ontology => !ontology || ontology.version === 'seed-1' ? '온톨로지 미등록' : (ontology.name || '이름 없는 온톨로지') + (ontology.publishedAt ? ' · ' + new Date(ontology.publishedAt).toLocaleString() : '');
+  function renderVersion() {
+    $('version').textContent = !state ? '불러오는 중…' : (dirty ? '미저장 변경 있음' : '초안 저장됨 · 공개 적용은 별도') + ' | 현재 공개: ' + publishedLabel(state.published);
+    $('version').title = state ? '시스템 발행 ID (자동 생성): ' + state.published.version : '';
+    $('save').disabled = busy || !state; $('publish').disabled = busy || !state || dirty;
+  }
   function confirm(title, text, action) { $('confirm-title').textContent = title; $('confirm-text').textContent = text; $('accept').onclick = () => { $('confirm').close(); action(); }; $('confirm').showModal(); $('cancel').focus(); }
   $('cancel').onclick = () => $('confirm').close();
   async function api(route, payload) {
@@ -23,7 +28,7 @@
       const client = await window.aiRiskAdmin.client();
       const { data: { user }, error } = await client.auth.getUser();
       if (error || !user) { if (!state) location.replace('login.html'); throw Error('로그인이 만료되었습니다. JSON을 보관하고 다시 로그인하세요.'); }
-      install(await api('state')); $('editor').hidden = false; $('access-gate').hidden = true; message('Supabase에서 초안을 불러왔습니다.');
+      install(await api('state')); $('editor').hidden = false; $('access-gate').hidden = true; message('저장된 초안을 불러왔습니다. 수정 후 초안 저장 ▶ 발행 검토 ▶ 확인 순서로 공개 적용합니다.');
     } catch (e) { if (!state) $('gate-message').textContent = e.message; message(e.message, true); }
   }
   $('reload').onclick = () => dirty ? confirm('편집 내용 버리기', '저장하지 않은 변경을 버리고 서버 최신본을 불러올까요?', load) : load();
@@ -42,7 +47,7 @@
   $('publish').onclick = () => {
     const errors = model.validate(draft); if (errors.length) return message(errors.join('\n'), true);
     const count = key => draft[key].filter(x => x.review === 'reviewed').length;
-    confirm('검토 완료 항목 발행', `개념 ${count('concepts')}개 · 관계 ${count('relations')}개 · 정책 연결 ${count('bindings')}개\n초안 상태의 항목은 제외됩니다. 발행된 출처와 근거 메모는 공개됩니다.\n현재 공개 발행본을 교체할까요?`, () => mutate('publish'));
+    confirm('검토 완료 항목 공개 적용', `${draft.name || '이름 없는 온톨로지'}\n개념 ${count('concepts')}개 · 관계 ${count('relations')}개 · 정책 연결 ${count('bindings')}개\n초안 상태의 항목은 제외됩니다. 공통 AI 원칙도 여기서 발행한 개념·별칭으로만 매칭합니다.\n${count('concepts') === 0 ? '주의: 검토 완료 개념이 없어 공개 분석이 중단됩니다.\n' : ''}발행된 출처와 근거 메모는 공개됩니다. 현재 공개 발행본을 교체할까요?`, () => mutate('publish'));
   };
   $('logout').onclick = () => confirm('로그아웃', dirty ? '저장하지 않은 변경이 있습니다. 로그아웃하면 현재 편집 내용을 잃습니다.' : '관리자 세션을 종료할까요?', async () => { try { await api('logout', {}); dirty = false; location.replace('login.html'); } catch (e) { message(e.message, true); } });
   $('export').onclick = () => { if (!draft) return; const url = URL.createObjectURL(new Blob([JSON.stringify(draft, null, 2)], { type: 'application/json' })); const a = make('a'); a.href = url; a.download = 'ontology-draft.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
@@ -69,7 +74,7 @@
     const rows = draft[group].filter(row => JSON.stringify(row).toLowerCase().includes(query));
     for (const row of rows) {
       const b = make('button'); b.type = 'button'; b.setAttribute('aria-current', String(row.id === selected));
-      const title = group === 'concepts' ? row.label : group === 'relations' ? row.from + ' → ' + row.to : row.country + ' · 정책 ' + row.policyId + ' → ' + row.control;
+      const title = group === 'concepts' ? row.label : group === 'relations' ? row.from + ' ▶ ' + row.to : row.country + ' · 정책 ' + row.policyId + ' ▶ ' + row.control;
       b.append(make('strong', title), make('small', row.id + ' · ' + (row.review === 'reviewed' ? '검토 완료' : '초안'))); b.onclick = () => { selected = row.id; renderList(); renderDetail(); }; $('items').append(b);
     }
     if (!rows.length) $('items').append(make('p', '항목이 없습니다. 새 항목을 추가하세요.'));
@@ -107,7 +112,7 @@
     renderVersion(); $('tabs').replaceChildren();
     for (const [key, title] of Object.entries(groups)) { const b = make('button', title + ' · ' + draft[key].length); b.setAttribute('aria-pressed', String(group === key)); b.onclick = () => { group = key; selected = null; $('search').value = ''; render(); }; $('tabs').append(b); }
     $('list-title').textContent = groups[group]; renderList(); renderDetail(); $('history').replaceChildren();
-    for (const h of state.history) { const row = make('div'); row.className = 'history-row'; const restore = make('button', '초안으로 복원'); restore.onclick = () => confirm('이전 발행본 복원', '편집 초안을 이전 발행본으로 교체합니다. 공개 반영에는 저장·재발행이 필요합니다.', () => { draft = structuredClone(h.ontology); selected = null; mark(); render(); }); row.append(make('span', (h.publishedAt || '초기 발행본') + ' · ' + h.version), restore); $('history').append(row); }
+    for (const h of state.history) { const row = make('div'); row.className = 'history-row'; const restore = make('button', '초안으로 복원'); restore.onclick = () => confirm('이전 발행본 복원', '편집 초안을 이전 발행본으로 교체합니다. 공개 반영에는 저장·재발행이 필요합니다.', () => { draft = structuredClone(h.ontology); selected = null; mark(); render(); }); const label = make('span', publishedLabel(h.ontology)); label.title = '시스템 발행 ID: ' + h.version; row.append(label, restore); $('history').append(row); }
     if (!state.history.length) $('history').append(make('p', '아직 이전 발행본이 없습니다.'));
   }
   $('preview-form').elements.date.value = new Date().toISOString().slice(0, 10);
