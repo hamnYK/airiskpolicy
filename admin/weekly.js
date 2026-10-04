@@ -2,14 +2,21 @@
 (()=>{
  if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');
  const $=id=>document.getElementById(id),make=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
- let state=null,draft=null,kind='risk',selected=null,dirty=false,busy=false,proposal=null,proposalBase=null;
- const message=text=>$('weekly-message').textContent=text;
+ let state=null,draft=null,kind='risk',selected=null,dirty=false,busy=false,generating=false,proposal=null,proposalBase=null;
+ const message=text=>{if(generating)$('ai-selection-status').textContent=text;else $('weekly-message').textContent=text;};
  const rpc=(name,args)=>window.aiRiskAdmin.rpc('airisk_weekly_'+name,args);
  function status(){for(const id of ['load','collect','download','save','publish','withdraw','add','ai-generate-weekly'])$(id).disabled=busy||!state||((id==='publish'||id==='ai-generate-weekly')&&dirty);$('weekly-status').textContent=state.week_start+' 주 · '+(dirty?'미저장 변경 있음':'초안 저장됨')+' · RISK '+draft.items.filter(x=>x.kind==='risk').length+'/10 · POLICY '+draft.items.filter(x=>x.kind==='policy').length+'/10 · '+(state.published?'공개본 있음':'미발행');}
- function mark(){clearProposal();dirty=true;status();}
- function clearProposal(){proposal=null;proposalBase=null;$('ai-proposal').hidden=true;}
+ function selectionStatus(){
+  $('ai-save-draft').disabled=busy||!state;
+  $('ai-generate-weekly').disabled=busy||!state||dirty||!draft.question.trim();
+  $('ai-generate-weekly').textContent=generating?'AI 선정·내용 작성 중…':'핵심 질문으로 AI 선정·내용 작성';
+  $('ai-generate-weekly').setAttribute('aria-busy',String(generating));
+  $('ai-selection-ready').textContent=generating?'AI 응답을 기다리고 있습니다.':dirty?'미저장 변경이 있습니다. ‘질문·초안 저장’을 먼저 누르세요.':!draft.question.trim()?'이번 주 핵심 질문을 입력하세요.':!state.candidates.length?'수집된 후보가 없습니다. ‘후보 다시 수집’을 먼저 실행하세요.':'실행 준비됨 · 후보 '+state.candidates.length+'건. AI 선정·내용 작성 버튼을 누르면 시작합니다.';
+ }
+ function mark(){clearProposal();$('ai-selection-status').textContent='';dirty=true;status();selectionStatus();}
+ function clearProposal(){proposal=null;proposalBase=null;$('ai-proposal').hidden=true;$('ai-selection-status').textContent='';}
  function install(next){clearProposal();state=next;draft=structuredClone(next.draft);dirty=false;selected=null;$('week').value=state.week_start;$('question').value=draft.question;render();}
- async function run(fn){if(busy)return;busy=true;if(state)status();try{await fn();}catch(e){message(e.message);}finally{busy=false;if(state)status();}}
+ async function run(fn){if(busy)return;busy=true;if(state){status();selectionStatus();}try{await fn();}catch(e){message(e.message);}finally{busy=false;generating=false;if(state){status();selectionStatus();}}}
  function confirm(text,action){$('confirm-text').textContent=text;$('accept').onclick=()=>{$('weekly-confirm').close();run(action);};$('weekly-confirm').showModal();$('cancel').focus();}
  $('cancel').onclick=()=>$('weekly-confirm').close();$('weekly-confirm').addEventListener('cancel',e=>e.preventDefault());
  async function load(){install(await rpc('state',{p_week:$('week').value||null}));$('weekly-editor').hidden=false;message('초안을 불러왔습니다. 저장과 발행은 별도입니다.');}
@@ -18,7 +25,7 @@
   const item={id:candidate?.id||'manual-'+crypto.randomUUID(),kind,title:candidate?.title||'',source:candidate?.source||'',change:'',risk:'',policy:'',signal:'',reason:'',reviewed:false};
   if(draft.items.some(x=>x.id===item.id)){message('이미 선정한 후보입니다.');return;}draft.items.push(item);selected=item.id;mark();render();}
  function render(){
-  status();$('risk-tab').setAttribute('aria-pressed',String(kind==='risk'));$('policy-tab').setAttribute('aria-pressed',String(kind==='policy'));
+  status();selectionStatus();$('risk-tab').setAttribute('aria-pressed',String(kind==='risk'));$('policy-tab').setAttribute('aria-pressed',String(kind==='policy'));
   const c=state.collection;$('collection').textContent=c.fetchedAt?'수집: '+new Date(c.fetchedAt).toLocaleString()+' · RISK 수신 '+c.riskReceived+'/'+c.riskTotal+' · POLICY 전체 조회 '+c.policyScanned+' / 주간 갱신 '+c.policyEligible+' · 탭별 후보 최대 100개':'아직 후보를 수집하지 않았습니다.';
   $('candidates').replaceChildren();const candidates=state.candidates.filter(x=>x.kind===kind);if(!candidates.length)$('candidates').append(make('p','해당 주에 수집된 후보가 없습니다. 원출처를 확인해 직접 추가할 수 있습니다.'));
   for(const c of candidates){const card=make('article'),h=make('h3',c.title),meta=make('p',c.date+' · '+(c.country||'국가 미제공')+' · '+(kind==='policy'?'등록정보 갱신일':'관련 기사 '+(c.articles??'미제공'))),details=make('details');details.append(make('summary','수집 원문 요약'),make('p',c.summary||'요약 없음'));const b=make('button','선정 목록에 추가');b.disabled=draft.items.some(x=>x.id===c.id);b.onclick=()=>add(c);card.append(h,meta,details,source(c.source),b);$('candidates').append(card);}
@@ -30,6 +37,7 @@
   const l=make('label',' 원문과 분석 내용을 검토했습니다'),check=make('input');l.className='weekly-review';check.id='reviewed';check.type='checkbox';check.checked=item.reviewed===true;check.onchange=()=>{item.reviewed=check.checked;mark();};l.prepend(check);box.append(l);
  }
  $('ai-generate-weekly').onclick=()=>run(async()=>{
+  generating=true;selectionStatus();
   if(dirty||!draft.question.trim())throw Error('핵심 질문을 작성하고 초안 저장을 먼저 해 주세요.');
   const base=JSON.stringify(draft),revision=state.revision;clearProposal();message('핵심 질문에 관련된 후보를 선정하고 내용을 작성 중… 최대 2분 걸릴 수 있습니다.');
   const settings=await rpc('ai_state');if(!settings)throw Error('AI API 세팅에서 제공자·키·모델을 먼저 저장하세요.');
@@ -45,6 +53,7 @@
  $('ai-discard-weekly').onclick=clearProposal;
  $('ai-apply-weekly').onclick=()=>{if(!proposal)return;confirm('현재 선정 목록을 AI 제안으로 교체할까요? 모든 제안은 검토 필요 상태이며 초안 저장과 발행은 별도입니다.',async()=>{if(!proposal||JSON.stringify(draft)!==proposalBase)throw Error('초안이 변경되어 제안을 적용할 수 없습니다.');draft.items=structuredClone(proposal.items).map(x=>({...x,reviewed:false}));selected=null;mark();render();message('AI 제안을 편집 초안에 반영했습니다. 원문 확인·내용 검토 후 저장하고 발행하세요.');});};
  $('question').oninput=()=>{draft.question=$('question').value;mark();};
+ $('ai-save-draft').onclick=()=>$('save').click();
  for(const k of ['risk','policy'])$(k+'-tab').onclick=()=>{kind=k;selected=null;render();};
  $('add').onclick=()=>add();$('load').onclick=()=>{if(dirty)confirm('미저장 편집을 버리고 선택한 주의 저장본을 불러올까요?',load);else run(load);};
  $('collect').onclick=()=>run(async()=>{clearProposal();message('RISK·POLICY 후보 수집 중… 약 1~2분 걸릴 수 있습니다.');const client=await window.aiRiskAdmin.client();const {data,error}=await client.functions.invoke('weekly-collect',{body:{week:state.week_start}});if(error||data?.error)throw Error(data?.error||error?.message||'수집 실패');const next=await rpc('state',{p_week:state.week_start});state.candidates=next.candidates;state.collection=next.collection;render();message('후보를 갱신했습니다. 편집 중인 초안과 공개본은 유지됩니다.');});
