@@ -46,7 +46,7 @@
     }
     section.append(metrics);
     const method = make('details', 'gap-method'); method.append(make('summary', '', L('매칭 방법과 해석', 'Matching method and interpretation')),
-      make('p', '', L('동일 국가에서 발행된 개념·별칭에 따른 공통 AI 원칙과 위험 ▶ 통제수단 ◀ 정책 연결을 비교합니다. 온톨로지 근거 수, 공통 원칙 수 순으로 정렬합니다. 정책 연결 기간은 위험 조회 종료일 기준이며 사건 발생 당시 적용 여부는 별도 확인이 필요합니다. 등록 상태와 관계없이 전체 정책을 비교하며 매칭은 적용·집행·효과의 확정이 아닙니다.', 'Candidates use shared AI principles defined by published concepts and aliases, and risk ▶ control ◀ policy paths in the same country. They are ordered by ontology evidence count, then shared principles. Binding dates use the risk query end date, not the historical incident date. All policy statuses are included; matches do not establish coverage, enforcement or effectiveness.')),
+      make('p', '', L('동일 국가에서 발행된 개념·별칭, 세부 원칙에서 상위 원칙으로의 대응, 위험 ▶ 통제수단 ◀ 정책 연결을 비교합니다. 온톨로지 근거 수, 공통 원칙 수 순으로 정렬합니다. 정책 연결 기간은 위험 조회 종료일 기준이며 사건 발생 당시 적용 여부는 별도 확인이 필요합니다. 등록 상태와 관계없이 전체 정책을 비교하며 매칭은 적용·집행·효과의 확정이 아닙니다.', 'Candidates use shared AI principles defined by published concepts and aliases, explicit broader-principle mappings, and risk ▶ control ◀ policy paths in the same country. They are ordered by ontology evidence count, then shared principles. Binding dates use the risk query end date, not the historical incident date. All policy statuses are included; matches do not establish coverage, enforcement or effectiveness.')),
       make('p', '', '★ ' + L('AI 원칙이 없는 정책: ', 'Policies without AI principle labels: ') + a.unclassifiedPolicies + L('건', a.unclassifiedPolicies === 1 ? ' policy' : ' policies')),
       make('p', '', L('온톨로지로도 후보를 찾지 못했고 위험 원칙 또는 모든 정책의 원칙이 없으면 분류 정보 부족입니다. 정보 누락으로 후보가 빠질 수 있습니다. 후보 미발견은 정책 부재를 뜻하지 않습니다.', 'When ontology paths find no candidate and risk principles or all policy principles are missing, labels are insufficient. Missing information can hide candidates. No candidate does not establish policy absence.')));
     section.append(method);
@@ -96,7 +96,7 @@
           const item = make('div', 'gap-candidate'), p = candidate.policy;
           item.append(button(L(p.originalName || p.englishName, p.englishName), () => window.aiRiskPolicy.openRecord(p)), make('p', '', L('공통 원칙: ', 'Shared principles: ') + (candidate.sharedPrinciples.join(' · ') || '—')), make('p', 'ds-muted', L('등록 상태: ', 'Inventory status: ') + (p.status || '—') + ' · ' + L('적용·집행·효과 미검증', 'Coverage, enforcement and effectiveness unverified')));
           for (const evidence of candidate.evidence) {
-            item.append(make('p', '', L('온톨로지 근거: ', 'Ontology evidence: ') + evidence.label), make('p', 'ds-muted', evidence.note));
+            item.append(make('p', '', (evidence.type === 'broader' ? L('상위 원칙 대응 · 세부 대응 미확인: ', 'Broader principle · specific coverage unverified: ') : L('온톨로지 근거: ', 'Ontology evidence: ')) + evidence.label), make('p', 'ds-muted', evidence.note));
             for (const [label, url] of [[L('연결 근거 출처', 'Connection source'), evidence.source], [L('필요 통제수단 근거', 'Required control source'), evidence.relationSource]]) if (url) { const link = make('a', 'journey-link', label); link.href = url; link.target = '_blank'; link.rel = 'noopener'; item.append(link); }
           }
           details.append(item);

@@ -12,6 +12,7 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
     insert into auth.users values ('${admin}'), ('${member}');`);
   await db.exec(fs.readFileSync(path.join(__dirname, '../supabase/migrations/202610040001_ontology_admin.sql'), 'utf8'));
   await db.exec(fs.readFileSync(path.join(__dirname, '../supabase/migrations/202610040002_ontology_name.sql'), 'utf8'));
+  await db.exec(fs.readFileSync(path.join(__dirname, '../supabase/migrations/202610050001_principle_crosswalk.sql'), 'utf8'));
   await db.exec(`insert into airisk_private.ontology_admins(user_id) values ('${admin}');`);
   const role = async (name, uid = '') => { await db.exec('reset role'); await db.query("select set_config('request.jwt.claim.sub', $1, false)", [uid]); await db.exec('set role ' + name); };
   const rpc = async (name, params = [], casts = []) => (await db.query(`select public.${name}(${params.map((_, i) => '$' + (i + 1) + '::' + casts[i]).join(',')}) as result`, params)).rows[0].result;
@@ -38,7 +39,7 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
   await assert.rejects(rpc('airisk_ontology_publish', [previous], ['uuid']), /another session/);
   await assert.rejects(rpc('airisk_ontology_publish', [null], ['uuid']), /another session/);
   const invalid = structuredClone(document); invalid.relations[0].to = 'missing';
-  await assert.rejects(rpc('airisk_ontology_save', [state.revision, invalid], ['uuid','jsonb']), /Invalid requires/);
+  await assert.rejects(rpc('airisk_ontology_save', [state.revision, invalid], ['uuid','jsonb']), /Invalid ontology relation/);
   const duplicate = structuredClone(document); duplicate.concepts.push({ ...document.concepts[0], id: 'other-risk' });
   await assert.rejects(rpc('airisk_ontology_save', [state.revision, duplicate], ['uuid','jsonb']), /Ambiguous alias/);
   const unsafe = structuredClone(document); unsafe.concepts[0].source = 'javascript:alert(1)';
@@ -53,6 +54,14 @@ test('Supabase SQL: anonymous, ordinary user, administrator, publish and revocat
   assert.equal(published.name, document.name);
   await role('anon'); assert.deepEqual(await rpc('airisk_ontology_published'), published);
   await assert.rejects(db.exec('select * from airisk_private.ontology_history'), /permission denied/);
+  await role('authenticated', admin);
+  const crosswalk = require('../supabase/seeds/oecd-principle-crosswalk.json');
+  state = await rpc('airisk_ontology_save', [state.revision, crosswalk], ['uuid','jsonb']);
+  const badMapping = structuredClone(crosswalk); badMapping.relations[0].to = badMapping.relations[0].from;
+  await assert.rejects(rpc('airisk_ontology_save', [state.revision, badMapping], ['uuid','jsonb']), /Invalid ontology relation/);
+  state = await rpc('airisk_ontology_publish', [state.revision], ['uuid']);
+  assert.equal(state.published.relations.filter(r => r.type === 'broader').length, 8);
+  assert.deepEqual(model.validate(state.published), []);
   await db.exec('reset role'); await db.exec(`delete from airisk_private.ontology_admins where user_id = '${admin}'`);
   await role('authenticated', admin); await assert.rejects(rpc('airisk_ontology_state'), /administrator access required/);
 });

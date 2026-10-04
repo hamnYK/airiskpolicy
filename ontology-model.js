@@ -31,7 +31,8 @@
     }
     for (const r of data.relations) {
       id(r, '관계'); if (!r) continue; evidence(r, r.id);
-      if (r.type !== 'requires' || !concepts.has(r.from) || concepts.get(r.from)?.kind === 'control' || concepts.get(r.to)?.kind !== 'control') errors.push(r.id + ': 위험·원칙·대상 ▶ 통제수단 requires 관계만 지원합니다.');
+      const from = concepts.get(r.from), to = concepts.get(r.to);
+      if (!(r.type === 'requires' && from && from.kind !== 'control' && to?.kind === 'control') && !(r.type === 'broader' && from?.kind === 'principle' && to?.kind === 'principle' && r.from !== r.to)) errors.push(r.id + ': 통제수단 필요 관계 또는 AI 원칙 간 상위 원칙 연결을 선택하세요.');
       if (r.review === 'reviewed' && [r.from, r.to].some(key => concepts.get(key)?.review !== 'reviewed')) errors.push(r.id + ': 연결 개념도 검토 완료여야 합니다.');
     }
     const date = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && Number.isFinite(Date.parse(v)) && new Date(v).toISOString().slice(0, 10) === v;
@@ -52,6 +53,11 @@
     for (const c of riskConcepts) {
       if (c.kind === 'principle' && has(policy.principles, c)) evidence.push({ type: 'concept', conceptId: c.id, label: c.label, source: c.source, note: c.note });
       for (const r of ontology.relations.filter(r => r.review === 'reviewed' && r.from === c.id)) {
+        if (r.type === 'broader') {
+          const target = concepts.find(x => x.id === r.to);
+          if (target && has(policy.principles, target)) evidence.push({ type: 'broader', conceptId: c.id, targetConceptId: target.id, relationId: r.id, label: c.label + ' ▶ ' + target.label, source: r.source, note: r.note });
+          continue;
+        }
         for (const b of ontology.bindings.filter(b => b.review === 'reviewed' && b.control === r.to && b.country === country && b.policyId === policy.id)) {
           if ((b.validFrom || b.validTo) && !asOf) continue;
           if ((b.validFrom && asOf < b.validFrom) || (b.validTo && asOf > b.validTo)) continue;

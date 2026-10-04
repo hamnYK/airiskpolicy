@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id), model = window.aiRiskOntology;
   const make = (tag, text) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = text; return el; };
   const kinds = { principle: 'AI 원칙', harm: '피해 유형', entity: '보호 대상', control: '통제수단' };
-  const groups = { concepts: '개념·별칭', relations: '필요한 통제수단', bindings: '정책 조항 연결' };
+  const groups = { concepts: '개념·별칭', relations: '원칙 대응·통제수단', bindings: '정책 조항 연결' };
   let state, draft, group = 'concepts', selected = null, dirty = false, busy = false;
   function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
   function mark() { dirty = true; renderVersion(); }
@@ -74,7 +74,7 @@
     const rows = draft[group].filter(row => JSON.stringify(row).toLowerCase().includes(query));
     for (const row of rows) {
       const b = make('button'); b.type = 'button'; b.setAttribute('aria-current', String(row.id === selected));
-      const title = group === 'concepts' ? row.label : group === 'relations' ? row.from + ' ▶ ' + row.to : row.country + ' · 정책 ' + row.policyId + ' ▶ ' + row.control;
+      const title = group === 'concepts' ? row.label : group === 'relations' ? (row.type === 'broader' ? '[상위 원칙] ' : '[통제수단] ') + row.from + ' ▶ ' + row.to : row.country + ' · 정책 ' + row.policyId + ' ▶ ' + row.control;
       b.append(make('strong', title), make('small', row.id + ' · ' + (row.review === 'reviewed' ? '검토 완료' : '초안'))); b.onclick = () => { selected = row.id; renderList(); renderDetail(); }; $('items').append(b);
     }
     if (!rows.length) $('items').append(make('p', '항목이 없습니다. 새 항목을 추가하세요.'));
@@ -95,7 +95,11 @@
     if (group === 'concepts') {
       field(form, row, 'kind', '종류', Object.entries(kinds)); field(form, row, 'label', '대표 이름'); field(form, row, 'aliases', '별칭 · 한 줄에 하나', null, 'textarea');
     } else if (group === 'relations') {
-      field(form, row, 'from', '위험·원칙·보호 대상', choices(false)); field(form, row, 'to', '필요한 통제수단', choices(true));
+      const type = field(form, row, 'type', '관계 종류', [['requires', '필요한 통제수단'], ['broader', '상위·통합 AI 원칙으로 대응']]);
+      const changeType = type.oninput; type.oninput = () => { changeType(); row.from = ''; row.to = ''; renderDetail(); };
+      const principles = [['', '선택하세요'], ...draft.concepts.filter(c => c.kind === 'principle').map(c => [c.id, c.label])];
+      field(form, row, 'from', row.type === 'broader' ? '위험 쪽 세부 AI 원칙' : '위험·원칙·보호 대상', row.type === 'broader' ? principles : choices(false));
+      field(form, row, 'to', row.type === 'broader' ? '정책 쪽 상위·통합 AI 원칙' : '필요한 통제수단', row.type === 'broader' ? principles.filter(([id]) => id !== row.from) : choices(true));
     } else {
       field(form, row, 'policyId', 'OECD 정책 ID', null, 'number'); field(form, row, 'country', '국가 코드 · ISO 3자리'); field(form, row, 'control', '정책이 다루는 통제수단', choices(true));
       field(form, row, 'validFrom', '적용 시작일 · 확인된 경우', null, 'date'); field(form, row, 'validTo', '적용 종료일 · 확인된 경우', null, 'date');
@@ -118,7 +122,7 @@
   $('preview-form').elements.date.value = new Date().toISOString().slice(0, 10);
   $('preview-form').onsubmit = e => {
     e.preventDefault(); if (!draft) return; const errors = model.validate(draft); if (errors.length) return message(errors.join('\n'), true);
-    const input = Object.fromEntries(new FormData(e.currentTarget)), split = v => v.split(',').map(x => x.trim()).filter(Boolean);
+    const input = Object.fromEntries(new FormData(e.currentTarget)), split = v => v.split(/\r?\n/).map(x => x.trim()).filter(Boolean);
     const result = window.aiRiskGap.analyze({ country: { code: input.country }, to: input.date, total: 1, records: [{ id: 'preview', properties: Object.fromEntries(['principles', 'harm_types', 'harmed_entities'].map(k => [k, split(input[k])])) }] }, { country: { code: input.country }, records: [{ id: Number(input.policyId), principles: split(input.policyPrinciples) }] }, draft);
     $('preview-result').textContent = JSON.stringify({ status: result.rows[0].status, candidates: result.rows[0].candidates, assessment: result.assessment }, null, 2);
   };

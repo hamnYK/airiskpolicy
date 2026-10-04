@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "name": "공통 AI 원칙 매칭",
+  "version": "common-ai-principles-crosswalk-v2",
+  "concepts": [
+    {
+      "id": "shared-principle-01",
+      "kind": "principle",
+      "label": "Privacy & data governance",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-02",
+      "kind": "principle",
+      "label": "Respect of human rights",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-03",
+      "kind": "principle",
+      "label": "Accountability",
+      "aliases": [
+        "1.5 Accountability"
+      ],
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P9",
+      "note": "2026-10-05 OECD 정책 API의 실제 원칙명과 OECD 원칙 정의를 대조했습니다. 번호 및 표현이 다른 동일 원칙의 분류 대응이며 정책의 실제 적용·집행·효과를 확인한 것은 아닙니다."
+    },
+    {
+      "id": "shared-principle-04",
+      "kind": "principle",
+      "label": "Robustness & digital security",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-05",
+      "kind": "principle",
+      "label": "Transparency & explainability",
+      "aliases": [
+        "1.3 Transparency and explainability"
+      ],
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P7",
+      "note": "2026-10-05 OECD 정책 API의 실제 원칙명과 OECD 원칙 정의를 대조했습니다. 번호 및 표현이 다른 동일 원칙의 분류 대응이며 정책의 실제 적용·집행·효과를 확인한 것은 아닙니다."
+    },
+    {
+      "id": "shared-principle-06",
+      "kind": "principle",
+      "label": "Safety",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-07",
+      "kind": "principle",
+      "label": "Fairness",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-08",
+      "kind": "principle",
+      "label": "Democracy & human autonomy",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-09",
+      "kind": "principle",
+      "label": "Human wellbeing",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "shared-principle-10",
+      "kind": "principle",
+      "label": "Sustainability",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://github.com/hamnYK/airiskpolicy/blob/9482f5040e06a1dff353f1705dd0bc97b1a1785c/aim-explorer.js",
+      "note": "기존 앱의 원칙 분류명을 공통 개념으로 옮겼습니다. 위험과 정책 양쪽의 principles 값이 이 이름과 정규화 후 일치할 때 후보로 연결합니다. 대소문자·공백·문장부호를 제외하며, 의미가 다른 별칭이나 법적 적용·효과를 추론하지 않습니다. 별칭은 추가하지 않았습니다."
+    },
+    {
+      "id": "oecd-1-1",
+      "kind": "principle",
+      "label": "1.1 Inclusive growth, sustainable development and well-being",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P5",
+      "note": "OECD 정책 API에서 확인한 통합 AI 원칙입니다. 세부 원칙과 동일어로 취급하지 않고 단방향 상위 원칙 대응에 사용합니다."
+    },
+    {
+      "id": "oecd-1-2",
+      "kind": "principle",
+      "label": "1.2 Respect for the rule of law, human rights and democratic values, including fairness and privacy",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P6",
+      "note": "OECD 정책 API에서 확인한 통합 AI 원칙입니다. 세부 원칙과 동일어로 취급하지 않고 단방향 상위 원칙 대응에 사용합니다."
+    },
+    {
+      "id": "oecd-1-4",
+      "kind": "principle",
+      "label": "1.4 Robustness, security and safety",
+      "aliases": [],
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P8",
+      "note": "OECD 정책 API에서 확인한 통합 AI 원칙입니다. 세부 원칙과 동일어로 취급하지 않고 단방향 상위 원칙 대응에 사용합니다."
+    }
+  ],
+  "relations": [
+    {
+      "id": "crosswalk-shared-principle-09",
+      "type": "broader",
+      "from": "shared-principle-09",
+      "to": "oecd-1-1",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P5",
+      "note": "Human wellbeing는 OECD 원칙 1.1에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-10",
+      "type": "broader",
+      "from": "shared-principle-10",
+      "to": "oecd-1-1",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P5",
+      "note": "Sustainability는 OECD 원칙 1.1에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-01",
+      "type": "broader",
+      "from": "shared-principle-01",
+      "to": "oecd-1-2",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P6",
+      "note": "Privacy & data governance는 OECD 원칙 1.2에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-02",
+      "type": "broader",
+      "from": "shared-principle-02",
+      "to": "oecd-1-2",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P6",
+      "note": "Respect of human rights는 OECD 원칙 1.2에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-07",
+      "type": "broader",
+      "from": "shared-principle-07",
+      "to": "oecd-1-2",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P6",
+      "note": "Fairness는 OECD 원칙 1.2에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-08",
+      "type": "broader",
+      "from": "shared-principle-08",
+      "to": "oecd-1-2",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P6",
+      "note": "Democracy & human autonomy는 OECD 원칙 1.2에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-04",
+      "type": "broader",
+      "from": "shared-principle-04",
+      "to": "oecd-1-4",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P8",
+      "note": "Robustness & digital security는 OECD 원칙 1.4에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    },
+    {
+      "id": "crosswalk-shared-principle-06",
+      "type": "broader",
+      "from": "shared-principle-06",
+      "to": "oecd-1-4",
+      "review": "reviewed",
+      "source": "https://oecd.ai/en/dashboards/ai-principles/P8",
+      "note": "Safety는 OECD 원칙 1.4에서 다루는 주제에 대응합니다. 공식 정의와 실제 분류명을 대조한 편집상 대응입니다. 이 상위 원칙을 가진 정책이 해당 세부 위험을 직접 다룬다는 뜻은 아니며, 원문 조항 확인이 필요합니다. 역방향·다단계 추론은 하지 않습니다."
+    }
+  ],
+  "bindings": []
+}
