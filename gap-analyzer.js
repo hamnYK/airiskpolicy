@@ -82,7 +82,12 @@
   document.addEventListener('policy:loaded', render);
   document.addEventListener('policy:invalidated', render);
   document.addEventListener('ontology:changed', render);
-  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  let lastLanguage = document.documentElement.lang;
+  new MutationObserver(() => {
+    if (document.documentElement.lang === lastLanguage) return;
+    lastLanguage = document.documentElement.lang;
+    render();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   for (const id of ['risk-state', 'policy-state']) new MutationObserver(render).observe(document.getElementById(id), { attributes: true, attributeFilter: ['data-state'] });
   render();
 })();
