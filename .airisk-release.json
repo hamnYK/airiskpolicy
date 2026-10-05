@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-05T07-56-14-638Z-c472c2",
+  "id": "2026-10-05T13-58-03-263Z-fe4249",
   "verified": true,
   "obfuscator": "5.8.1",
   "files": [
@@ -112,6 +112,14 @@
       "sha256": "0aecf00d172eb5294a2d3b19c031b2d39bc9e27743363988f532520facec19fd"
     },
     {
+      "path": "community.css",
+      "sha256": "b44ac3f8813261d1d69f980d3a2ca4d995701585a79cdb49d2600fb6f2493230"
+    },
+    {
+      "path": "community.html",
+      "sha256": "174965bf4170cc4ff5ac434d4231cdb8ab227b183d1b9bd3cac626824d4d39b1"
+    },
+    {
       "path": "design-system-page.css",
       "sha256": "67eaaf66619f57ec34092fdd4b8478bd43e1f9c3852ad4986c9d3b5a261cb341"
     },
@@ -149,7 +157,7 @@
     },
     {
       "path": "i18n-en.json",
-      "sha256": "c9811e658a49aaa9eba9813b7f169d9cb173c9d048bf63aa3bb121fb68b4b0d6"
+      "sha256": "5fccf57dad8e68e5f8a5690970840f8059b13f11163b12d6166b43a937bc99b1"
     },
     {
       "path": "i18n.css",
@@ -161,7 +169,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "dbf7ab2604e169ff5aca09bcae38399a4bdd888a2c5fd6266badab499a872a83"
+      "sha256": "beb6f3c237f430198a8a8869f3941fc926e0b94ef402fe4fef7206d3cd215a8f"
     },
     {
       "path": "journey.css",
@@ -213,7 +221,7 @@
     },
     {
       "path": "sitemap.xml",
-      "sha256": "95e11cfb3da78543785c2f062b5e0b186d806ba2e35fca0e97541a85e0570163"
+      "sha256": "56da5bcd60ac0db1abeba4413529cf57c3c713cdcbf4b30c705d5487f9081276"
     },
     {
       "path": "style.css",
