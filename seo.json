@@ -14,6 +14,20 @@
     "intro": "We aim to connect leading communities in each country to develop technical responses, cultural understanding and policy readiness for AI risk. By sharing evidence and lived experience, we seek paths to collective action across borders.",
     "locale": "en_US"
   },
+  "pages": {
+    "community": {
+      "ko": {
+        "title": "커뮤니티 소개 · AI Risk & Policy",
+        "description": "AI의 사회적 영향과 정책을 함께 살피는 커뮤니티를 준비하고 있습니다. 커뮤니티 소개와 운영 정보를 확인하세요.",
+        "locale": "ko_KR"
+      },
+      "en": {
+        "title": "About the community · AI Risk & Policy",
+        "description": "We are preparing a community to explore AI's social impact and policy. Learn about the community, its organisers and contact details.",
+        "locale": "en_US"
+      }
+    }
+  },
   "publication": {
     "primaryLanguage": "en",
     "englishStatus": "English by default. Korean toggle available only when the visitor country is detected as KR.",

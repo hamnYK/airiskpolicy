@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-05T13-58-03-263Z-fe4249",
+  "id": "2026-10-05T14-15-15-261Z-fb293a",
   "verified": true,
   "obfuscator": "5.8.1",
   "files": [
@@ -73,7 +73,7 @@
     },
     {
       "path": "app.js",
-      "sha256": "399d2c4229e39d838d0798554ff4b9ca2f37ea8e0bc834b67042df17ba6cd6ff"
+      "sha256": "dcb5b3aa2d3ea789cc228641a0616a93c4649b9d89eb741ef40aaef61648c5bf"
     },
     {
       "path": "assets/countries.geojson",
@@ -113,11 +113,11 @@
     },
     {
       "path": "community.css",
-      "sha256": "b44ac3f8813261d1d69f980d3a2ca4d995701585a79cdb49d2600fb6f2493230"
+      "sha256": "e8d09f5b64836993cbff8dc6fd61701e9c29cac11dd65be43a0682389634f8fb"
     },
     {
       "path": "community.html",
-      "sha256": "174965bf4170cc4ff5ac434d4231cdb8ab227b183d1b9bd3cac626824d4d39b1"
+      "sha256": "46110054c4abfe913aa1deaba4cc2dccb7033efd744d71978a18365cfe4a1e04"
     },
     {
       "path": "design-system-page.css",
@@ -157,7 +157,7 @@
     },
     {
       "path": "i18n-en.json",
-      "sha256": "5fccf57dad8e68e5f8a5690970840f8059b13f11163b12d6166b43a937bc99b1"
+      "sha256": "deb88a58d4cb9650d7031ea579060a8491c79724d00106d9b846c2712e291930"
     },
     {
       "path": "i18n.css",
@@ -165,11 +165,11 @@
     },
     {
       "path": "i18n.js",
-      "sha256": "99dc7678d372e3d328627fa868191569de8ccb04263d678d096ac97678f384ad"
+      "sha256": "d72d6ce87c89fd1dce4e80ef5cd3af8ab6cb3ad5ac6cfb7d09d46d67564abf34"
     },
     {
       "path": "index.html",
-      "sha256": "beb6f3c237f430198a8a8869f3941fc926e0b94ef402fe4fef7206d3cd215a8f"
+      "sha256": "654a2985b0ef4b3c0002264df277013a3c0f4ca1e648222ccd591195cba07be7"
     },
     {
       "path": "journey.css",
@@ -217,7 +217,7 @@
     },
     {
       "path": "seo.json",
-      "sha256": "b015f6252276114dd7ff91467a3491cbd77678b6450a2647fdcd3fb7700ccbe2"
+      "sha256": "6f8a6a8a08d29a9f87a0c42402109d632b58e194803a4926b1202b80cc7c4527"
     },
     {
       "path": "sitemap.xml",
@@ -1618,6 +1618,10 @@
     {
       "path": "vendor/supabase/supabase.js",
       "sha256": "59d39487c3589843b410322d8a3d562ce022aba1e5ccb16898ef3fb2a0da2ecd"
+    },
+    {
+      "path": "visitor-country.js",
+      "sha256": "bea3fd3dd50f68a7b03129b8c49d1a7b92b222c0b0bba3e5d137908173e1089f"
     },
     {
       "path": "weekly-briefing.css",
