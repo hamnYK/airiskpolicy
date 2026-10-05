@@ -1,4 +1,4 @@
-name: Deploy AI Risk GIS
+name: Deploy AI Risk published release
 on:
   push:
     branches: [main]
@@ -13,21 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
       - uses: actions/configure-pages@v5
-      - run: npm ci --ignore-scripts
-      - run: npm test
-      - run: npm run build
-        env:
-          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY || secrets.SUPABASE_PUBLISHABLE_KEY }}
-          ONTOLOGY_PROVIDER: ${{ vars.ONTOLOGY_PROVIDER }}
+      - name: Package verified static release
+        run: |
+          test -f .airisk-release.json
+          test -f index.html
+          test -f admin/weekly.html
+          test ! -d supabase
+          test ! -f package.json
+          mkdir _site
+          rsync -a --exclude='.git/' --exclude='.github/' --exclude='_site/' --exclude='README.md' --exclude='.airisk-release.json' ./ _site/
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: _site
   deploy:
     needs: build
     runs-on: ubuntu-latest

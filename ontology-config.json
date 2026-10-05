@@ -1,1 +1,4 @@
-{"provider":"supabase","endpoint":"ontology.json"}
+{
+  "provider": "supabase",
+  "endpoint": "ontology.json"
+}
