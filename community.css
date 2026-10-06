@@ -30,3 +30,13 @@
 .community-header-actions .language-toggle button{min-height:var(--ds-target);padding:var(--ds-space-2) var(--ds-space-3);border:0;border-radius:var(--ds-radius-control);background:transparent;color:var(--ds-text);font:inherit;font-size:var(--ds-type-ui);line-height:var(--ds-line-control);cursor:pointer}
 .community-header-actions .language-toggle button[aria-pressed=true]{background:var(--ds-action);color:var(--ds-on-action);font-weight:700}
 @media(max-width:540px){.community-header-actions{justify-content:flex-start}}
+
+.community-people{margin-top:var(--ds-space-8);padding-top:var(--ds-space-8);border-top:1px solid var(--ds-border)}
+.community-people h2{font-size:var(--ds-type-section);margin:0 0 var(--ds-space-4)}.people-disclosure{color:var(--ds-text-muted);font-size:var(--ds-type-ui);margin:0 0 var(--ds-space-6)}
+.people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-4)}.person-card{min-width:0;overflow-wrap:anywhere}.person-heading{display:flex;align-items:center;gap:var(--ds-space-3)}.person-heading h3{margin:0;font-size:var(--ds-type-card)}.person-heading p{margin:var(--ds-space-1) 0 0;color:var(--ds-text-muted);font-size:var(--ds-type-ui)}.person-avatar{width:var(--ds-space-12);height:var(--ds-space-12);border-radius:var(--ds-radius-pill);object-fit:cover}.person-card>p{white-space:pre-line}.person-card figure{margin:var(--ds-space-4) 0 0}.person-work{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--ds-input);border-radius:var(--ds-radius-control)}.person-card figcaption{margin-top:var(--ds-space-2);font-size:var(--ds-type-ui);color:var(--ds-text-muted)}.person-socials{display:flex;flex-wrap:wrap;gap:var(--ds-space-2);margin-top:var(--ds-space-3)}
+@media(max-width:540px){.people-grid{grid-template-columns:minmax(0,1fr)}}
+
+#people-public-status[hidden]{display:none}
+
+.people-public-tools{display:flex;gap:var(--ds-space-4);align-items:end;justify-content:space-between;margin-bottom:var(--ds-space-6)}.people-public-tools .ds-field{flex:1;max-width:24rem;font-size:var(--ds-type-ui)}.people-result-count{display:flex;gap:var(--ds-space-1);align-items:center;margin:0;min-height:var(--ds-action-height);color:var(--ds-text-muted);font-size:var(--ds-type-ui);white-space:nowrap}.people-pagination{display:flex;align-items:center;justify-content:center;gap:var(--ds-space-4);margin-top:var(--ds-space-6)}#people-public-tools[hidden],#people-pagination[hidden]{display:none}#community-people-title{scroll-margin-top:var(--ds-space-6)}
+@media(max-width:540px){.people-public-tools{align-items:stretch;flex-direction:column;gap:var(--ds-space-2)}.people-public-tools .ds-field{max-width:none}.people-result-count{min-height:0}}

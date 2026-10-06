@@ -1,5 +1,6 @@
 {
-  "id": "2026-10-05T14-15-15-261Z-fb293a",
+  "id": "2026-10-06T04-29-06-453Z-077295",
+  "environment": "production",
   "verified": true,
   "obfuscator": "5.8.1",
   "files": [
@@ -29,23 +30,27 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "0bb2052c59cc6e97030963a3c721b3437ba9a864e3424abe6d9774e97ed50701"
+      "sha256": "41f7b07f09ad0194da15602f0f0163051470cfb810e3d7fd24e916466e9964b0"
     },
     {
       "path": "admin/login.html",
-      "sha256": "6d34aa902996e9abbe973e06d503cb99476a9d22df5cca0ab1da85cadf59a68d"
+      "sha256": "67d5159bb4cdd9b20ea6d58c6d11322dc77346a612920152ca3ca615e6924a3a"
     },
     {
       "path": "admin/login.js",
       "sha256": "2fa8778c4570e192cdf8c70d6328f03baeb44cae682f772e4a4d94f4e6370a24"
     },
     {
+      "path": "admin/participants.js",
+      "sha256": "31893aaac75cd82122fdf74083924c6cd2823d73765691fc32e70f60cac01fcc"
+    },
+    {
       "path": "admin/style.css",
-      "sha256": "f65c3c7bc348a5de1810847b43c687bd66dd28b51bc6b9656f908010547c1ca9"
+      "sha256": "910268aad4b2e65f7b3ea2ea0617dc748cada302ba27641f067c713c65e29a60"
     },
     {
       "path": "admin/supabase-client.js",
-      "sha256": "59d377c53b32457c8f9567eb9c6eee626ae2b41539b0b336405335f22ccc756b"
+      "sha256": "e38620a012c80b7e6469d0da7c245118ac14a7243dfe775b83fe48a596331996"
     },
     {
       "path": "admin/weekly.css",
@@ -53,7 +58,7 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "573d3f86c6e151e5698e206aaa02646e05b3e36233759e2a6aab782b1491b9c9"
+      "sha256": "b75a36030a1da95771b3f17205f68f5542d366b0478ec0fad0dac9f05bfe3541"
     },
     {
       "path": "admin/weekly.js",
@@ -61,7 +66,7 @@
     },
     {
       "path": "admin/workspace-tabs.js",
-      "sha256": "c73ec675bddcb1cbc34c452a90dedde919d717346da12dfeaf14c4c74b9e858c"
+      "sha256": "81b65c489818001a5aac3169edf4d7d64fc8f2c086b96c8c994959e9d48ffc5d"
     },
     {
       "path": "aim-explorer.js",
@@ -113,11 +118,11 @@
     },
     {
       "path": "community.css",
-      "sha256": "e8d09f5b64836993cbff8dc6fd61701e9c29cac11dd65be43a0682389634f8fb"
+      "sha256": "1aff1075451aed862f682d1829fd88d51ac775ce1c9d19fc79ae8ad873f62f58"
     },
     {
       "path": "community.html",
-      "sha256": "46110054c4abfe913aa1deaba4cc2dccb7033efd744d71978a18365cfe4a1e04"
+      "sha256": "ec52d04adcd77bf0fd9f15adca4c736ef10621651d8b14d8e2707f0843a01618"
     },
     {
       "path": "design-system-page.css",
@@ -157,7 +162,7 @@
     },
     {
       "path": "i18n-en.json",
-      "sha256": "deb88a58d4cb9650d7031ea579060a8491c79724d00106d9b846c2712e291930"
+      "sha256": "d70ef841b0401665455feff08a65a1a920f6b74d55c275906dcb372499b81144"
     },
     {
       "path": "i18n.css",
@@ -169,7 +174,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "654a2985b0ef4b3c0002264df277013a3c0f4ca1e648222ccd591195cba07be7"
+      "sha256": "70f4ae059537b46871232ba2cd0bbef4b97baad889deab35bfca44113712ae70"
     },
     {
       "path": "journey.css",
@@ -194,6 +199,10 @@
     {
       "path": "ontology.json",
       "sha256": "ddbb2b2ecf45147a2d9c743ed1abc942622b9e3b6c9bb968977bdbee7566f04e"
+    },
+    {
+      "path": "participants.js",
+      "sha256": "c5832937d9a62d9b832569880f15d095947fd75b522405377932db6a5347ffbe"
     },
     {
       "path": "policy.css",
@@ -229,7 +238,7 @@
     },
     {
       "path": "supabase-config.json",
-      "sha256": "2ee6f9964fada538ca0ddde32d92e9af98d34db1cf1110e4f5b424afdc06a6e9"
+      "sha256": "f984d5ab0bd565a59904ed9e76dfb687f2e0f851a726fe792aa54919b352499c"
     },
     {
       "path": "typography.css",

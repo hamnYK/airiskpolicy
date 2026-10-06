@@ -8,9 +8,9 @@
   <meta name="description" content="AI의 사회적 영향과 정책을 함께 살피는 커뮤니티를 준비하고 있습니다. 커뮤니티 소개와 운영 정보를 확인하세요.">
   <link rel="stylesheet" href="typography.css?v=bc159ea59b2f">
   <link rel="stylesheet" href="design-system.css?v=d16ecb87db5f">
-  <link rel="stylesheet" href="community.css?v=e8d09f5b6483">
+  <link rel="stylesheet" href="community.css?v=1aff1075451a">
   <script defer src="visitor-country.js?v=bea3fd3dd50f"></script>
-  <script defer src="i18n.js?v=d72d6ce87c89"></script>
+  <script defer src="participants.js?v=c5832937d9a6"></script><script defer src="i18n.js?v=d72d6ce87c89"></script>
 </head>
 <body class="community-page" data-i18n-page="community">
   <header class="community-header"><a href="index.html" class="community-brand">AI Risk &amp; Policy</a><div class="community-header-actions" data-language-controls><a class="ds-link" href="index.html">사이트로 돌아가기</a></div></header>
@@ -20,6 +20,19 @@
     <p class="community-status"><span aria-hidden="true"></span>현재 커뮤니티 준비 중</p>
     <p class="community-intro">AI의 사회적 영향과 정책을 함께 살피고,<br class="community-break"> 더 나은 대응을 고민하는 커뮤니티를 준비하고 있습니다.</p>
     <p class="community-description">AI Risk &amp; Policy는 AI 사건과 정책에 관한 공개 정보를 살펴보고, 서로의 경험과 질문을 나누기 위한 공간입니다. 함께할 사람들과 운영 체계를 마련하고 있습니다.</p>
+    <section class="community-people" aria-labelledby="community-people-title">
+      <p class="community-eyebrow">PEOPLE &amp; WORK</p><h2 id="community-people-title">함께하는 사람</h2>
+      <p class="people-disclosure">참여자 소개, 성과물 이미지 및 SNS는 참여자 개인의 요청 또는 동의를 받아 게재합니다.</p>
+      <div id="people-public-tools" class="people-public-tools" hidden>
+        <label class="ds-field" for="people-public-search"><span>이름·역할·소속 검색</span><input id="people-public-search" class="ds-input" type="search" placeholder="참여자 찾기"></label>
+        <p id="people-public-count" class="people-result-count" role="status"></p>
+      </div>
+      <p id="people-public-status" class="ds-status" data-state="loading" role="status">참여자 정보를 불러오는 중…</p>
+      <div id="community-people-list" class="people-grid" data-no-translate></div>
+      <nav id="people-pagination" class="people-pagination" aria-label="참여자 페이지" hidden>
+        <button id="people-previous" class="ds-secondary" type="button">이전</button><span id="people-page-number" data-no-translate></span><button id="people-next" class="ds-secondary" type="button">다음</button>
+      </nav>
+    </section>
     <section class="community-details" aria-labelledby="community-details-title">
       <h2 id="community-details-title">운영 정보</h2>
       <dl>

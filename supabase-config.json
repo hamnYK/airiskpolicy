@@ -1,4 +1,5 @@
 {
   "url": "https://jiyngdwpdmpjiwdnyanb.supabase.co",
-  "publishableKey": "sb_publishable_ZKzghFywgAXT3gQN68dFUg_pOdD2krJ"
+  "publishableKey": "sb_publishable_ZKzghFywgAXT3gQN68dFUg_pOdD2krJ",
+  "environment": "production"
 }

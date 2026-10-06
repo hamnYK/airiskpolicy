@@ -13,3 +13,15 @@ input,select,textarea{min-height:var(--ds-action-height)}.primary{min-height:var
 #ontology-workspace .file-button input{position:absolute;inset:0;width:100%;height:100%;max-width:none;min-height:0;margin:0;padding:0;opacity:0;cursor:pointer}
 #ontology-workspace .file-button:focus-within{outline:2px solid var(--ds-action);outline-offset:3px}
 @media(max-width:760px){#ontology-workspace .toolbar>.file-button{width:auto;flex:1 1 140px}}
+
+.person-editor{margin-top:var(--ds-space-6)}.person-editor h3{margin-top:0;font-size:var(--ds-type-card)}.person-check{display:flex;align-items:center;gap:var(--ds-space-3);min-height:var(--ds-target);margin-top:var(--ds-space-3)}.person-check input{width:var(--ds-space-6);min-height:var(--ds-space-6);height:var(--ds-space-6);accent-color:var(--ds-action)}#people-status{color:var(--ds-warning);white-space:pre-line}
+
+.person-editor .fields>label{align-content:start}
+.person-editor .fields{gap:var(--ds-space-4)}
+.person-editor .fields>label{gap:var(--ds-space-2)}
+.person-editor .fields input,.person-editor .fields textarea{padding:var(--ds-space-3);line-height:var(--ds-line-control)}
+.person-editor .fields input{height:var(--ds-action-height)}
+.person-editor .fields textarea{height:var(--work-textarea-height);min-height:var(--work-textarea-height);resize:vertical}
+
+.people-editor-layout{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:var(--ds-space-6);align-items:start}.people-browser{min-width:0}.people-browser h3{margin:0 0 var(--ds-space-4);font-size:var(--ds-type-card)}.people-browser>label{margin-bottom:var(--ds-space-3)}#people-count{font-size:var(--ds-type-ui);margin:var(--ds-space-3) 0}#people-list{display:grid;gap:var(--ds-space-2);max-height:640px;overflow:auto;padding:var(--ds-space-1)}.people-list-item{display:grid;gap:var(--ds-space-1);width:100%;text-align:left;overflow-wrap:anywhere}.people-list-item>span{color:var(--ds-text-muted)}.people-list-item[aria-pressed=true]{border-color:var(--ds-action);box-shadow:inset var(--ds-space-1) 0 var(--ds-action)}.people-list-meta{display:flex;gap:var(--ds-space-2);flex-wrap:wrap}.people-list-meta small{font-size:var(--ds-type-meta)}.people-editor-layout>.person-editor{margin-top:0;scroll-margin-top:var(--ds-space-4)}.person-editor-note{font-size:var(--ds-type-ui)}.person-editor .actions>span{font-size:var(--ds-type-ui)}
+@media(max-width:1000px){.people-editor-layout{grid-template-columns:minmax(0,1fr)}#people-list{max-height:288px}}
