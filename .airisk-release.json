@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-06T04-29-06-453Z-077295",
+  "id": "2026-10-06T04-39-31-323Z-169c0a",
   "environment": "production",
   "verified": true,
   "obfuscator": "5.8.1",
@@ -30,7 +30,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "41f7b07f09ad0194da15602f0f0163051470cfb810e3d7fd24e916466e9964b0"
+      "sha256": "29c5182f754983803a4f36116a5fdf61d6cc332ec925507cce03587f716b9f31"
     },
     {
       "path": "admin/login.html",
@@ -42,7 +42,7 @@
     },
     {
       "path": "admin/participants.js",
-      "sha256": "31893aaac75cd82122fdf74083924c6cd2823d73765691fc32e70f60cac01fcc"
+      "sha256": "5fe823829e35745cebcd77a482e61dd7d2b5b5f157313ad8705139aaee40aff6"
     },
     {
       "path": "admin/style.css",
