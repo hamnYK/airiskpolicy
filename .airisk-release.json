@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-07T06-02-41-077Z-81fadf",
+  "id": "2026-10-07T13-40-56-793Z-eb8816",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -86,6 +86,10 @@
       "sha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb"
     },
     {
+      "path": "assets/favicon.png",
+      "sha256": "c02dcc109267f694d9b95b8455f0b354d1fb6dfb9689ee8a53981e55526dedbb"
+    },
+    {
       "path": "assets/fonts/Pretendard-LICENSE.txt",
       "sha256": "82e9c8a4b203261f10ddba1296422d64914ff3d4b7bd8a12896d03f0f088d70a"
     },
@@ -114,6 +118,10 @@
       "sha256": "fc5e0648d5413b55b79ebbab0f50de561a026574cba3a9c8eb03d5bddd432263"
     },
     {
+      "path": "assets/share-card.png",
+      "sha256": "6e998e60fdcb90eb66a39582166c06ae94a92c0b9956edd0da6827f19a53025e"
+    },
+    {
       "path": "CNAME",
       "sha256": "0aecf00d172eb5294a2d3b19c031b2d39bc9e27743363988f532520facec19fd"
     },
@@ -123,7 +131,7 @@
     },
     {
       "path": "community.html",
-      "sha256": "ec52d04adcd77bf0fd9f15adca4c736ef10621651d8b14d8e2707f0843a01618"
+      "sha256": "6e0ea6e21e365a77eddb5a3f6f81467eb6fc6b69f9ac0cfaa7200c41759a96fe"
     },
     {
       "path": "design-system-page.css",
@@ -155,7 +163,7 @@
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "0718201bebd1ada25e6c2781b21c11c9e970b3d154ae3e5866b44fe63793d1f2"
+      "sha256": "f350a1d4b11bcbe6c69dbeda03ce3fc5a02ab76c4cbbf2bde1c421e1c8985547"
     },
     {
       "path": "gap-engine.js",
@@ -171,11 +179,11 @@
     },
     {
       "path": "i18n.js",
-      "sha256": "d72d6ce87c89fd1dce4e80ef5cd3af8ab6cb3ad5ac6cfb7d09d46d67564abf34"
+      "sha256": "b3cf14e45eb94b74286e3ca76592bbee6890682a0c5e20807f977c616e32025c"
     },
     {
       "path": "index.html",
-      "sha256": "e762d59d8ef2868b1f82a2b3a7bf86f40854aadeb10443eb2fe69595fe0a223d"
+      "sha256": "1b7aa402a2e4635db750ac0708c84a265f9932ceb85f62d817f37f4a38646c85"
     },
     {
       "path": "journey.css",
@@ -227,7 +235,7 @@
     },
     {
       "path": "seo.json",
-      "sha256": "6f8a6a8a08d29a9f87a0c42402109d632b58e194803a4926b1202b80cc7c4527"
+      "sha256": "9a028d8bbc26fb1c14c3a0aba2433450dbb42a51c404591d166e2758f268ed4e"
     },
     {
       "path": "sitemap.xml",

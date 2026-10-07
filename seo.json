@@ -33,5 +33,12 @@
     "englishStatus": "English by default. Korean toggle available only when the visitor country is detected as KR.",
     "canonicalUrl": "https://www.aipolicy.world/",
     "note": "One canonical URL; English is the default and Korean remains available to visitors detected in Korea. No alternate-language URLs are published."
+  },
+  "image": {
+    "path": "assets/share-card.png",
+    "width": 1200,
+    "height": 630,
+    "type": "image/png",
+    "alt": "AI Risk & Policy — AI 위험과 정책을 연결하는 글로벌 커뮤니티 / A global community connecting AI risks and policy"
   }
 }
