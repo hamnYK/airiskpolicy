@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-07T05-33-38-336Z-f62497",
+  "id": "2026-10-07T06-02-41-077Z-81fadf",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -27,11 +27,11 @@
     },
     {
       "path": "admin/editor.js",
-      "sha256": "e0d226243c2021a28b9b804facf4effa7cad65974c271c2df024be8064b2f15d"
+      "sha256": "ac84e9341d8135c2546365ea8f7d3402025e449ae86ddc52f48974878566c462"
     },
     {
       "path": "admin/index.html",
-      "sha256": "cc7dc4e10433c7ee66513492301e7fd8a79875c833ae388803f7b31d776c0893"
+      "sha256": "8b7ea7a6185e02886cdf0be41961eea8e6fd108b675c20d3788b4491b314b0b0"
     },
     {
       "path": "admin/login.html",
@@ -155,11 +155,11 @@
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "fcd1fcd6edde6fa2165217139f244c192d7ce3373d8a5af5376f21bea891365b"
+      "sha256": "0718201bebd1ada25e6c2781b21c11c9e970b3d154ae3e5866b44fe63793d1f2"
     },
     {
       "path": "gap-engine.js",
-      "sha256": "c1c41e7160b4c43638a0c834b330d6e5cec9ece4bde860bcb8a43562602ad9d9"
+      "sha256": "27c63c56bf07100ac94a567f6655120badd15728b301c6a3a56936ba830c6c63"
     },
     {
       "path": "i18n-en.json",
@@ -175,7 +175,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "dcfa08d36233eb3b7aa6d2a79b13b2d390c88159403055141807e967b9a7880d"
+      "sha256": "e762d59d8ef2868b1f82a2b3a7bf86f40854aadeb10443eb2fe69595fe0a223d"
     },
     {
       "path": "journey.css",
@@ -195,7 +195,7 @@
     },
     {
       "path": "ontology-model.js",
-      "sha256": "798e5f07bbdc8ae3072982b6c2bca042526b15ea7273cead0211e868193733f4"
+      "sha256": "e45976063c7522ecab6e3380f4278964bab634afb4779296741a4b4f5342835a"
     },
     {
       "path": "ontology.json",
@@ -219,7 +219,7 @@
     },
     {
       "path": "response-journey.js",
-      "sha256": "a20326c787a9f68632de3866d6b40a9d301e79d76ecb12c3925cf4884879e82a"
+      "sha256": "0fd5bbf6ae3950bb05a4c0c2264ecb185e10985b9abf5a4adfb216e48dc3a2c6"
     },
     {
       "path": "robots.txt",
