@@ -1,9 +1,8 @@
 {
-  "id": "2026-10-08T15-54-57-833Z-verified",
+  "id": "2026-10-08T16-28-48-148Z-42ce40",
   "environment": "production",
   "verified": true,
   "tests": "passed",
-  "verification": "30 unit/DB tests and all 8 production UI scripts passed on this build. weekly-ui retried after waiting for dismissal persistence; no rebuild or skipped tests.",
   "obfuscator": "5.8.1",
   "files": [
     {
@@ -60,11 +59,11 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "138964c96160bb7d3920d5010b7279b76880cf132a03a25b727b840a1c511f4e"
+      "sha256": "9ec3af5ac236d2d04a5924eca840424ebdad6f5ae88c8f762a130c98f7d6d6a8"
     },
     {
       "path": "admin/weekly.js",
-      "sha256": "6ea19fb2bbe716bb64f060c025b1f679aea4b1a145d608af6071e26832bbf747"
+      "sha256": "4d9276651b418ffd52bbb9d43118c00e9978815129d117be5b1e2e6861dee822"
     },
     {
       "path": "admin/workspace-tabs.js",
