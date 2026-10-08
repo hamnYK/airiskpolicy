@@ -1,21 +1,22 @@
+@import './foundation.css';
 /* AI RISK design system v1.2. Shared by the application and reference page. */
 :root{
- --ds-background:#08131f;--ds-surface:#102737;--ds-surface-raised:#163241;--ds-input:#091d2b;
- --ds-text:#dfedf4;--ds-text-muted:#a9c0cf;--ds-text-subtle:#9fb7c7;
- --ds-border:#426578;--ds-border-control:#64899a;
- --ds-action:#a8ddd2;--ds-action-hover:#c5eee5;--ds-on-action:#092b30;
- --ds-secondary:#193d49;--ds-secondary-hover:#234c57;--ds-link:#b5e6da;
- --ds-focus:#a8ddd2;--ds-error:#efb0b0;--ds-warning:#dcc79e;--ds-success:#a8ddd2;
- --ds-incident:#e2a98e;--ds-hazard:#8baedb;--ds-country-selected:#f5cf69;
+ --ds-background:var(--airisk-foundation-color-08131f);--ds-surface:var(--airisk-foundation-color-102737);--ds-surface-raised:var(--airisk-foundation-color-163241);--ds-input:var(--airisk-foundation-color-091d2b);
+ --ds-text:var(--airisk-foundation-color-dfedf4);--ds-text-muted:var(--airisk-foundation-color-a9c0cf);--ds-text-subtle:var(--airisk-foundation-color-9fb7c7);
+ --ds-border:var(--airisk-foundation-color-426578);--ds-border-control:var(--airisk-foundation-color-64899a);
+ --ds-action:var(--airisk-foundation-color-a8ddd2);--ds-action-hover:var(--airisk-foundation-color-c5eee5);--ds-on-action:var(--airisk-foundation-color-092b30);
+ --ds-secondary:var(--airisk-foundation-color-193d49);--ds-secondary-hover:var(--airisk-foundation-color-234c57);--ds-link:var(--airisk-foundation-color-b5e6da);
+ --ds-focus:var(--airisk-foundation-color-a8ddd2);--ds-error:var(--airisk-foundation-color-efb0b0);--ds-warning:var(--airisk-foundation-color-dcc79e);--ds-success:var(--airisk-foundation-color-a8ddd2);
+ --ds-incident:var(--airisk-foundation-color-e2a98e);--ds-hazard:var(--airisk-foundation-color-8baedb);--ds-country-selected:var(--airisk-foundation-color-f5cf69);
  --ds-policy-active:var(--ds-action);--ds-policy-proposed:var(--ds-hazard);--ds-policy-complete:var(--ds-text-muted);--ds-policy-not-started:var(--ds-warning);
- --ds-space-1:4px;--ds-space-2:8px;--ds-space-3:12px;--ds-space-4:16px;--ds-space-6:24px;--ds-space-8:32px;--ds-space-12:48px;
- --ds-radius-control:6px;--ds-radius-panel:8px;--ds-radius-dialog:12px;--ds-radius-pill:999px;
- --ds-font-body:Pretendard,'Malgun Gothic',sans-serif;--ds-font-title:SUITE,Pretendard,sans-serif;--ds-font-number:'Space Grotesk',Pretendard,sans-serif;
- --ds-type-display:40px;--ds-type-title:32px;--ds-type-section:24px;--ds-type-card:20px;--ds-type-body:16px;--ds-type-ui:14px;--ds-type-meta:12px;
+ --ds-space-1:var(--airisk-foundation-space-4px);--ds-space-2:var(--airisk-foundation-space-8px);--ds-space-3:var(--airisk-foundation-space-12px);--ds-space-4:var(--airisk-foundation-space-16px);--ds-space-6:var(--airisk-foundation-space-24px);--ds-space-8:var(--airisk-foundation-space-32px);--ds-space-12:var(--airisk-foundation-space-48px);
+ --ds-radius-control:var(--airisk-foundation-radius-6px);--ds-radius-panel:var(--airisk-foundation-radius-8px);--ds-radius-dialog:var(--airisk-foundation-radius-12px);--ds-radius-pill:var(--airisk-foundation-radius-999px);
+ --ds-font-body:"Upright Quotes", Pretendard, "Malgun Gothic", system-ui, sans-serif;--ds-font-title:"Upright Quotes", "Space Grotesk", SUITE, Pretendard, sans-serif;--ds-font-number:"Upright Quotes", "Space Grotesk", Pretendard, sans-serif;
+ --ds-type-display:var(--airisk-foundation-type-40px);--ds-type-title:var(--airisk-foundation-type-32px);--ds-type-section:var(--airisk-foundation-type-24px);--ds-type-card:var(--airisk-foundation-type-20px);--ds-type-body:var(--airisk-foundation-type-16px);--ds-type-ui:var(--airisk-foundation-type-14px);--ds-type-meta:var(--airisk-foundation-type-12px);
  --ds-line-body:1.7;--ds-line-heading:1.4;--ds-line-control:1.5;
  --ds-target:44px;--ds-action-height:48px;--ds-work-width:1120px;--ds-dialog-width:1240px;
  --ds-scrollbar-size:10px;--ds-scrollbar-track:var(--ds-input);--ds-scrollbar-thumb:var(--ds-border-control);--ds-scrollbar-hover:var(--ds-action);--ds-scrollbar-radius:var(--ds-radius-pill);
- --ds-shadow:0 24px 80px #0006;--ds-backdrop:#030b14c9;
+ --ds-shadow:0 24px 80px var(--airisk-foundation-color-00000066);--ds-backdrop:var(--airisk-foundation-color-030b14c9);
  /* Existing layout variables resolve to the shared foundations. */
  --font-body:var(--ds-font-body);--font-title:var(--ds-font-title);--font-number:var(--ds-font-number);
  --type-body:var(--ds-type-body);--type-ui:var(--ds-type-ui);--type-meta:var(--ds-type-meta);
@@ -90,8 +91,14 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
  #observatory #globe{height:34dvh;min-height:260px;max-height:340px}
  #observatory #selected-country{top:calc(34dvh - 60px);bottom:auto;max-width:calc(100% - 32px)}
  #risk-panel,#policy-panel{overflow-wrap:anywhere}
- #observatory .source-details > summary{min-height:44px;box-sizing:border-box;padding-block:10px;font-size:14px}
+ #observatory .source-details > summary{min-height:44px;box-sizing:border-box;padding-block:var(--airisk-foundation-space-10px);font-size:var(--airisk-foundation-type-14px)}
  .journey-dialog,.ds-dialog{max-height:calc(100dvh - 24px - env(safe-area-inset-bottom,0px));overscroll-behavior:contain}
- .journey-dialog-head{gap:12px}.journey-dialog-head .journey-close{flex-shrink:0}
- input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;max-width:100%}
+ .journey-dialog-head{gap:var(--airisk-foundation-space-12px)}.journey-dialog-head .journey-close{flex-shrink:0}
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:var(--airisk-foundation-type-16px)!important;max-width:100%}
 }
+
+/* Runtime measurements; visual treatments stay in component styles. */
+.month-bar{height:var(--month-height)}
+#risk-donut{background:conic-gradient(var(--ds-incident) 0 var(--incident-share,0%),var(--ds-hazard) var(--incident-share,0%) 100%)}
+#incident-bar,#hazard-bar{width:var(--risk-share)}
+.policy-status-bar span{width:var(--policy-share)}
