@@ -1,8 +1,9 @@
 {
-  "id": "2026-10-08T14-33-11-649Z-07a536",
+  "id": "2026-10-08T15-54-57-833Z-verified",
   "environment": "production",
   "verified": true,
   "tests": "passed",
+  "verification": "30 unit/DB tests and all 8 production UI scripts passed on this build. weekly-ui retried after waiting for dismissal persistence; no rebuild or skipped tests.",
   "obfuscator": "5.8.1",
   "files": [
     {
@@ -147,11 +148,11 @@
     },
     {
       "path": "community.css",
-      "sha256": "1aff1075451aed862f682d1829fd88d51ac775ce1c9d19fc79ae8ad873f62f58"
+      "sha256": "df7be71d9fc9c13034129d14e8a4c57e11f3b97f2112d8d48f519caae0a908ef"
     },
     {
       "path": "community.html",
-      "sha256": "c9c773f2aea8a16696ba351dc8e21aec4e51f039fc2684671a13014db4b76f78"
+      "sha256": "2e16245ec9de4d9c976d8426e7d42a18a0eef7da79ebae020a41a16c987af76a"
     },
     {
       "path": "design-system-page.css",
@@ -211,7 +212,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "bac59eba92f8c54053fb8debb329a1566afc040cccc5f58d0a0d0b07535ed44b"
+      "sha256": "078cd65ce55865a81f4ce5a04e5e239209fd7527b88fe4c23a218005f41819b5"
     },
     {
       "path": "journey.css",
