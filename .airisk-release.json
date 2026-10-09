@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T03-44-00-588Z-babc07",
+  "id": "2026-10-09T04-00-08-701Z-8b7df0",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -59,7 +59,7 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "10e5a24efa6daf7d785185e1d5fcc482e0b785f20d60ad6cf8995e2242f891ae"
+      "sha256": "a8c80e3a191af5d3db5652267d56f30f87bd0599b3015edf53673e44ade51507"
     },
     {
       "path": "admin/weekly.js",
@@ -79,7 +79,7 @@
     },
     {
       "path": "app.js",
-      "sha256": "dcb5b3aa2d3ea789cc228641a0616a93c4649b9d89eb741ef40aaef61648c5bf"
+      "sha256": "c32348577fae5a8f8f234b5e6dda767b0f189a955dd7d02baf148fb00ee1b212"
     },
     {
       "path": "assets/countries.geojson",
@@ -211,7 +211,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "078cd65ce55865a81f4ce5a04e5e239209fd7527b88fe4c23a218005f41819b5"
+      "sha256": "e05823db29ff55bacfebae264643723d8ee417e6ae2e114b263ebca1a912632a"
     },
     {
       "path": "journey.css",
@@ -1675,7 +1675,7 @@
     },
     {
       "path": "weekly-briefing.js",
-      "sha256": "9ef1980ccbeb65435d1b1ca6c2cb1e1364d2cf026fb797db3fe0ab068feedb57"
+      "sha256": "ff8f6686c5d33fc0d63adafaed6851f9eda838118cef065d05f6bbf226174fa9"
     },
     {
       "path": "weekly-model.js",
