@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T04-10-01-523Z-3f4ee6",
+  "id": "2026-10-09T05-59-29-447Z-15bdc8",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -151,7 +151,7 @@
     },
     {
       "path": "community.html",
-      "sha256": "2e16245ec9de4d9c976d8426e7d42a18a0eef7da79ebae020a41a16c987af76a"
+      "sha256": "e56f9e56f80e110c692388caa57900aee082b2d426087bd46807827b286d9253"
     },
     {
       "path": "design-system-page.css",
@@ -239,7 +239,7 @@
     },
     {
       "path": "participants.js",
-      "sha256": "c5832937d9a62d9b832569880f15d095947fd75b522405377932db6a5347ffbe"
+      "sha256": "cc0df86713cf0a018aa3a80422fdd4a88f58f5c71f5a1f2fc68c18bc7d75310e"
     },
     {
       "path": "policy.css",
