@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-08T16-28-48-148Z-42ce40",
+  "id": "2026-10-09T03-44-00-588Z-babc07",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -59,7 +59,7 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "9ec3af5ac236d2d04a5924eca840424ebdad6f5ae88c8f762a130c98f7d6d6a8"
+      "sha256": "10e5a24efa6daf7d785185e1d5fcc482e0b785f20d60ad6cf8995e2242f891ae"
     },
     {
       "path": "admin/weekly.js",
