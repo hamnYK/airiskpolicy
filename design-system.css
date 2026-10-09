@@ -102,3 +102,13 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
 #risk-donut{background:conic-gradient(var(--ds-incident) 0 var(--incident-share,0%),var(--ds-hazard) var(--incident-share,0%) 100%)}
 #incident-bar,#hazard-bar{width:var(--risk-share)}
 .policy-status-bar span{width:var(--policy-share)}
+
+/* Shared disclosures preserve native keyboard and expanded-state semantics. */
+summary{box-sizing:border-box;min-height:var(--ds-target);padding-block:var(--ds-space-2);font-size:var(--ds-type-ui);line-height:var(--ds-line-body);cursor:pointer;overflow-wrap:anywhere}
+summary::marker{content:'▶  ';color:var(--ds-action)}
+details[open]>summary::marker{content:'▼  '}
+/* Label/value rows: keep labels aligned and allow long evidence to wrap. */
+.ds-facts{display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr);gap:var(--ds-space-2) var(--ds-space-4);margin:var(--ds-space-4) 0;font-size:var(--ds-type-ui);line-height:var(--ds-line-body)}
+.ds-facts dt{font-weight:600;color:var(--ds-text-muted)}
+.ds-facts dd{margin:0;min-width:0;overflow-wrap:anywhere;color:var(--ds-text)}
+@media(max-width:540px){.ds-facts{grid-template-columns:minmax(0,1fr);row-gap:var(--ds-space-1)}.ds-facts dd+dt{margin-top:var(--ds-space-3)}}

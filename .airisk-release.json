@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T05-59-29-447Z-15bdc8",
+  "id": "2026-10-09T16-35-27-162Z-f62090",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -31,11 +31,11 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "87f333fe14cdb1d07e65bf648285344deac4cd8a7e6a9bb678e1866829ded6c1"
+      "sha256": "6e1146fa6075a021861c6fc7f824d3dd50c6a340c871a10ad86dc1c016e77127"
     },
     {
       "path": "admin/login.html",
-      "sha256": "0c21d465cb568d6edbbedb36ab57a8e85ba078c6ff3cbb069454b096b27813e3"
+      "sha256": "a7c4d3a4bb1a913ef8df4da04a814e616717d53b76f394f1848d7d2f4d50c564"
     },
     {
       "path": "admin/login.js",
@@ -59,7 +59,7 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "f7c44503cb6d592de53f35c9206ab400cbe63bad38329c945fb9f708f87fe12e"
+      "sha256": "b1bca1e8206141d7f1c776d44cfaf3726126a71bf09480d9b28a512c95f4e2c4"
     },
     {
       "path": "admin/weekly.js",
@@ -151,7 +151,7 @@
     },
     {
       "path": "community.html",
-      "sha256": "e56f9e56f80e110c692388caa57900aee082b2d426087bd46807827b286d9253"
+      "sha256": "3a8ed3ba684cc609f3a7920fa46bb168da5e7f247e8d879753876c74afca3a62"
     },
     {
       "path": "design-system-page.css",
@@ -163,11 +163,11 @@
     },
     {
       "path": "design-system.css",
-      "sha256": "30c3b8f70cc81eb0f9592263dc669472cac06f42ce6d8be56475d806168d1a34"
+      "sha256": "c1cd4a5f3a9e617513dd1bcdf5652fc6f30a639be83c27f0fe611b4cffd42c30"
     },
     {
       "path": "design-system.html",
-      "sha256": "1e45791326473674257bf353dc7028b4c413b81af57d483c2fcc77d911d83329"
+      "sha256": "5b55aa6a00736148d537ecb5c6fe94ac110c7dafae810ee3604df77e5fac35f7"
     },
     {
       "path": "explorer-layout.css",
@@ -211,7 +211,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "e05823db29ff55bacfebae264643723d8ee417e6ae2e114b263ebca1a912632a"
+      "sha256": "a4cb29955faa1cb8d168214ed694c1b88a6471fa9e2ec3585d3895df28d746fd"
     },
     {
       "path": "journey.css",
@@ -279,7 +279,7 @@
     },
     {
       "path": "typography.css",
-      "sha256": "75dfc57c74ca5e961ef2e3d3a39a933a47d61995c6b20bc37339df53dcd77d90"
+      "sha256": "3cce4a8bebd05fa5461a8921828cfedb4f86c875341ba60804f3642869a7cb3d"
     },
     {
       "path": "vendor/cesium/Assets/approximateTerrainHeights.json",
