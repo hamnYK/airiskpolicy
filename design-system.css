@@ -112,3 +112,13 @@ details[open]>summary::marker{content:'▼  '}
 .ds-facts dt{font-weight:600;color:var(--ds-text-muted)}
 .ds-facts dd{margin:0;min-width:0;overflow-wrap:anywhere;color:var(--ds-text)}
 @media(max-width:540px){.ds-facts{grid-template-columns:minmax(0,1fr);row-gap:var(--ds-space-1)}.ds-facts dd+dt{margin-top:var(--ds-space-3)}}
+
+/* Shared in-page confirmations and accessible field validation. */
+dialog.ds-confirm{width:560px;max-width:calc(100vw - var(--ds-space-8));max-height:calc(100dvh - var(--ds-space-8));padding:var(--ds-space-6);overflow:auto;overscroll-behavior:contain;font-family:var(--ds-font-body)}
+.ds-confirm h2{margin:0;font-size:var(--ds-type-section);line-height:var(--ds-line-heading)}
+.ds-confirm p{margin:var(--ds-space-4) 0 var(--ds-space-6);font-size:var(--ds-type-body);line-height:var(--ds-line-body);white-space:pre-line;overflow-wrap:anywhere}
+.ds-confirm-actions{display:flex;justify-content:flex-end;align-items:stretch;gap:var(--ds-space-3);flex-wrap:wrap}
+.ds-confirm-actions button{flex:1 1 0;min-width:0;min-height:var(--ds-action-height);margin:0}
+.ds-field-error{display:block;color:var(--ds-error);font-size:var(--ds-type-ui);line-height:var(--ds-line-body);overflow-wrap:anywhere}
+input[aria-invalid=true],select[aria-invalid=true],textarea[aria-invalid=true]{border-color:var(--ds-error)}
+@media(max-width:540px){dialog.ds-confirm{padding:var(--ds-space-4)}.ds-confirm h2{font-size:var(--ds-type-card)}}

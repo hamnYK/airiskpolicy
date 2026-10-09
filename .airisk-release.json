@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T18-14-46-123Z-a05c06",
+  "id": "2026-10-09T18-33-19-966Z-06471e",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -31,11 +31,11 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "ced672cf8e6957f12f18f18fe864ce852a63dd3391267cddccbc692d8e448e68"
+      "sha256": "20226e22e086d4ab4a21d8dacf2ffe77ef0c03a6ce6908f76483b8dd3299ba45"
     },
     {
       "path": "admin/login.html",
-      "sha256": "a7c4d3a4bb1a913ef8df4da04a814e616717d53b76f394f1848d7d2f4d50c564"
+      "sha256": "0cdfdb45dd7429a17d7113ca37548bbe8c984b3928ec9b727d370ba733ea5c67"
     },
     {
       "path": "admin/login.js",
@@ -43,11 +43,11 @@
     },
     {
       "path": "admin/participants.js",
-      "sha256": "5fe823829e35745cebcd77a482e61dd7d2b5b5f157313ad8705139aaee40aff6"
+      "sha256": "6b3c9addae85639394a23ff3353b058d42ce0e3664c4b74df3ffa89696d83a84"
     },
     {
       "path": "admin/reports.js",
-      "sha256": "a8009aea1dfa3a696907cc78fe4a434339f59b826b0396f63e44b0803593a604"
+      "sha256": "b835dea3153414d97bff57d5bb471f912d0674811f72105770bfd86ced30016c"
     },
     {
       "path": "admin/style.css",
@@ -63,7 +63,7 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "b1bca1e8206141d7f1c776d44cfaf3726126a71bf09480d9b28a512c95f4e2c4"
+      "sha256": "b9b1a1855b41db0017c9b975497bcefcd2d8569fef3e024446999f45fce09636"
     },
     {
       "path": "admin/weekly.js",
@@ -155,7 +155,7 @@
     },
     {
       "path": "community.html",
-      "sha256": "3a8ed3ba684cc609f3a7920fa46bb168da5e7f247e8d879753876c74afca3a62"
+      "sha256": "7720a7566eb11ab1b429e7778fef01b9ef131fb3ef2e28b6d57bc8afe73b117d"
     },
     {
       "path": "design-system-page.css",
@@ -167,11 +167,15 @@
     },
     {
       "path": "design-system.css",
-      "sha256": "c1cd4a5f3a9e617513dd1bcdf5652fc6f30a639be83c27f0fe611b4cffd42c30"
+      "sha256": "65d8efb1ddf2ee6ab99b2731b186d92b0d2f399bf251e32f87196e0660a8da3d"
     },
     {
       "path": "design-system.html",
-      "sha256": "a599cbf948fbc9ddecf69c3817a83358708760e298474b04549b427578a54b13"
+      "sha256": "9604dcb428d0b31fdcce570140e0b0cb54d08eadcd2961335272471f663df3b0"
+    },
+    {
+      "path": "design-system.js",
+      "sha256": "c5fee0c8ad4a1aa0e6c8c2eb3ede4d09e2ff4e8dd720517393bd0aa832922d9d"
     },
     {
       "path": "explorer-layout.css",
@@ -215,7 +219,7 @@
     },
     {
       "path": "gap-reports.js",
-      "sha256": "0809e459ce4a4f1e774d13b08ae2c2d9b5e6c59f627becc970d630a1b0d1c448"
+      "sha256": "aceb2419211608f2fb056a53ae1e4b77408aee2f3160a6da57bd23a631f0bc7b"
     },
     {
       "path": "i18n-en.json",
@@ -231,7 +235,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "5960bee30ef8209c439a7f175e2464292e3816b45784a7712044fcb3999d4d43"
+      "sha256": "e64448e647334db39c61165c66aecd41f0307cfdc544852ece0580458cd08562"
     },
     {
       "path": "journey.css",
@@ -283,7 +287,7 @@
     },
     {
       "path": "report.html",
-      "sha256": "793e3bb785e242dcaee5acc33eac7c63987cb565005dd9d25c0586629358b363"
+      "sha256": "dcd8b2d958605ba44cdfc2af3bf90c76c38f87c1ebe1eebac139fd7381e30324"
     },
     {
       "path": "reports.css",
