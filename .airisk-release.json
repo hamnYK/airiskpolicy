@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T17-01-44-706Z-df0768",
+  "id": "2026-10-09T18-04-05-605Z-3c04d4",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -31,7 +31,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "6e1146fa6075a021861c6fc7f824d3dd50c6a340c871a10ad86dc1c016e77127"
+      "sha256": "ced672cf8e6957f12f18f18fe864ce852a63dd3391267cddccbc692d8e448e68"
     },
     {
       "path": "admin/login.html",
@@ -44,6 +44,10 @@
     {
       "path": "admin/participants.js",
       "sha256": "5fe823829e35745cebcd77a482e61dd7d2b5b5f157313ad8705139aaee40aff6"
+    },
+    {
+      "path": "admin/reports.js",
+      "sha256": "a8009aea1dfa3a696907cc78fe4a434339f59b826b0396f63e44b0803593a604"
     },
     {
       "path": "admin/style.css",
@@ -67,7 +71,7 @@
     },
     {
       "path": "admin/workspace-tabs.js",
-      "sha256": "6e673fb025e464db402e6cd3e5be1fb17371793802934adcd45a431cc2d40c5c"
+      "sha256": "c898543c533c072252e9f4dc758d721f39601f81d89822ac512e57cf389c9c84"
     },
     {
       "path": "aim-explorer.js",
@@ -191,7 +195,7 @@
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "7074ed4c2dfc05ce125520b92942f40892b199478165125bbd3216d85e02bf4a"
+      "sha256": "b2d2a5108fe713eb4eeee5f3af975e85d8447d5220feef535639a648258f8371"
     },
     {
       "path": "gap-audience-data.js",
@@ -210,6 +214,10 @@
       "sha256": "27c63c56bf07100ac94a567f6655120badd15728b301c6a3a56936ba830c6c63"
     },
     {
+      "path": "gap-reports.js",
+      "sha256": "3e051984369cf98ba204d9c2ee46f8dd79f12ef7094c670712824fc972027681"
+    },
+    {
       "path": "i18n-en.json",
       "sha256": "d70ef841b0401665455feff08a65a1a920f6b74d55c275906dcb372499b81144"
     },
@@ -223,7 +231,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "4ab88b594aef9bec3590d508ab4fc01e875765843f08f0361fa7f14684e5edf0"
+      "sha256": "b29acdac1d5d8457f951986c210b6f2cbb1b7968f902d7a3c7b5274885fdf035"
     },
     {
       "path": "journey.css",
@@ -260,6 +268,26 @@
     {
       "path": "policy.js",
       "sha256": "f8a6ea1897a2489bc4c78978a3e236ef206779c63c041e8fe73ffce5da3cd34a"
+    },
+    {
+      "path": "report-model.js",
+      "sha256": "1f54b43b8bcd4a5ac90dafbfe0b8749c6ae662f2c19d3d0b6a47fdc305d8b606"
+    },
+    {
+      "path": "report-reader.js",
+      "sha256": "210d5498073aadffba27b8c4f1a7d56815bd3f4cb479d529d3608f0209be7ef3"
+    },
+    {
+      "path": "report-view.js",
+      "sha256": "69a9a93245c254fb02f210999e123528ae7caf3fae28181018ec3bc93b59eceb"
+    },
+    {
+      "path": "report.html",
+      "sha256": "793e3bb785e242dcaee5acc33eac7c63987cb565005dd9d25c0586629358b363"
+    },
+    {
+      "path": "reports.css",
+      "sha256": "06ff964bf5df20723f9105984ab4430b9981e63f788bd4946be917277c9e6aa8"
     },
     {
       "path": "response-journey.css",
