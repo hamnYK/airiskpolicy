@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-09T16-35-27-162Z-f62090",
+  "id": "2026-10-09T17-01-44-706Z-df0768",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -167,7 +167,7 @@
     },
     {
       "path": "design-system.html",
-      "sha256": "5b55aa6a00736148d537ecb5c6fe94ac110c7dafae810ee3604df77e5fac35f7"
+      "sha256": "a599cbf948fbc9ddecf69c3817a83358708760e298474b04549b427578a54b13"
     },
     {
       "path": "explorer-layout.css",
@@ -187,11 +187,23 @@
     },
     {
       "path": "gap-analyzer.css",
-      "sha256": "3efff05b3f2a80040f491d88a3a346b2efe59deb32ce4484bc0c361681406c88"
+      "sha256": "c5c429432dcb7a08fe32c4dfcbc1b1d238d29c6a2ba3b652ca5fefbc6fe70c44"
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "f350a1d4b11bcbe6c69dbeda03ce3fc5a02ab76c4cbbf2bde1c421e1c8985547"
+      "sha256": "7074ed4c2dfc05ce125520b92942f40892b199478165125bbd3216d85e02bf4a"
+    },
+    {
+      "path": "gap-audience-data.js",
+      "sha256": "ede830a0fef125042ce1a025c9b7e614924d35d1a50efc768254dac808f3158c"
+    },
+    {
+      "path": "gap-audience-en.js",
+      "sha256": "f5d337f976ab1f775cfd0e9f09ecf22905a020f63c6dd2aa169a6eb3521b7ba4"
+    },
+    {
+      "path": "gap-audience.js",
+      "sha256": "ca1f5a13e58c93f6e4e9c637e2eacc0f25252e940377cef599c624316ce6cfe4"
     },
     {
       "path": "gap-engine.js",
@@ -211,7 +223,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "a4cb29955faa1cb8d168214ed694c1b88a6471fa9e2ec3585d3895df28d746fd"
+      "sha256": "4ab88b594aef9bec3590d508ab4fc01e875765843f08f0361fa7f14684e5edf0"
     },
     {
       "path": "journey.css",
