@@ -9,7 +9,7 @@
 .report-request-form,.report-editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-4)}
 .report-request-form>p,.report-request-form>.report-actions,.report-request-form>a,.report-editor-fields>.report-wide{grid-column:1/-1}
 .report-request-form textarea{resize:vertical;min-height:var(--work-textarea-height)}
-.report-reader{max-width:var(--ds-work-width);margin:auto;padding:var(--ds-space-6);box-sizing:border-box}
+.report-reader{--report-reading-width:76ch;max-width:var(--report-reading-width);margin:auto;padding:var(--ds-space-6);box-sizing:border-box}
 .report-reader *,#report-detail *{box-sizing:border-box;min-width:0}
 .report-body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:var(--ds-line-body)}
 .report-sources{padding-inline-start:var(--ds-space-6)}.report-sources a,.report-summary,.report-reader h1{overflow-wrap:anywhere}
@@ -94,3 +94,15 @@
 @media(max-width:600px){.report-source-picker{padding:var(--ds-space-2)}.report-source-picker header>p{display:none}.report-source-picker header .report-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.report-source-picker header button{padding:var(--ds-space-2)}.report-picker-card{grid-template-columns:minmax(0,1fr)}.report-picker-card>button{justify-self:end}.report-source-picker footer>.report-actions:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 body.report-picker-open{overflow:hidden}
+
+/* Keep the finding and action in the reading flow; original evidence stays inspectable. */
+.report-evidence{border-block:1px solid var(--ds-border);margin:0 0 var(--ds-space-6);padding-block:var(--ds-space-2)}
+.report-evidence>summary,.report-source-locations>summary{cursor:pointer;min-height:var(--ds-target);align-content:center;color:var(--ds-link);font-size:var(--ds-type-ui);line-height:var(--ds-line-body)}
+.report-evidence>p{margin-block:var(--ds-space-3);font-size:var(--ds-type-ui)}
+.report-evidence blockquote{margin-block:var(--ds-space-3)}
+.report-prose .report-finding-status{font-size:var(--ds-type-ui);color:var(--ds-text-muted);margin-bottom:var(--ds-space-3)}
+.report-next-action{padding-inline-start:var(--ds-space-3);border-inline-start:3px solid var(--ds-border-control)}
+.report-source-locations p{overflow-wrap:anywhere;margin-block:var(--ds-space-2);font-size:var(--ds-type-ui);line-height:var(--ds-line-body)}
+.report-sources>li+li{margin-top:var(--ds-space-4)}
+.report-citation{white-space:nowrap}
+@media print{.report-evidence::details-content,.report-source-locations::details-content{display:block;content-visibility:visible}.report-evidence>summary,.report-source-locations>summary,.report-prose .report-finding-status,.report-source-locations p{color:CanvasText}.report-evidence>summary{break-after:avoid}.report-evidence blockquote{break-inside:avoid}}
