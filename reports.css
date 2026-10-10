@@ -106,3 +106,7 @@ body.report-picker-open{overflow:hidden}
 .report-sources>li+li{margin-top:var(--ds-space-4)}
 .report-citation{white-space:nowrap}
 @media print{.report-evidence::details-content,.report-source-locations::details-content{display:block;content-visibility:visible}.report-evidence>summary,.report-source-locations>summary,.report-prose .report-finding-status,.report-source-locations p{color:CanvasText}.report-evidence>summary{break-after:avoid}.report-evidence blockquote{break-inside:avoid}}
+
+.report-analysis-appendix{margin-block:var(--ds-space-6);border-top:1px solid var(--ds-border);padding-top:var(--ds-space-3)}
+.report-analysis-appendix>summary{cursor:pointer;min-height:var(--ds-target);align-content:center}.report-analysis-appendix>summary>h3,.report-analysis-appendix>summary>h4{display:inline;margin:0}
+@media print{.report-analysis-appendix::details-content{display:block;content-visibility:visible}}
