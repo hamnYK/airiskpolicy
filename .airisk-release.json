@@ -1,18 +1,16 @@
 {
-  "id": "2026-10-10T07-52-39-318Z-a93b46",
+  "id": "2026-10-10T08-08-51-020Z-6eac33",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-national-sources-report-ui-periods-and-design-tokens-passed",
+  "tests": "scoped-evidence-picker-periods-and-design-tokens-passed",
   "verification": {
-    "baseRelease": "2026-10-10T07-21-57-258Z-db8867",
+    "baseRelease": "2026-10-10T07-52-39-318Z-a93b46",
     "changedFiles": [
       "admin/index.html",
       "admin/report-ai.js",
-      "admin/reports.js",
       "index.html",
       "report.html",
-      "reports.css",
-      "report-countries.js"
+      "reports.css"
     ],
     "fullSuiteRerun": false
   },
@@ -44,7 +42,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "47ed746cf23f9c8e13000c0a9b704e6e3036111196175ca4625a11c336916f4d"
+      "sha256": "8e709ba4c30e2dcb95334bb4cf9c618f12ac098cb960bf93f1186b3ad1dd1462"
     },
     {
       "path": "admin/login.html",
@@ -60,7 +58,7 @@
     },
     {
       "path": "admin/report-ai.js",
-      "sha256": "30b28a134eebe56c883a3a9fd4b73f534277536927bd02228e1b0e983ad527b5"
+      "sha256": "6c0171211589eb6d02761815deb8ab7cd22a2c8fc01b87bf1f4f9c7f0f63c862"
     },
     {
       "path": "admin/reports.js",
@@ -252,7 +250,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "5be2ed4715b0d21f071f86c5e64f02c74e1d459558cb61eb5fca74cbd841c7be"
+      "sha256": "af516dd30d416bbd2778970d2e5a9cea3243045895add094a5269c1ea8e30fc3"
     },
     {
       "path": "journey.css",
@@ -304,11 +302,11 @@
     },
     {
       "path": "report.html",
-      "sha256": "0539887ebdf293a821109e3c42efefc0600bdc5475c7da43ac063cfa8e225d2c"
+      "sha256": "ee1d6e8c0106afec15498a88fbd0e6b311e71e5162fe203be5c51f4751119d17"
     },
     {
       "path": "reports.css",
-      "sha256": "36eccce22c2fd2886b978eda530cecdf8a7698d740e9ee3b2939915cde5499d4"
+      "sha256": "63c8ba7ada2d35eae69a287edaf9266921d7525ae6f6a1f50f815ffb393243d8"
     },
     {
       "path": "response-journey.css",

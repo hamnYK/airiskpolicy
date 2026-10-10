@@ -78,3 +78,19 @@
 .report-ai-candidates:has(.report-source-group){max-height:none;overflow:visible}
 .report-source-list{display:grid;gap:var(--ds-space-2)}
 .report-source-group h4{margin-block:var(--ds-space-3)}
+
+.report-source-picker{width:var(--ds-work-width);max-width:calc(100vw - var(--ds-space-6));height:calc(100dvh - var(--ds-space-6));max-height:calc(100dvh - var(--ds-space-6));padding:var(--ds-space-4);box-sizing:border-box;background:var(--ds-surface);color:var(--ds-text)}
+.report-source-picker[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:var(--ds-space-3);overflow:hidden}
+.report-source-picker header h3,.report-source-picker header p{margin:0 0 var(--ds-space-2)}
+.report-source-picker header input{width:100%;box-sizing:border-box}
+.report-source-picker .report-actions{margin-block:var(--ds-space-2);gap:var(--ds-space-2)}
+.report-picker-list{min-height:0;overflow:auto;overscroll-behavior:contain}
+.report-picker-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--ds-space-3);padding:var(--ds-space-3);border-bottom:1px solid var(--ds-border);align-items:start;overflow-wrap:anywhere}
+.report-picker-card p{margin-block:var(--ds-space-2)}
+.report-picker-card summary{min-height:var(--ds-target);cursor:pointer}
+.report-source-picker footer{border-top:1px solid var(--ds-border);padding-top:var(--ds-space-2)}
+.report-source-picker .ds-status:empty{display:none}
+.report-source-picker button[aria-pressed=true]{background:var(--ds-action);color:var(--ds-on-action)}
+@media(max-width:600px){.report-source-picker{padding:var(--ds-space-2)}.report-source-picker header>p{display:none}.report-source-picker header .report-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.report-source-picker header button{padding:var(--ds-space-2)}.report-picker-card{grid-template-columns:minmax(0,1fr)}.report-picker-card>button{justify-self:end}.report-source-picker footer>.report-actions:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+body.report-picker-open{overflow:hidden}
