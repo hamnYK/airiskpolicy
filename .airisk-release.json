@@ -1,19 +1,16 @@
 {
-  "id": "2026-10-10T09-37-29-740Z-551f2c",
+  "id": "2026-10-10T09-48-54-150Z-811b97",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-new-and-legacy-recommendation-headings-ko-en-reader-preview-offline-print-passed",
-  "verification": {
-    "baseRelease": "2026-10-10T09-16-19-911Z-fdac7c",
-    "changedFiles": [
-      "admin/index.html",
-      "index.html",
-      "report-view.js",
-      "report.html"
-    ],
-    "fullSuiteRerun": false
-  },
+  "tests": "targeted country UI and ontology transport passed; unchanged assets inherited from verified base",
   "obfuscator": "5.8.1",
+  "verification": {
+    "base": "2026-10-10T09-37-29-740Z-551f2c",
+    "changedFiles": [
+      "gap-reports.js",
+      "index.html"
+    ]
+  },
   "files": [
     {
       "path": ".nojekyll",
@@ -233,7 +230,7 @@
     },
     {
       "path": "gap-reports.js",
-      "sha256": "345a8f3648aafb685a1bb4afbe7583fa4b34b84caeb7af0976754f79088a918b"
+      "sha256": "b244ed715acac384e38798d30ba1afdb20d81803dc7f78d7f609ef2a362116a3"
     },
     {
       "path": "i18n-en.json",
@@ -249,7 +246,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "e1cbdbad96a8228c0bd7aa96afe248be90855fb0634990787a25ae2825a156aa"
+      "sha256": "44a28fb93338b225f2adec2c6ddfa623bd5306946441c153bd380b0007eb3ecb"
     },
     {
       "path": "journey.css",
@@ -286,6 +283,10 @@
     {
       "path": "policy.js",
       "sha256": "f8a6ea1897a2489bc4c78978a3e236ef206779c63c041e8fe73ffce5da3cd34a"
+    },
+    {
+      "path": "report-countries.js",
+      "sha256": "1fb9ab42c488b82c4e95bb05f921155f7d7e801a860667ff59471da45a79a713"
     },
     {
       "path": "report-model.js",
@@ -1750,10 +1751,6 @@
     {
       "path": "workspace-layout.css",
       "sha256": "d9eb5a8922f57e48e1f18729658bfc417d851e5dc1cf6b572ea4c45d036388f4"
-    },
-    {
-      "path": "report-countries.js",
-      "sha256": "1fb9ab42c488b82c4e95bb05f921155f7d7e801a860667ff59471da45a79a713"
     }
   ]
 }
