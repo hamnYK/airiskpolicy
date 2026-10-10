@@ -1,13 +1,12 @@
 {
-  "id": "2026-10-10T08-33-28-124Z-fa0bdd",
+  "id": "2026-10-10T08-38-07-221Z-188047",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-persistent-workspace-journeys-and-atomic-storage-passed",
+  "tests": "scoped-persistent-workspace-including-reload-discard-passed",
   "verification": {
-    "baseRelease": "2026-10-10T08-18-44-045Z-4b2343",
+    "baseRelease": "2026-10-10T08-33-28-124Z-fa0bdd",
     "changedFiles": [
       "admin/index.html",
-      "admin/report-ai.js",
       "admin/reports.js"
     ],
     "fullSuiteRerun": false
@@ -40,7 +39,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "d0f6eb462cb29faa75864366fdc910e84d6d4a0cb72021e219a935c308b22a48"
+      "sha256": "59da9e997b128b62290c113fecf86f15762b60a2c05fc582700a953616b5aae1"
     },
     {
       "path": "admin/login.html",
@@ -60,7 +59,7 @@
     },
     {
       "path": "admin/reports.js",
-      "sha256": "d32cb9a4e729de818c21414ed6d498d15fbcdb49cb7864b51baa09fdd8589d4d"
+      "sha256": "22905e5b551734ad07b6764a9a8f9ef5f076ac7b38b9fc28e9e05a298ac422d3"
     },
     {
       "path": "admin/style.css",
