@@ -1,16 +1,15 @@
 {
-  "id": "2026-10-10T08-08-51-020Z-6eac33",
+  "id": "2026-10-10T08-18-44-045Z-4b2343",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-evidence-picker-periods-and-design-tokens-passed",
+  "tests": "scoped-new-report-journeys-picker-and-server-scope-passed",
   "verification": {
-    "baseRelease": "2026-10-10T07-52-39-318Z-a93b46",
+    "baseRelease": "2026-10-10T08-08-51-020Z-6eac33",
     "changedFiles": [
       "admin/index.html",
       "admin/report-ai.js",
-      "index.html",
-      "report.html",
-      "reports.css"
+      "admin/reports.js",
+      "index.html"
     ],
     "fullSuiteRerun": false
   },
@@ -42,7 +41,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "8e709ba4c30e2dcb95334bb4cf9c618f12ac098cb960bf93f1186b3ad1dd1462"
+      "sha256": "b105f514036982bfbf3bc050ae33cd654753bd438f1d5de1b2d2bca801656b5c"
     },
     {
       "path": "admin/login.html",
@@ -58,11 +57,11 @@
     },
     {
       "path": "admin/report-ai.js",
-      "sha256": "6c0171211589eb6d02761815deb8ab7cd22a2c8fc01b87bf1f4f9c7f0f63c862"
+      "sha256": "a4e2455a48433efe373b8e266fba74e4daf9db861a5d9bca2d460513539cd617"
     },
     {
       "path": "admin/reports.js",
-      "sha256": "f7785c701d4cacf9cb9ffa52eafd88040809abd17af189f613f87f18a6e9fc3c"
+      "sha256": "16771d26f8e7135391a8446e6c02fd7b8ab8d0a4a7a780b836dc0c66d7b0b04b"
     },
     {
       "path": "admin/style.css",
@@ -250,7 +249,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "af516dd30d416bbd2778970d2e5a9cea3243045895add094a5269c1ea8e30fc3"
+      "sha256": "7b2072cf80552d496bac801d83a37b0c8cc7766bba48832f06839ad21ffabb5e"
     },
     {
       "path": "journey.css",
