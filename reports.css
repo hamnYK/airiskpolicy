@@ -61,3 +61,8 @@
 .report-request-form>.report-request-preview{grid-column:1/-1}.report-request-preview textarea{min-height:var(--work-textarea-height);white-space:pre-wrap}
 
 @media(max-width:760px){.report-request-steps{grid-template-columns:minmax(0,1fr)}}
+
+/* AI drafting reuses shared report fields, actions and reader tokens. */
+.report-ai{margin-block:var(--ds-space-6);padding:var(--ds-space-4);border:1px solid var(--ds-border);border-radius:var(--ds-radius-panel);background:var(--ds-surface)}
+.report-ai>h3{margin-top:0}.report-ai-source{border:1px solid var(--ds-border);border-radius:var(--ds-radius-panel);padding:var(--ds-space-3);margin-block:var(--ds-space-3)}.report-ai-source>summary{min-height:var(--ds-target);cursor:pointer;overflow-wrap:anywhere}.report-ai-candidates{display:grid;gap:var(--ds-space-2);max-height:var(--work-textarea-height);overflow:auto}.report-ai-candidates button{text-align:start;white-space:normal;overflow-wrap:anywhere}.report-ai .ds-status{white-space:pre-wrap}.report-ai-source .report-editor-fields{margin-block:var(--ds-space-3)}
+#report-ai-preview{width:var(--ds-work-width);max-width:calc(100vw - var(--ds-space-8));padding:var(--ds-space-4)}
