@@ -1,8 +1,18 @@
 {
-  "id": "2026-10-09T18-33-19-966Z-06471e",
+  "id": "2026-10-10T04-16-46-252Z-e082c6",
   "environment": "production",
   "verified": true,
-  "tests": "passed",
+  "tests": "scoped-report-verification-passed",
+  "verification": {
+    "priorNodeTests": 98,
+    "priorNodeTestsReused": true,
+    "reportsUI": "passed on obfuscated production build",
+    "obfuscatedScripts": 35,
+    "syntax": "passed",
+    "assetHashes": "passed",
+    "vendorAndLicenses": "unchanged",
+    "fullReleaseSuiteRerun": false
+  },
   "obfuscator": "5.8.1",
   "files": [
     {
@@ -31,7 +41,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "20226e22e086d4ab4a21d8dacf2ffe77ef0c03a6ce6908f76483b8dd3299ba45"
+      "sha256": "846be269cceae5bd4d13abee23435154957c46db72880f0e89f2803a073bf7d0"
     },
     {
       "path": "admin/login.html",
@@ -47,7 +57,7 @@
     },
     {
       "path": "admin/reports.js",
-      "sha256": "b835dea3153414d97bff57d5bb471f912d0674811f72105770bfd86ced30016c"
+      "sha256": "3a6b0279b836d55d89f2d451f7ee657e6c7526b11248aaa3573a42ec06c4b206"
     },
     {
       "path": "admin/style.css",
@@ -235,7 +245,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "e64448e647334db39c61165c66aecd41f0307cfdc544852ece0580458cd08562"
+      "sha256": "ddbdeeb8c57e00d65bbc45122de576569482495bc1d5cbdd45a0c099f50043b5"
     },
     {
       "path": "journey.css",
@@ -275,7 +285,7 @@
     },
     {
       "path": "report-model.js",
-      "sha256": "1f54b43b8bcd4a5ac90dafbfe0b8749c6ae662f2c19d3d0b6a47fdc305d8b606"
+      "sha256": "e44de0aef05ecbfdbd893c31a80bff553fa3e7db2292230465c9396a7b65ea12"
     },
     {
       "path": "report-reader.js",
@@ -283,15 +293,15 @@
     },
     {
       "path": "report-view.js",
-      "sha256": "69a9a93245c254fb02f210999e123528ae7caf3fae28181018ec3bc93b59eceb"
+      "sha256": "bf5504f7180e1dd8354cb358c31bfb8eaf9b9da2e70e748716561b86412551c6"
     },
     {
       "path": "report.html",
-      "sha256": "dcd8b2d958605ba44cdfc2af3bf90c76c38f87c1ebe1eebac139fd7381e30324"
+      "sha256": "bdeb42b5e48b16e9365a5158da254b02e3d4f57e43a164af9129bb63672cd765"
     },
     {
       "path": "reports.css",
-      "sha256": "06ff964bf5df20723f9105984ab4430b9981e63f788bd4946be917277c9e6aa8"
+      "sha256": "db7af1cbb303df783fba9374ef72da5e21a1b7bc093b2dd5d9ae8b0228baac1a"
     },
     {
       "path": "response-journey.css",
