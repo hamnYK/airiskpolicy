@@ -1,15 +1,16 @@
 {
-  "id": "2026-10-10T06-54-48-264Z-d1dc49",
+  "id": "2026-10-10T07-01-46-882Z-1fc964",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-weekly-report-period-ui-year-boundary-custom-edit-save-source-query-mobile-passed",
+  "tests": "scoped-report-ui-design-tokens-mobile-alignment-reader-print-passed",
   "verification": {
-    "baseRelease": "2026-10-10T06-43-31-057Z-4658bf",
+    "baseRelease": "2026-10-10T06-54-48-264Z-d1dc49",
     "changedFiles": [
       "admin/index.html",
-      "admin/reports.js",
-      "admin/weekly.html",
-      "admin/weekly.js"
+      "admin/report-ai.js",
+      "index.html",
+      "report.html",
+      "reports.css"
     ],
     "fullSuiteRerun": false
   },
@@ -41,7 +42,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "d2d8bf835a767980369acd0a37a883a0570ae6900a56ae5104bca9d3dfbdf39c"
+      "sha256": "3fdf22fa415e85c880f3c3d98003a62c92572893ad430d7a4f348c9fe43508e0"
     },
     {
       "path": "admin/login.html",
@@ -57,7 +58,7 @@
     },
     {
       "path": "admin/report-ai.js",
-      "sha256": "51962cc807f1e3f66c8919b7a661c6a04c2613f53b878fa695bdde8a630056b4"
+      "sha256": "654d7302dcd2d9653a1c256f2544403d4c2213a70c650bcd23e05c358278942e"
     },
     {
       "path": "admin/reports.js",
@@ -249,7 +250,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "4a7e7371f3d8d054aad695b1df0d80684dc47bbbd1ba55616dcadeb6bcf9813d"
+      "sha256": "30c5c9fff5a23d9c815adebebc750aeb397ed32415b400d5c768e788c0b9c901"
     },
     {
       "path": "journey.css",
@@ -301,11 +302,11 @@
     },
     {
       "path": "report.html",
-      "sha256": "db2abb0373bb64311417262d35677d888efce73404641e6b06a130dd775fbf81"
+      "sha256": "cb8100d6fb853c795bf4982329bede8652332e6dc88e51212cd12e092db647a6"
     },
     {
       "path": "reports.css",
-      "sha256": "5904c62b703e88920e154e3ae8fff4b89d84cef4c1589c4084e6b2e34478cfd1"
+      "sha256": "27340879b243d0e54cefd5ffb612a1dded1746e3a9c5f510fea98de34012567b"
     },
     {
       "path": "response-journey.css",

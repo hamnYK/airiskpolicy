@@ -20,7 +20,7 @@
 #report-admin-list:empty{display:none}
 #report-detail{min-width:0}#report-detail textarea[name=body]{min-height:360px}
 .report-check{display:flex;align-items:center;gap:var(--ds-space-3);min-height:var(--ds-target);margin-block:var(--ds-space-4)}
-.report-check input{width:var(--ds-space-6);height:var(--ds-space-6);min-height:var(--ds-space-6)}
+.report-check input{width:var(--ds-space-6);height:var(--ds-space-6);min-height:var(--ds-space-6);flex-shrink:0}
 #report-preview{width:var(--ds-work-width);padding:var(--ds-space-4);max-width:calc(100vw - var(--ds-space-8))}
 @media(max-width:760px){.report-list,.report-request-form,.report-editor-fields,.report-editor-layout{grid-template-columns:minmax(0,1fr)}.report-reader{padding:var(--ds-space-4)}#report-admin-list{max-height:240px}}
 @media print{.report-reader>nav,#report-status,.report-version{display:none!important}.report-reader{max-width:none;padding:0}.report-reader article{color:CanvasText;background:Canvas}.report-reader .ds-facts,.report-reader .ds-muted,.report-reader a{color:CanvasText;background:Canvas}.report-reader a{padding:0;min-height:0}.report-reader h2{break-after:avoid}.report-reader .ds-facts{break-inside:avoid}}
@@ -68,3 +68,4 @@
 .report-ai{margin-block:var(--ds-space-6);padding:var(--ds-space-4);border:1px solid var(--ds-border);border-radius:var(--ds-radius-panel);background:var(--ds-surface)}
 .report-ai>h3{margin-top:0}.report-ai-source{border:1px solid var(--ds-border);border-radius:var(--ds-radius-panel);padding:var(--ds-space-3);margin-block:var(--ds-space-3)}.report-ai-source>summary{min-height:var(--ds-target);cursor:pointer;overflow-wrap:anywhere}.report-ai-candidates{display:grid;gap:var(--ds-space-2);max-height:var(--work-textarea-height);overflow:auto}.report-ai-candidates button{text-align:start;white-space:normal;overflow-wrap:anywhere}.report-ai .ds-status{white-space:pre-wrap}.report-ai-source .report-editor-fields{margin-block:var(--ds-space-3)}
 #report-ai-preview{width:var(--ds-work-width);max-width:calc(100vw - var(--ds-space-8));padding:var(--ds-space-4)}
+.report-ai .ds-status:empty{padding:0;margin:0;border:0;min-height:0}
