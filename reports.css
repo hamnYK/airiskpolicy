@@ -16,6 +16,8 @@
 .report-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:var(--ds-space-6);margin-block:var(--ds-space-6)}
 #report-admin-list{display:grid;align-content:start;gap:var(--ds-space-2);max-height:640px;overflow:auto}
 #report-admin-list button{text-align:start;overflow-wrap:anywhere}
+.report-editor-layout:has(>#report-admin-list:empty){grid-template-columns:minmax(0,1fr)}
+#report-admin-list:empty{display:none}
 #report-detail{min-width:0}#report-detail textarea[name=body]{min-height:360px}
 .report-check{display:flex;align-items:center;gap:var(--ds-space-3);min-height:var(--ds-target);margin-block:var(--ds-space-4)}
 .report-check input{width:var(--ds-space-6);height:var(--ds-space-6);min-height:var(--ds-space-6)}

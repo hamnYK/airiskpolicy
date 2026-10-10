@@ -1,18 +1,18 @@
 {
-  "id": "2026-10-10T06-34-09-734Z-f0f889",
+  "id": "2026-10-10T06-43-31-057Z-4658bf",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-report-ai-sql-provider-admin-reader-mobile-passed",
+  "tests": "scoped-empty-saved-list-layout-1280-820-390-320-design-tokens-passed",
   "verification": {
-    "baseRelease": "2026-10-10T06-03-53-883Z-b636a5",
+    "baseRelease": "2026-10-10T06-34-09-734Z-f0f889",
     "changedFiles": [
       "admin/index.html",
-      "admin/ai-settings.js",
-      "admin/reports.js",
-      "admin/report-ai.js",
+      "index.html",
+      "report.html",
       "reports.css"
     ],
-    "fullSuiteRerun": false
+    "fullSuiteRerun": false,
+    "obfuscatedScripts": "byte-identical to verified base"
   },
   "obfuscator": "5.8.1",
   "files": [
@@ -42,7 +42,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "33b787576609eeff9b94b0b0c9fb2b1c43e84fb0025b37625122cb3537a37959"
+      "sha256": "88c5a12ac6a7c3e7d602f3914ed1c139cb7e7ecea49921aa6207c2546b271c9c"
     },
     {
       "path": "admin/login.html",
@@ -250,7 +250,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "818cf29a23b98ac16f5e848f8a6a76868d4f7e02b9ca276dd9ba16b238dbb13b"
+      "sha256": "4a7e7371f3d8d054aad695b1df0d80684dc47bbbd1ba55616dcadeb6bcf9813d"
     },
     {
       "path": "journey.css",
@@ -302,11 +302,11 @@
     },
     {
       "path": "report.html",
-      "sha256": "626e8420fd8c91d99ee24eca50743083550577b4745e490b7c6952abb91932a3"
+      "sha256": "db2abb0373bb64311417262d35677d888efce73404641e6b06a130dd775fbf81"
     },
     {
       "path": "reports.css",
-      "sha256": "cd860eeb89697880b549c625e0a25153606851c6431f421567d8dfd77f6b2e04"
+      "sha256": "5904c62b703e88920e154e3ae8fff4b89d84cef4c1589c4084e6b2e34478cfd1"
     },
     {
       "path": "response-journey.css",
