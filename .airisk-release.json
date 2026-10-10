@@ -1,16 +1,18 @@
 {
-  "id": "2026-10-10T09-48-54-150Z-811b97",
+  "id": "2026-10-10T10-03-30-107Z-a0ae70",
   "environment": "production",
   "verified": true,
-  "tests": "targeted country UI and ontology transport passed; unchanged assets inherited from verified base",
-  "obfuscator": "5.8.1",
+  "tests": "Admin UI including navigation/session reuse, permission denial and logout passed; unchanged assets inherited",
   "verification": {
-    "base": "2026-10-10T09-37-29-740Z-551f2c",
+    "base": "2026-10-10T09-48-54-150Z-811b97",
     "changedFiles": [
-      "gap-reports.js",
+      "admin/login.html",
+      "admin/login.js",
+      "gap-analyzer.js",
       "index.html"
     ]
   },
+  "obfuscator": "5.8.1",
   "files": [
     {
       "path": ".nojekyll",
@@ -42,11 +44,11 @@
     },
     {
       "path": "admin/login.html",
-      "sha256": "0cdfdb45dd7429a17d7113ca37548bbe8c984b3928ec9b727d370ba733ea5c67"
+      "sha256": "266ab35d9246a9e90b5924615878f617b94c866acd6be178399193c2708057e7"
     },
     {
       "path": "admin/login.js",
-      "sha256": "2fa8778c4570e192cdf8c70d6328f03baeb44cae682f772e4a4d94f4e6370a24"
+      "sha256": "7ff712f381d7ddba3d790e1baac7452354604f0ddfde0a08741753a3f05dc717"
     },
     {
       "path": "admin/participants.js",
@@ -210,7 +212,7 @@
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "5efa09758dd5d1ba8c6ed9cd93e8d405aa78bd8d69d3be511d3a4b382d8df926"
+      "sha256": "014c172cd8cca7ad7ccc43fb4689c6ff535ab436dc48e2436c704bad181983c4"
     },
     {
       "path": "gap-audience-data.js",
@@ -246,7 +248,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "44a28fb93338b225f2adec2c6ddfa623bd5306946441c153bd380b0007eb3ecb"
+      "sha256": "a3e55f0c0cd71d29da5f588d8b00fa63f16a3b7368365c054c1b554110787782"
     },
     {
       "path": "journey.css",
