@@ -1,15 +1,15 @@
 {
-  "id": "2026-10-10T05-47-25-703Z-ac91f0",
+  "id": "2026-10-10T06-03-53-883Z-b636a5",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-visitor-ux-passed",
+  "tests": "scoped-weekly-collection-passed",
   "verification": {
-    "baseRelease": "2026-10-10T04-55-08-838Z-e264e3",
+    "baseRelease": "2026-10-10T05-47-25-703Z-ac91f0",
     "changedFiles": [
-      "gap-reports.js",
-      "index.html"
+      "admin/weekly.html",
+      "admin/weekly.js"
     ],
-    "ux": "KO/EN and mobile email flow passed; redundant contact removed",
+    "scope": "Incomplete week blocked without invocation; KST Monday rollover; HTTP errors; draft preservation; mobile layout",
     "fullSuiteRerun": false
   },
   "obfuscator": "5.8.1",
@@ -72,11 +72,11 @@
     },
     {
       "path": "admin/weekly.html",
-      "sha256": "b9b1a1855b41db0017c9b975497bcefcd2d8569fef3e024446999f45fce09636"
+      "sha256": "72351672e1ceee20089a94364498de8963d15e1010b70c304dd33d51237e3bdb"
     },
     {
       "path": "admin/weekly.js",
-      "sha256": "4d9276651b418ffd52bbb9d43118c00e9978815129d117be5b1e2e6861dee822"
+      "sha256": "ea9dcbc7381b063bf432f6a54423bf2d57a21df90f3c5b1777119f1eb7e72884"
     },
     {
       "path": "admin/workspace-tabs.js",
