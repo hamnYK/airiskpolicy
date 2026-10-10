@@ -74,3 +74,7 @@
 .report-ai-source-row>.report-ai-source{margin:0;min-width:0}
 .report-ai-source-row>button{margin-top:var(--ds-space-3)}
 @media(max-width:600px){.report-ai-source-row{grid-template-columns:minmax(0,1fr)}.report-ai-source-row>button{justify-self:end;margin-top:0}}
+
+.report-ai-candidates:has(.report-source-group){max-height:none;overflow:visible}
+.report-source-list{display:grid;gap:var(--ds-space-2)}
+.report-source-group h4{margin-block:var(--ds-space-3)}
