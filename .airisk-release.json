@@ -1,15 +1,14 @@
 {
-  "id": "2026-10-10T08-18-44-045Z-4b2343",
+  "id": "2026-10-10T08-33-28-124Z-fa0bdd",
   "environment": "production",
   "verified": true,
-  "tests": "scoped-new-report-journeys-picker-and-server-scope-passed",
+  "tests": "scoped-persistent-workspace-journeys-and-atomic-storage-passed",
   "verification": {
-    "baseRelease": "2026-10-10T08-08-51-020Z-6eac33",
+    "baseRelease": "2026-10-10T08-18-44-045Z-4b2343",
     "changedFiles": [
       "admin/index.html",
       "admin/report-ai.js",
-      "admin/reports.js",
-      "index.html"
+      "admin/reports.js"
     ],
     "fullSuiteRerun": false
   },
@@ -41,7 +40,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "b105f514036982bfbf3bc050ae33cd654753bd438f1d5de1b2d2bca801656b5c"
+      "sha256": "d0f6eb462cb29faa75864366fdc910e84d6d4a0cb72021e219a935c308b22a48"
     },
     {
       "path": "admin/login.html",
@@ -57,11 +56,11 @@
     },
     {
       "path": "admin/report-ai.js",
-      "sha256": "a4e2455a48433efe373b8e266fba74e4daf9db861a5d9bca2d460513539cd617"
+      "sha256": "d8d17e2ef7d674aed0e1e461ebecdaf1ad4eb8d9faf4c164b0cc7961d86d918c"
     },
     {
       "path": "admin/reports.js",
-      "sha256": "16771d26f8e7135391a8446e6c02fd7b8ab8d0a4a7a780b836dc0c66d7b0b04b"
+      "sha256": "d32cb9a4e729de818c21414ed6d498d15fbcdb49cb7864b51baa09fdd8589d4d"
     },
     {
       "path": "admin/style.css",
