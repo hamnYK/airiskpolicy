@@ -12,7 +12,7 @@
     "description": "Explore AI incidents and policies worldwide. Connect evidence, identify questions about policy gaps, and help build a global community for shared responses.",
     "heading": "A global response to AI risk starts with communities in every country.",
     "intro": "We aim to connect leading communities in each country to develop technical responses, cultural understanding and policy readiness for AI risk. By sharing evidence and lived experience, we seek paths to collective action across borders.",
-    "locale": "en_US"
+    "locale": "en_GB"
   },
   "pages": {
     "community": {
@@ -24,7 +24,7 @@
       "en": {
         "title": "About the community · AI Risk & Policy",
         "description": "We are preparing a community to explore AI's social impact and policy. Learn about the community, its organisers and contact details.",
-        "locale": "en_US"
+        "locale": "en_GB"
       }
     }
   },

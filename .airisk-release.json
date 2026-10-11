@@ -1,15 +1,8 @@
 {
-  "id": "2026-10-10T10-12-21-131Z-345f84",
+  "id": "2026-10-11T05-27-44-962Z-70a38b",
   "environment": "production",
   "verified": true,
-  "tests": "Manual outline UX checks passed; unchanged verified assets retained",
-  "verification": {
-    "base": "2026-10-10T10-03-30-107Z-a0ae70",
-    "changedFiles": [
-      "admin/index.html",
-      "admin/reports.js"
-    ]
-  },
+  "tests": "passed",
   "obfuscator": "5.8.1",
   "files": [
     {
@@ -210,7 +203,7 @@
     },
     {
       "path": "gap-analyzer.js",
-      "sha256": "014c172cd8cca7ad7ccc43fb4689c6ff535ab436dc48e2436c704bad181983c4"
+      "sha256": "2f3209ffebceaeca51d32bb8da019027782174eb3c62fec7d68ad19045a1173f"
     },
     {
       "path": "gap-audience-data.js",
@@ -234,7 +227,7 @@
     },
     {
       "path": "i18n-en.json",
-      "sha256": "d70ef841b0401665455feff08a65a1a920f6b74d55c275906dcb372499b81144"
+      "sha256": "4a0ae1a436ae94193464a42e53965da9b3871519a5810f7051d25a459941dc50"
     },
     {
       "path": "i18n.css",
@@ -246,7 +239,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "a3e55f0c0cd71d29da5f588d8b00fa63f16a3b7368365c054c1b554110787782"
+      "sha256": "2f51036f482e5be2e2a030a54373d38f2a01f9fc1fd5e339662d119118caebaf"
     },
     {
       "path": "journey.css",
@@ -322,7 +315,7 @@
     },
     {
       "path": "seo.json",
-      "sha256": "9a028d8bbc26fb1c14c3a0aba2433450dbb42a51c404591d166e2758f268ed4e"
+      "sha256": "d7c1d1bf5e2815f072f85411ad3a59c1e1cfdbd3ac4a7585ead15285bcc6b58d"
     },
     {
       "path": "sitemap.xml",
@@ -1734,7 +1727,7 @@
     },
     {
       "path": "weekly-briefing.js",
-      "sha256": "ff8f6686c5d33fc0d63adafaed6851f9eda838118cef065d05f6bbf226174fa9"
+      "sha256": "6ced1881e47a6c038b74c68274e59a7222db7fb074887fd6526f4aa6e8eefade"
     },
     {
       "path": "weekly-model.js",
