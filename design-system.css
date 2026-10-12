@@ -1,6 +1,33 @@
 @import './foundation.css';
 /* AI RISK design system v1.2. Shared by the application and reference page. */
 :root{
+ /* Product typography: preserve the existing metrics across every surface. */
+ --ds-line-1-3:1.3;
+ --ds-weight-semibold:600;
+ --ds-line-1-75:1.75;
+ --ds-line-1-8:1.8;
+ --ds-weight-bold:700;
+ --ds-tracking-2px:2px;
+ --ds-tracking-minus-1px:-1px;
+ --ds-tracking-1px:1px;
+ --ds-line-1-45:1.45;
+ --ds-weight-medium:500;
+ --ds-line-1-6:1.6;
+ --ds-line-1-2:1.2;
+ --ds-line-1-35:1.35;
+ --ds-line-1:1;
+ --ds-tracking-1-4px:1.4px;
+ --ds-tracking-1-5px:1.5px;
+ --ds-line-1-9:1.9;
+ --ds-weight-regular:400;
+ --ds-tracking-1-1px:1.1px;
+ --ds-tracking-0-5px:.5px;
+ --ds-line-1-25:1.25;
+ --ds-line-1-65:1.65;
+ --ds-tracking-0-11em:.11em;
+ --ds-tracking-minus-0-035em:-.035em;
+ --ds-line-1-08:1.08;
+ --ds-login-offset:12vh;
  --ds-background:var(--airisk-foundation-color-08131f);--ds-surface:var(--airisk-foundation-color-102737);--ds-surface-raised:var(--airisk-foundation-color-163241);--ds-input:var(--airisk-foundation-color-091d2b);
  --ds-text:var(--airisk-foundation-color-dfedf4);--ds-text-muted:var(--airisk-foundation-color-a9c0cf);--ds-text-subtle:var(--airisk-foundation-color-9fb7c7);
  --ds-border:var(--airisk-foundation-color-426578);--ds-border-control:var(--airisk-foundation-color-64899a);
@@ -18,8 +45,8 @@
  --ds-scrollbar-size:10px;--ds-scrollbar-track:var(--ds-input);--ds-scrollbar-thumb:var(--ds-border-control);--ds-scrollbar-hover:var(--ds-action);--ds-scrollbar-radius:var(--ds-radius-pill);
  --ds-shadow:0 24px 80px var(--airisk-foundation-color-00000066);--ds-backdrop:var(--airisk-foundation-color-030b14c9);
  /* Existing layout variables resolve to the shared foundations. */
- --font-body:var(--ds-font-body);--font-title:var(--ds-font-title);--font-number:var(--ds-font-number);
- --type-body:var(--ds-type-body);--type-ui:var(--ds-type-ui);--type-meta:var(--ds-type-meta);
+
+
  --work-width:var(--ds-work-width);--work-space-xs:var(--ds-space-2);--work-space-sm:var(--ds-space-4);--work-space-md:var(--ds-space-6);--work-space-lg:var(--ds-space-8);--work-radius:var(--ds-radius-panel);--work-input-height:var(--ds-action-height);--work-textarea-height:128px;--work-panel-border:var(--ds-border);--work-panel-bg:var(--ds-surface);
 }
 html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:var(--ds-font-body);font-size:var(--ds-type-body);line-height:var(--ds-line-body)}
@@ -29,9 +56,9 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
 :where(button):disabled{opacity:.45;cursor:not-allowed}
 :where(button,a)[hidden]{display:none!important}
 /* Primary: advance or save. Secondary: resume an existing piece of work. */
-.ds-primary,.journey-primary,#explore-dialog #interest-question{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-action-height);max-width:100%;gap:var(--ds-space-2);padding:var(--ds-space-3) var(--ds-space-4);border:1px solid var(--ds-action);border-radius:var(--ds-radius-control);background:var(--ds-action);color:var(--ds-on-action);font-size:var(--ds-type-ui);font-weight:700;line-height:var(--ds-line-control);text-decoration:none;white-space:normal;cursor:pointer}
+.ds-primary,.journey-primary,#explore-dialog #interest-question{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-action-height);max-width:100%;gap:var(--ds-space-2);padding:var(--ds-space-3) var(--ds-space-4);border:1px solid var(--ds-action);border-radius:var(--ds-radius-control);background:var(--ds-action);color:var(--ds-on-action);font-size:var(--ds-type-ui);font-weight:var(--ds-weight-bold);line-height:var(--ds-line-control);text-decoration:none;white-space:normal;cursor:pointer}
 .ds-primary:hover:not(:disabled),.journey-primary:hover:not(:disabled){background:var(--ds-action-hover);border-color:var(--ds-action-hover)}
-.ds-secondary,#collective-work .work-secondary{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-action-height);gap:var(--ds-space-2);padding:var(--ds-space-3) var(--ds-space-4);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-control);background:var(--ds-secondary);color:var(--ds-text);font-size:var(--ds-type-ui);font-weight:600;line-height:var(--ds-line-control);text-decoration:none;cursor:pointer}
+.ds-secondary,#collective-work .work-secondary{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-action-height);gap:var(--ds-space-2);padding:var(--ds-space-3) var(--ds-space-4);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-control);background:var(--ds-secondary);color:var(--ds-text);font-size:var(--ds-type-ui);font-weight:var(--ds-weight-semibold);line-height:var(--ds-line-control);text-decoration:none;cursor:pointer}
 .ds-secondary:hover:not(:disabled),#collective-work .work-secondary:hover:not(:disabled){background:var(--ds-secondary-hover);border-color:var(--ds-action);color:var(--ds-text);text-decoration:none}
 .ds-quiet,.journey-close,.map-controls>button,.map-zoom-controls button,#risk-refresh,.record-pagination button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--ds-target);padding:var(--ds-space-2) var(--ds-space-3);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-control);background:var(--ds-surface);color:var(--ds-text);font-size:var(--ds-type-ui);line-height:var(--ds-line-control);cursor:pointer}
 .ds-quiet:hover:not(:disabled),.journey-close:hover,.map-controls>button:hover,.map-zoom-controls button:hover,#risk-refresh:hover:not(:disabled),.record-pagination button:hover:not(:disabled){background:var(--ds-surface-raised)}
@@ -39,7 +66,7 @@ html,body{background:var(--ds-background);color:var(--ds-text)}body{font-family:
 .ds-link:hover,.risk-sources a:hover,#collective-work .work-action:not(.work-secondary):hover,.journey-link:hover{background:var(--ds-surface-raised);color:var(--ds-text)}
 /* Choice controls use aria-pressed as their single state source. */
 .ds-chip,.classification-chip,#explore-dialog .classification-chip{box-sizing:border-box;min-height:var(--ds-target);padding:var(--ds-space-2) var(--ds-space-3);border:1px solid var(--ds-border-control);border-radius:var(--ds-radius-pill);background:var(--ds-surface);color:var(--ds-text);font:inherit;font-size:var(--ds-type-ui);line-height:var(--ds-line-control);cursor:pointer;white-space:normal}
-.ds-chip[aria-pressed=true],.classification-chip[aria-pressed=true],#explore-dialog .classification-chip[aria-pressed=true],.explore-mobile-tabs button[aria-pressed=true]{background:var(--ds-action);color:var(--ds-on-action);border-color:var(--ds-action);font-weight:700}
+.ds-chip[aria-pressed=true],.classification-chip[aria-pressed=true],#explore-dialog .classification-chip[aria-pressed=true],.explore-mobile-tabs button[aria-pressed=true]{background:var(--ds-action);color:var(--ds-on-action);border-color:var(--ds-action);font-weight:var(--ds-weight-bold)}
 .type-filters button,.explore-mobile-tabs button{min-height:var(--ds-target);font-size:var(--ds-type-ui)}
 .type-filters [aria-pressed=true]{background:var(--ds-secondary-hover);color:var(--ds-text)}
 #clear-category{min-height:var(--ds-target);padding-inline:var(--ds-space-2);color:var(--ds-link)}
@@ -109,7 +136,7 @@ summary::marker{content:'▶  ';color:var(--ds-action)}
 details[open]>summary::marker{content:'▼  '}
 /* Label/value rows: keep labels aligned and allow long evidence to wrap. */
 .ds-facts{display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr);gap:var(--ds-space-2) var(--ds-space-4);margin:var(--ds-space-4) 0;font-size:var(--ds-type-ui);line-height:var(--ds-line-body)}
-.ds-facts dt{font-weight:600;color:var(--ds-text-muted)}
+.ds-facts dt{font-weight:var(--ds-weight-semibold);color:var(--ds-text-muted)}
 .ds-facts dd{margin:0;min-width:0;overflow-wrap:anywhere;color:var(--ds-text)}
 @media(max-width:540px){.ds-facts{grid-template-columns:minmax(0,1fr);row-gap:var(--ds-space-1)}.ds-facts dd+dt{margin-top:var(--ds-space-3)}}
 

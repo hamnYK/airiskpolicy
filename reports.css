@@ -55,7 +55,7 @@
 .report-table-wrap{max-width:100%;overflow:auto;margin-block:var(--ds-space-4)}
 .report-table{border-collapse:collapse;width:100%;font-size:var(--ds-type-ui);line-height:var(--ds-line-body)}
 .report-table th,.report-table td{border:1px solid var(--ds-border-control);padding:var(--ds-space-3);text-align:start;vertical-align:top;min-width:8em}
-.report-table th{background:var(--ds-surface-raised);font-weight:700}
+.report-table th{background:var(--ds-surface-raised);font-weight:var(--ds-weight-bold)}
 .report-sources li:target{outline:2px solid var(--ds-focus);outline-offset:3px}
 @media print{.report-prose,.report-prose blockquote,.report-prose a,.report-table th,.report-table td{color:CanvasText;background:Canvas}.report-table-wrap{overflow:visible}.report-table th,.report-table td{min-width:0}.report-prose h3,.report-prose h4,.report-prose h5,.report-prose h6{break-after:avoid}.report-table tr{break-inside:avoid}.report-table thead{display:table-header-group}}
 
