@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-16T03-07-18-551Z-a5df3f",
+  "id": "2026-10-16T06-11-03-290Z-4ce945",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -104,10 +104,6 @@
     {
       "path": "assets/fonts/PretendardVariable.woff2",
       "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4"
-    },
-    {
-      "path": "assets/fonts/README.md",
-      "sha256": "09ffe2838ac54606c26fe3a2aef0d1ca25c44d34ad4f30dc1b5dc642da42c1cf"
     },
     {
       "path": "assets/fonts/SpaceGrotesk-LICENSE.txt",
