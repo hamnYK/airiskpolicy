@@ -1,5 +1,5 @@
 {
-  "id": "2026-10-16T06-11-03-290Z-4ce945",
+  "id": "2026-10-23T01-02-57-910Z-198e61",
   "environment": "production",
   "verified": true,
   "tests": "passed",
@@ -31,7 +31,7 @@
     },
     {
       "path": "admin/index.html",
-      "sha256": "f6404457d5d263a5d2657067c87009aaa0cccd664c46ab51c62b52362c129072"
+      "sha256": "5a7641d03c3677db32908c72978fb913541cadd9bc2aba168568145b7ed42423"
     },
     {
       "path": "admin/login.html",
@@ -43,7 +43,7 @@
     },
     {
       "path": "admin/participants.js",
-      "sha256": "6b3c9addae85639394a23ff3353b058d42ce0e3664c4b74df3ffa89696d83a84"
+      "sha256": "67fbe2b1011ba54c6cfb5ff69a1764d0f7401c9f9955e9540223142de5b5b3f2"
     },
     {
       "path": "admin/report-ai.js",
@@ -142,6 +142,50 @@
       "sha256": "6c66771a85a7bfc4b620b743542aaa5947d4454ac81b4a8855b771020173c40c"
     },
     {
+      "path": "assets/participants/andrew-leung-anrobo.png",
+      "sha256": "cb01c34bca305647fc8628688e26db7ac845ee28460b6c042a12bf11207a3987"
+    },
+    {
+      "path": "assets/participants/andrew-leung.jpg",
+      "sha256": "a68034d15257552906e7571a5c7c5b1262812ede0c2c312d0d517aec543988f6"
+    },
+    {
+      "path": "assets/participants/bae-sanghak.jpg",
+      "sha256": "5feb8e0f23f52fc3faf6579f8cd1adf5d7846c414618d4ea69584648b6d80f3a"
+    },
+    {
+      "path": "assets/participants/cha-jukyung.jpg",
+      "sha256": "3eb146e6c61724e4910abcb600ee097e2cd861c84e4157c8c534315ff98729e4"
+    },
+    {
+      "path": "assets/participants/hamn-youngkuk.jpg",
+      "sha256": "9aa34e65c81d0d87bb8d3e4214c7ad3a7116d77547f32fbaeec89025b2b4a175"
+    },
+    {
+      "path": "assets/participants/hwang-byungyeop.jpg",
+      "sha256": "6e5a29d94bda93b020789b6696d985a6bb3ab27107bd50fa1d4c1d1e4e57eefc"
+    },
+    {
+      "path": "assets/participants/kim-iksoo.jpg",
+      "sha256": "3175342fd3f979401f3a28064db57e1b53cd542bfaa0608fc835dfb4c75601f8"
+    },
+    {
+      "path": "assets/participants/lee-jungju.jpg",
+      "sha256": "c5bc62dd5cd130f018a7e575305309d3923873d57fc78fa5c3b999901c1c2317"
+    },
+    {
+      "path": "assets/participants/lee-youngwhan.jpg",
+      "sha256": "2b56618690fcd8578320826efa71ade39731070c0ed9d60ad932d9239f1bd262"
+    },
+    {
+      "path": "assets/participants/muhammad-arslan-akhtar.jpg",
+      "sha256": "f668675e47bcbda91090d8bd3d0c76a446423d19c73b27b9b34e1ec840c72a3e"
+    },
+    {
+      "path": "assets/participants/siraj-aizlewood.jpg",
+      "sha256": "ec1b576964246f79d22c9340214c0f9fc2ad39ea92064db4c7268a55698d0dd5"
+    },
+    {
       "path": "assets/share-card.png",
       "sha256": "8d8a237b914da1d521d08336e670c698d380c980c5317636c5d4ef4e988b2a45"
     },
@@ -155,7 +199,7 @@
     },
     {
       "path": "community.html",
-      "sha256": "252f5bb24bef61ae7cb8ee99a6fcee794d4f5a3b031d73ea2f6e287fafc8b00a"
+      "sha256": "6fd4260c115dc8dc98b12f99d22ce826d28d7806d352db6d5a230f33147b069a"
     },
     {
       "path": "design-system-page.css",
@@ -262,8 +306,12 @@
       "sha256": "ddbb2b2ecf45147a2d9c743ed1abc942622b9e3b6c9bb968977bdbee7566f04e"
     },
     {
+      "path": "participant-assets.js",
+      "sha256": "05bb831b42e0bb090f0ef8dffd21b26e12dc64e00131b1234a4ebcb4783065e6"
+    },
+    {
       "path": "participants.js",
-      "sha256": "cc0df86713cf0a018aa3a80422fdd4a88f58f5c71f5a1f2fc68c18bc7d75310e"
+      "sha256": "6d291bfe475e1093206749619b2b3f3b4eaf3765fc1bb7a41fac2a26d2275aa2"
     },
     {
       "path": "policy.css",
